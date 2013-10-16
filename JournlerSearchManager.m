@@ -137,13 +137,13 @@ static NSString *referenceIndexFile = @"Index References";
 	if ( [[NSFileManager defaultManager] fileExistsAtPath:entryIndexPath] ) 
 	{
 		NSLog(@"%s - index already exists at path, overwriting %@", __PRETTY_FUNCTION__, entryIndexPath);
-		[[NSFileManager defaultManager] removeFileAtPath:entryIndexPath handler:nil];
+		[[NSFileManager defaultManager] removeItemAtPath:entryIndexPath error:NULL];
 	}
 	
 	if ( [[NSFileManager defaultManager] fileExistsAtPath:referenceIndexPath] ) 
 	{
 		NSLog(@"%s - index already exists at path, overwriting %@", __PRETTY_FUNCTION__, referenceIndexPath);
-		[[NSFileManager defaultManager] removeFileAtPath:referenceIndexPath handler:nil];
+		[[NSFileManager defaultManager] removeItemAtPath:referenceIndexPath error:NULL];
 	}
 	
 	// 10.4 dictionary
@@ -192,12 +192,12 @@ static NSString *referenceIndexFile = @"Index References";
 	NSString *referenceIndexPath = [path stringByAppendingPathComponent:referenceIndexFile];
 
 	if ( [[NSFileManager defaultManager] fileExistsAtPath:entryIndexPath] )
-		success = ( [[NSFileManager defaultManager] removeFileAtPath:entryIndexPath handler:self] && success );
+		success = ( [[NSFileManager defaultManager] removeItemAtPath:entryIndexPath error:NULL] && success );
 	else
 		success = ( success && NO );
 	
 	if ( [[NSFileManager defaultManager] fileExistsAtPath:referenceIndexPath] )
-		success = ( [[NSFileManager defaultManager] removeFileAtPath:referenceIndexPath handler:self] && success );
+		success = ( [[NSFileManager defaultManager] removeItemAtPath:referenceIndexPath error:NULL] && success );
 	else
 		success = ( success && NO );
 		

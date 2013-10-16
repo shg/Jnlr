@@ -1450,7 +1450,7 @@ bail:
     NSInteger successCount = 0;
 	BOOL completeSuccess = YES;
 	//NSFileManager *fm = [NSFileManager defaultManager];
-	NSArray *contents = [[NSFileManager defaultManager] directoryContentsAtPath:path];
+	NSArray *contents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:NULL];
 	
 	NSString *aPath;
 	NSString *aCompletePath;
@@ -1559,7 +1559,7 @@ bail:
 				NSString *movedPath = [NSString stringWithFormat:@"- %@",[aCompletePath lastPathComponent]];
 				NSString *completeMovedPath = [[aCompletePath stringByDeletingLastPathComponent] stringByAppendingPathComponent:movedPath];
 				
-				if ( [fm fileExistsAtPath:aCompletePath] && ![fm movePath:aCompletePath toPath:completeMovedPath handler:nil] )
+				if ( [fm fileExistsAtPath:aCompletePath] && ![fm moveItemAtPath:aCompletePath toPath:completeMovedPath error:NULL] )
 					NSLog(@"%s - file still existed after import and could not be removed", __PRETTY_FUNCTION__);
 				
 			}
@@ -1585,7 +1585,7 @@ bail:
 				NSString *movedPath = [NSString stringWithFormat:@"+ %@",[aCompletePath lastPathComponent]];
 				NSString *completeMovedPath = [[aCompletePath stringByDeletingLastPathComponent] stringByAppendingPathComponent:movedPath];
 				
-				if ( [fm fileExistsAtPath:aCompletePath] && ![fm movePath:aCompletePath toPath:completeMovedPath handler:nil] )
+				if ( [fm fileExistsAtPath:aCompletePath] && ![fm moveItemAtPath:aCompletePath toPath:completeMovedPath error:NULL] )
 					NSLog(@"%s - file still existed after import and could not be removed", __PRETTY_FUNCTION__);
 				
 				// note the first selection
@@ -1628,7 +1628,7 @@ bail:
 			NSString *movedPath = [NSString stringWithFormat:@"- %@",[aCompletePath lastPathComponent]];
 			NSString *completeMovedPath = [[aCompletePath stringByDeletingLastPathComponent] stringByAppendingPathComponent:movedPath];
 			
-			if ( [[NSFileManager defaultManager] fileExistsAtPath:aCompletePath] && ![[NSFileManager defaultManager] movePath:aCompletePath toPath:completeMovedPath handler:nil] )
+			if ( [[NSFileManager defaultManager] fileExistsAtPath:aCompletePath] && ![[NSFileManager defaultManager] moveItemAtPath:aCompletePath toPath:completeMovedPath error:NULL] )
 				NSLog(@"%s - file still existed after import and could not be removed", __PRETTY_FUNCTION__);
 		}
 	}
@@ -1670,7 +1670,7 @@ bail:
 				NSString *movedPath = [NSString stringWithFormat:@"- %@",[aCompletePath lastPathComponent]];
 				NSString *completeMovedPath = [[aCompletePath stringByDeletingLastPathComponent] stringByAppendingPathComponent:movedPath];
 				
-				if ( [fm fileExistsAtPath:aCompletePath] && ![fm movePath:aCompletePath toPath:completeMovedPath handler:nil] )
+				if ( [fm fileExistsAtPath:aCompletePath] && ![fm moveItemAtPath:aCompletePath toPath:completeMovedPath error:NULL] )
 					NSLog(@"%s - file still existed after import and could not be removed", __PRETTY_FUNCTION__);
 				
 			}
@@ -1706,7 +1706,7 @@ bail:
 				NSString *movedPath = [NSString stringWithFormat:@"+ %@",[aCompletePath lastPathComponent]];
 				NSString *completeMovedPath = [[aCompletePath stringByDeletingLastPathComponent] stringByAppendingPathComponent:movedPath];
 				
-				if ( [fm fileExistsAtPath:aCompletePath] && ![fm movePath:aCompletePath toPath:completeMovedPath handler:nil] )
+				if ( [fm fileExistsAtPath:aCompletePath] && ![fm moveItemAtPath:aCompletePath toPath:completeMovedPath error:NULL] )
 					NSLog(@"%s - file still existed after import and could not be removed", __PRETTY_FUNCTION__);
 				
 				// note the first selection
@@ -1801,7 +1801,7 @@ bail:
 				//NSString *movedPath = [NSString stringWithFormat:@"+ %@",[aCompletePath lastPathComponent]];
 				//NSString *completeMovedPath = [[aCompletePath stringByDeletingLastPathComponent] stringByAppendingPathComponent:movedPath];
 				
-				if ( [fm fileExistsAtPath:aCompletePath] && deleteOriginalFile && ![fm removeFileAtPath:aCompletePath handler:nil] )
+				if ( [fm fileExistsAtPath:aCompletePath] && deleteOriginalFile && ![fm removeItemAtPath:aCompletePath error:NULL] )
 					NSLog(@"%s - file could not be deleted at path %@", __PRETTY_FUNCTION__, aCompletePath);
 				
 				// note the first selection
@@ -1837,7 +1837,7 @@ bail:
 			{
 				NSString *aCompletePath = [aDictionary objectForKey:@"representedObject"];
 				
-				if ( [fm fileExistsAtPath:aCompletePath] && ![fm removeFileAtPath:aCompletePath handler:nil] )
+				if ( [fm fileExistsAtPath:aCompletePath] && ![fm removeItemAtPath:aCompletePath error:NULL] )
 					NSLog(@"%s - file could not be deleted at path %@", __PRETTY_FUNCTION__, aCompletePath);
 			}
 		}
@@ -1850,7 +1850,7 @@ bail:
 - (void) cleanupDropBox:(NSString*)path
 {
 	//NSFileManager *fm = [NSFileManager defaultManager];
-	NSArray *contents = [[NSFileManager defaultManager] directoryContentsAtPath:path];
+	NSArray *contents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:NULL];
 	
 	NSString *aPath;
 	NSString *aCompletePath;
@@ -1953,7 +1953,7 @@ bail:
 		NSString *aPath, *theDirectoryPath = [selectedFiles objectAtIndex:0];
 		NSMutableArray *anArray = [[[NSMutableArray alloc] init] autorelease];
 		
-		NSEnumerator *enumerator = [[[NSFileManager defaultManager] directoryContentsAtPath:theDirectoryPath] objectEnumerator];
+		NSEnumerator *enumerator = [[[NSFileManager defaultManager] contentsOfDirectoryAtPath:theDirectoryPath error:NULL] objectEnumerator];
 		while ( aPath = [enumerator nextObject] )
 			[anArray addObject:[theDirectoryPath stringByAppendingPathComponent:aPath]];
 		
@@ -2348,7 +2348,7 @@ bail:
 			if ( [[NSFileManager defaultManager] fileExistsAtPath:newPath] ) 
 			{
 				NSLog(@"%s - found old journal, removing it", __PRETTY_FUNCTION__);
-				[[NSFileManager defaultManager] removeFileAtPath:newPath handler:nil];
+				[[NSFileManager defaultManager] removeItemAtPath:newPath error:NULL];
 			}
 			
 			//
@@ -4603,7 +4603,7 @@ bail:
 		
 		// delete the old, troublesome script script
 		if ( [fileManager fileExistsAtPath:myAppPDFScriptPath] ) 
-			[fileManager removeFileAtPath:myAppPDFScriptPath handler:nil];
+			[fileManager removeItemAtPath:myAppPDFScriptPath error:NULL];
 		
 		if ( ![fileManager fileExistsAtPath:myAppPDFAppPath] )
 		{ 
@@ -5967,7 +5967,7 @@ bail:
 	// set the menu's target - set the target of each item as well
 	
 	// get the directory's contents
-	pathContents = [fm directoryContentsAtPath:path];
+	pathContents = [fm contentsOfDirectoryAtPath:path error:NULL];
 	
 	// iterate through each item in the directory
 	for ( i = 0; i < [pathContents count]; i++ ) 
