@@ -2662,7 +2662,7 @@ bail:
 			// actually create the files
 			
 			// the journal directory
-			if ( ![[NSFileManager defaultManager] createDirectoryAtPath:path attributes:nil] ) 
+			if ( ![[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:NO attributes:nil error:NULL] )
 			{
 				// unable to create the journler directory at the application support folder - ask the user where
 				NSLog(@"%s - Could not create support directory at path %@", __PRETTY_FUNCTION__, path);
@@ -2671,28 +2671,28 @@ bail:
 			}
 			
 			// entries directory
-			if ( ![[NSFileManager defaultManager] createDirectoryAtPath:[sharedJournal entriesPath] attributes:nil] ) 
+			if ( ![[NSFileManager defaultManager] createDirectoryAtPath:[sharedJournal entriesPath] withIntermediateDirectories:NO attributes:nil error:NULL] )
 			{
 				NSLog(@"%s - Could not create entries directory at path %@", __PRETTY_FUNCTION__, [sharedJournal entriesPath]);
 				return NO;
 			}
 			
 			// collections directory
-			if ( ![[NSFileManager defaultManager] createDirectoryAtPath:[sharedJournal collectionsPath] attributes:nil] ) 
+			if ( ![[NSFileManager defaultManager] createDirectoryAtPath:[sharedJournal collectionsPath] withIntermediateDirectories:NO attributes:nil error:NULL] )
 			{
 				NSLog(@"%s - Could not create collections directory at path %@", __PRETTY_FUNCTION__, [sharedJournal collectionsPath]);
 				return NO;
 			}
 			
 			// the blogs directory
-			if ( ![[NSFileManager defaultManager] createDirectoryAtPath:[sharedJournal blogsPath] attributes:nil] ) 
+			if ( ![[NSFileManager defaultManager] createDirectoryAtPath:[sharedJournal blogsPath] withIntermediateDirectories:NO attributes:nil error:NULL] )
 			{
 				NSLog(@"%s - Could not create blogs directory at path %@", __PRETTY_FUNCTION__, [sharedJournal blogsPath]);
 				return NO;
 			}
 			
 			// the resources directory
-			if ( ![[NSFileManager defaultManager] createDirectoryAtPath:[sharedJournal resourcesPath] attributes:nil] )
+			if ( ![[NSFileManager defaultManager] createDirectoryAtPath:[sharedJournal resourcesPath] withIntermediateDirectories:NO attributes:nil error:NULL] )
 			{
 				NSLog(@"%s - Could not create resources directory at path %@", __PRETTY_FUNCTION__, [sharedJournal resourcesPath]);
 				return NO;
@@ -3497,11 +3497,11 @@ bail:
 							[NSString stringWithFormat:@"%i", [entryDate dayOfMonth]]];
 										
 					if (![fileManager fileExistsAtPath:yearLoc])
-						[fileManager createDirectoryAtPath:yearLoc attributes:nil];
+						[fileManager createDirectoryAtPath:yearLoc withIntermediateDirectories:NO attributes:nil error:NULL];
 					if (![fileManager fileExistsAtPath:monthLoc])
-						[fileManager createDirectoryAtPath:monthLoc attributes:nil];
+						[fileManager createDirectoryAtPath:monthLoc withIntermediateDirectories:NO attributes:nil error:NULL];
 					if (![fileManager fileExistsAtPath:dayLoc])
-						[fileManager createDirectoryAtPath:dayLoc attributes:nil];
+						[fileManager createDirectoryAtPath:dayLoc withIntermediateDirectories:NO attributes:nil error:NULL];
 					
 					NSString *title = [anEntry valueForKey:@"title"];
 					if ( title == nil || [title length] == 0 ) 
@@ -4502,7 +4502,7 @@ bail:
 		if ( !isDir ) 
 		{ 
 			// There is no PDF Services directory so create it 
-			success = [fileManager createDirectoryAtPath:pdfServiceDirectoryPath attributes:nil]; 
+			success = [fileManager createDirectoryAtPath:pdfServiceDirectoryPath withIntermediateDirectories:NO attributes:nil error:NULL];
 			if (!success) 
 			{ 
 				NSLog(@"%s - Unable to create PDF Services directory at %@", __PRETTY_FUNCTION__, pdfServiceDirectoryPath);
@@ -4565,14 +4565,14 @@ bail:
 		NSString *journlerScriptsDirectory = [@"~/Library/Scripts/Journler" stringByExpandingTildeInPath];
 		
 		if ( ![[NSFileManager defaultManager] fileExistsAtPath:scriptsDirectory] 
-			&& ![[NSFileManager defaultManager] createDirectoryAtPath:scriptsDirectory attributes:nil] )
+			&& ![[NSFileManager defaultManager] createDirectoryAtPath:scriptsDirectory withIntermediateDirectories:NO attributes:nil error:NULL] )
 		{
 			NSLog(@"%s - unable to create scripts directory at path %@", __PRETTY_FUNCTION__, scriptsDirectory);
 			goto bail;
 		}
 		
 		if ( ![[NSFileManager defaultManager] fileExistsAtPath:journlerScriptsDirectory]
-			&& ![[NSFileManager defaultManager] createDirectoryAtPath:journlerScriptsDirectory attributes:nil] )
+			&& ![[NSFileManager defaultManager] createDirectoryAtPath:journlerScriptsDirectory withIntermediateDirectories:NO attributes:nil error:NULL] )
 		{
 			NSLog(@"%s - unable to create journler scripts directory at path %@", __PRETTY_FUNCTION__, scriptsDirectory);
 			goto bail;
@@ -4589,21 +4589,21 @@ bail:
 		NSString *journlerScriptsDirectory = [@"~/Library/Scripts/Applications/Journler" stringByExpandingTildeInPath];
 		
 		if ( ![[NSFileManager defaultManager] fileExistsAtPath:scriptsDirectory] 
-			&& ![[NSFileManager defaultManager] createDirectoryAtPath:scriptsDirectory attributes:nil] )
+			&& ![[NSFileManager defaultManager] createDirectoryAtPath:scriptsDirectory withIntermediateDirectories:NO attributes:nil error:NULL] )
 		{
 			NSLog(@"%s - unable to create scripts directory at path %@", __PRETTY_FUNCTION__, scriptsDirectory);
 			goto bail;
 		}
 		
 		if ( ![[NSFileManager defaultManager] fileExistsAtPath:applicationScriptsDirectory] 
-			&& ![[NSFileManager defaultManager] createDirectoryAtPath:applicationScriptsDirectory attributes:nil] )
+			&& ![[NSFileManager defaultManager] createDirectoryAtPath:applicationScriptsDirectory withIntermediateDirectories:NO attributes:nil error:NULL] )
 		{
 			NSLog(@"%s - unable to create scripts directory at path %@", __PRETTY_FUNCTION__, scriptsDirectory);
 			goto bail;
 		}
 		
 		if ( ![[NSFileManager defaultManager] fileExistsAtPath:journlerScriptsDirectory]
-			&& ![[NSFileManager defaultManager] createDirectoryAtPath:journlerScriptsDirectory attributes:nil] )
+			&& ![[NSFileManager defaultManager] createDirectoryAtPath:journlerScriptsDirectory withIntermediateDirectories:NO attributes:nil error:NULL] )
 		{
 			NSLog(@"%s - unable to create journler scripts directory at path %@", __PRETTY_FUNCTION__, scriptsDirectory);
 			goto bail;
@@ -4639,7 +4639,7 @@ bail:
 		if ( !isDir ) 
 		{ 
 			// There is no PDF Services directory so create it 
-			success = [fileManager createDirectoryAtPath:contextualItemsDirectoryPath attributes:nil]; 
+			success = [fileManager createDirectoryAtPath:contextualItemsDirectoryPath withIntermediateDirectories:NO attributes:nil error:NULL];
 			if (!success) 
 			{ 
 				NSLog(@"%s - Unable to create Contextual Menu Items directory at %@", __PRETTY_FUNCTION__, contextualItemsDirectoryPath);
@@ -4681,7 +4681,7 @@ bail:
 	
 	if ( ![[NSFileManager defaultManager] fileExistsAtPath:dropBoxPath] )
 	{
-		if ( ![[NSFileManager defaultManager] createDirectoryAtPath:dropBoxPath attributes:nil] )
+		if ( ![[NSFileManager defaultManager] createDirectoryAtPath:dropBoxPath withIntermediateDirectories:NO attributes:nil error:NULL] )
 			NSLog(@"%s - no dropbox and unable to create at path %@", __PRETTY_FUNCTION__, dropBoxPath);
 		else
 		{

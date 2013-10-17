@@ -1591,7 +1591,7 @@
 	NSString *journlerPath = [notesPath stringByAppendingPathComponent:@"Journler"];
 	if ( ![[NSFileManager defaultManager] fileExistsAtPath:journlerPath] ) 
 	{
-		if ( ![[NSFileManager defaultManager] createDirectoryAtPath:journlerPath attributes:nil] ) 
+		if ( ![[NSFileManager defaultManager] createDirectoryAtPath:journlerPath withIntermediateDirectories:NO attributes:nil error:NULL] )
 		{
 			[[NSAlert iPodNoJournlerFolder] runModal];
 			return;

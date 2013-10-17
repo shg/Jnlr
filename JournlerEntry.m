@@ -1870,7 +1870,7 @@ static NSArray *JObjectValues()
 	
 	if ( create && ( ![[NSFileManager defaultManager] fileExistsAtPath:resourcePath isDirectory:&dir] || !dir ) ) 
 	{
-		if ( ![[NSFileManager defaultManager] createDirectoryAtPath:resourcePath attributes:nil] ) 
+		if ( ![[NSFileManager defaultManager] createDirectoryAtPath:resourcePath withIntermediateDirectories:NO attributes:nil error:NULL] )
 		{
 			NSLog(@"%s - unable to create resource directory at %@",  __PRETTY_FUNCTION__, resourcePath);
 			resourcePath = nil;
@@ -1900,7 +1900,7 @@ static NSArray *JObjectValues()
 	
 	if ( create && ( ![[NSFileManager defaultManager] fileExistsAtPath:resourcePath isDirectory:&dir] || !dir ) ) 
 	{
-		if ( ![[NSFileManager defaultManager] createDirectoryAtPath:resourcePath attributes:nil] ) 
+		if ( ![[NSFileManager defaultManager] createDirectoryAtPath:resourcePath withIntermediateDirectories:NO attributes:nil error:NULL] ) 
 		{
 			NSLog(@"%s - unable to create resource directory at %@", __PRETTY_FUNCTION__, resourcePath);
 			resourcePath = nil;
