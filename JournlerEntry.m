@@ -1528,7 +1528,7 @@ static NSArray *JObjectValues()
 		if ( operation == kNewResourceForceCopy ) 
 		{
 			// actually copy the file
-			if ( ![fm copyPath:path toPath:fullLocalPath handler:self] )
+			if ( ![fm copyItemAtPath:path toPath:fullLocalPath error:NULL] )
 			 {
 				NSLog(@"%s - unable to copy %@ to %@", __PRETTY_FUNCTION__, path, fullLocalPath);
 				return nil;

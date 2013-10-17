@@ -199,7 +199,7 @@
 		if ( operation == kNewResourceForceCopy ) 
 		{
 			// actually copy the file
-			if ( ![fm copyPath:filename toPath:newResourcePath handler:self] )
+			if ( ![fm copyItemAtPath:filename toPath:newResourcePath error:NULL] )
 			{
 				success = NO;
 				NSLog(@"%s - unable to copy %@ to %@", __PRETTY_FUNCTION__, filename, newResourcePath);

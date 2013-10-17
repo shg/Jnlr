@@ -1008,7 +1008,7 @@ bail:
 		}
 		else
 		{
-			if ( [[NSFileManager defaultManager] copyPath:original toPath:destination handler:self] )
+			if ( [[NSFileManager defaultManager] copyItemAtPath:original toPath:destination error:NULL] )
 				actualPath = destination;
 			else
 				actualPath = nil;
