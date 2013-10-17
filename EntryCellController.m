@@ -138,8 +138,8 @@ static NSDictionary * StatusAttributes()
 	[self setHeaderHidden:NO];
 	[self setFooterHidden:NO];
 		
-	[textView setDelegate:self];
-	[[textView textStorage] setDelegate:self];
+	[textView setDelegate:(id)self];
+	[[textView textStorage] setDelegate:(id)self];
 	//[textView setContinuouslyPostsSelectionNotification:YES];
 	
 	[[scalePop cell] setArrowPosition:NSPopUpNoArrow];

@@ -1155,7 +1155,7 @@ bail:
 	[progressText210 setStringValue:NSLocalizedStringFromTable(@"processing entries", @"UpgradeController", @"")];
 	[NSApp runModalSession:session210];
 	
-	[log210 appendFormat:@"%s - Processing entries\n\n", __PRETTY_FUNCTION__, [journal journalPath]];
+	[log210 appendFormat:@"%s - Processing entries\n\n%@", __PRETTY_FUNCTION__, [journal journalPath]];
 	
 	// disable collection but not indexing
 	//[_journal setSaveEntryOptions:kEntrySaveDoNotCollect];
@@ -1228,7 +1228,7 @@ bail:
 	[progressIndicator210 startAnimation:self];
 	[NSApp runModalSession:session210];
 	
-	[log210 appendFormat:@"%s - Saving Journal\n\n", __PRETTY_FUNCTION__, [journal journalPath]];
+	[log210 appendFormat:@"%s - Saving Journal\n\n%@", __PRETTY_FUNCTION__, [journal journalPath]];
 	
 	// re-set the folder icons
 	[[_journal valueForKey:@"collections"] makeObjectsPerformSelector:@selector(determineIcon)];
@@ -2136,7 +2136,7 @@ bail:
 	[alert setMessageText:NSLocalizedStringFromTable(@"2.5.4 store move message", @"UpgradeController", @"")];
 	[alert setInformativeText:NSLocalizedStringFromTable(@"2.5.4 store move info", @"UpgradeController", @"")];  
 	
-	[alert setDelegate:self];
+	[alert setDelegate:(id)self];
 	[alert setShowsHelp:YES];
 	[alert setHelpAnchor:@"http://wiki.journler.com/index.php?title=Datastorage_Update"];
 	
@@ -2153,7 +2153,7 @@ bail:
 	[alert setMessageText:NSLocalizedStringFromTable(@"2.5.4 store already in library message", @"UpgradeController", @"")];
 	[alert setInformativeText:NSLocalizedStringFromTable(@"2.5.4 store already in library info", @"UpgradeController", @"")];  
 	
-	[alert setDelegate:self];
+	[alert setDelegate:(id)self];
 	[alert setShowsHelp:YES];
 	[alert setHelpAnchor:@"http://wiki.journler.com/index.php?title=Datastorage_Update"];
 	
@@ -2180,7 +2180,7 @@ bail:
 	[alert setMessageText:NSLocalizedStringFromTable(@"2.5.4 store moved failure message", @"UpgradeController", @"")];
 	[alert setInformativeText:NSLocalizedStringFromTable(@"2.5.4 store moved failure info", @"UpgradeController", @"")];  
 	
-	[alert setDelegate:self];
+	[alert setDelegate:(id)self];
 	[alert setShowsHelp:YES];
 	[alert setHelpAnchor:@"http://wiki.journler.com/index.php?title=Datastorage_Update"];
 	

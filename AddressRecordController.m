@@ -155,7 +155,7 @@ static NSString *kMediabarItemOpenHomepage = @"kMediabarItemOpenHomepage";
 	if ( aPerson == nil )
 	{
 		NSBeep();
-		NSLog(@"%s - unable to get address record for unique id", __PRETTY_FUNCTION__, uid);
+		NSLog(@"%s - unable to get address record for unique id %@", __PRETTY_FUNCTION__, uid);
 		return;
 	}
 	
@@ -163,7 +163,7 @@ static NSString *kMediabarItemOpenHomepage = @"kMediabarItemOpenHomepage";
 	if ( vcfData == nil )
 	{
 		NSBeep();
-		NSLog(@"%s - unable to get vcf data from address record with uinque id", __PRETTY_FUNCTION__, uid);
+		NSLog(@"%s - unable to get vcf data from address record with uinque id %@", __PRETTY_FUNCTION__, uid);
 		return;
 	}
 	

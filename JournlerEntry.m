@@ -3455,7 +3455,7 @@ static NSArray *JObjectValues()
 	if ( scriptContents == nil )
 	{
 		scriptContents = [[NSTextStorage alloc] initWithAttributedString:[self attributedContent]];
-		[scriptContents setDelegate:self];
+		[scriptContents setDelegate:(id)self];
 	}
 	else
 	{

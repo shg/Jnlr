@@ -3277,7 +3277,7 @@ bail:
 		
         speechRecognizer = [[NSSpeechRecognizer alloc] init];
         [speechRecognizer setCommands:cmds];
-        [speechRecognizer setDelegate:self];
+        [speechRecognizer setDelegate:(id)self];
 		[speechRecognizer startListening];
 	}
 }

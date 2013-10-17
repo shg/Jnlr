@@ -398,7 +398,7 @@ static NSString *kStopListToolbarItems			= @"kStopListToolbarItems";
     [toolbar setDisplayMode: NSToolbarDisplayModeIconOnly];
 	[toolbar setAllowsUserCustomization:NO];
 	[toolbar setAutosavesConfiguration:NO];
-    [toolbar setDelegate: self];
+    [toolbar setDelegate:(id)self];
 	
     [[self window] setToolbar: toolbar];
 	

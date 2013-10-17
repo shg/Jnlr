@@ -1877,7 +1877,7 @@ bail:
 	
 	// build the menu dynamically
 	NSMenu *menu = [[[NSMenu alloc] init] autorelease];
-	[menu setDelegate:self];
+	[menu setDelegate:(id)self];
 	return menu;
 }
 

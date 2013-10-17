@@ -3553,7 +3553,7 @@ bail:
 		}
 		
 		// begin speaking
-		[highlightSpeechSynthesizer setDelegate:self];
+		[highlightSpeechSynthesizer setDelegate:(id)self];
 		[highlightSpeechSynthesizer startSpeakingString:spokenText];
 	}
 }

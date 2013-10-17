@@ -872,7 +872,7 @@
 		
 	[webController setDelegate:self];
 	[self setActiveContentView:localContentView];
-	[self setMediaController:webController];
+	[self setMediaController:(id)webController];
 	
 	[webController loadURL:aURL];
 }

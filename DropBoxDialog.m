@@ -462,7 +462,7 @@ static NSSortDescriptor *FoldersByIndexSortPrototype()
 		
 	NSViewAnimation *animation = [[[NSViewAnimation alloc] initWithViewAnimations:[NSArray arrayWithObject:aDictionary]] autorelease];
 	
-	[animation setDelegate:self];
+	[animation setDelegate:(id)self];
 	[animation setDuration:0.15];
 	[animation startAnimation];
 

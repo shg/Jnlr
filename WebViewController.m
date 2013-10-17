@@ -387,7 +387,7 @@
 	NSURL *url = [NSURL URLWithString:urlString];
 	if ( !url ) 
 	{
-		NSLog(@"WebViewController search: - unable to create url from url string", urlString );
+		NSLog(@"WebViewController search: - unable to create url from url string %@", urlString );
 		NSBeep(); 
 		[[NSAlert googleSearchError] runModal];
 		return;
@@ -838,7 +838,7 @@ bail:
 	if ( theArchive == nil )
 	{
 		NSBeep();
-		NSLog(@"%s - unable to get archive for url", __PRETTY_FUNCTION__, [theURL absoluteString]);
+		NSLog(@"%s - unable to get archive for url %@", __PRETTY_FUNCTION__, [theURL absoluteString]);
 		return;
 	}
 	
@@ -846,7 +846,7 @@ bail:
 	if ( archiveData == nil )
 	{
 		NSBeep();
-		NSLog(@"%s - unable to get archive data for url", __PRETTY_FUNCTION__, [theURL absoluteString]);
+		NSLog(@"%s - unable to get archive data for url %@", __PRETTY_FUNCTION__, [theURL absoluteString]);
 		return;
 	}
 	
