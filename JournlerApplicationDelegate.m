@@ -2617,7 +2617,7 @@ bail:
 				NSString *wordlistSource = [[NSBundle mainBundle] pathForResource:@"AutoCorrectWordPairs" ofType:@"csv"];
 				
 				if ( wordlistSource != nil && wordlistDestination != nil && 
-						![[NSFileManager defaultManager] copyPath:wordlistSource toPath:wordlistDestination handler:self] )
+						![[NSFileManager defaultManager] copyItemAtPath:wordlistSource toPath:wordlistDestination error:NULL] )
 				{
 					NSLog(@"%s - unable to copy wordlist from %@ to %@\n\n", __PRETTY_FUNCTION__, wordlistSource, wordlistDestination);
 				}
@@ -2838,7 +2838,7 @@ bail:
 			
 			// the word list
 			if ( wordlistSource != nil && wordlistDestination != nil && 
-					![[NSFileManager defaultManager] copyPath:wordlistSource toPath:wordlistDestination handler:self] )
+					![[NSFileManager defaultManager] copyItemAtPath:wordlistSource toPath:wordlistDestination error:NULL] )
 			{
 				NSLog(@"%s - unable to copy wordlist from %@ to %@\n\n", __PRETTY_FUNCTION__, wordlistSource, wordlistDestination);
 			}
@@ -4617,7 +4617,7 @@ bail:
 			else
 			{
 				
-				success = [fileManager copyPath:myAppPath toPath:myAppPDFAppPath handler:nil];
+				success = [fileManager copyItemAtPath:myAppPath toPath:myAppPDFAppPath error:NULL];
 				if ( success ) // hide the extension if successful
 				{
 					NSLog(@"%s - installed self as pdf service to %@", __PRETTY_FUNCTION__, myAppPDFAppPath);
@@ -4737,7 +4737,7 @@ bail:
 		{ 
 			// There is no alias to myApp so create it 
 			bundledContextualItemPath = [[NSBundle mainBundle] pathForResource:@"JournlerCMI" ofType:@"plugin"];
-			success = [fileManager copyPath:bundledContextualItemPath toPath:installedItemPath handler:nil]; 
+			success = [fileManager copyItemAtPath:bundledContextualItemPath toPath:installedItemPath error:NULL];
 			if (success) 
 			{ 
 				NSLog(@"%s - successfully installed contextual menu item", __PRETTY_FUNCTION__);

@@ -195,7 +195,7 @@
 		if ( [savePanel runModalForDirectory:nil file:[[[self URL] path] lastPathComponent]] == NSOKButton )
 		{
 			NSString *filename = [savePanel filename];
-			if ( ![[NSFileManager defaultManager] copyPath:[[self URL] path] toPath:filename handler:self] )
+			if ( ![[NSFileManager defaultManager] copyItemAtPath:[[self URL] path] toPath:filename error:NULL] )
 			{
 				NSString *errorTitle = NSLocalizedString(@"file manager error title",@"");
 				NSString *errorMessage = [NSString stringWithFormat:NSLocalizedString(@"file manager error msg",@""), 

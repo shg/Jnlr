@@ -588,7 +588,7 @@ static NSString *kJournlerABFileExtension = @"jaduid";
 	
 	if ( wordlistSource != nil && wordlistDestination != nil )
 	{
-		if ( ![[NSFileManager defaultManager] copyPath:wordlistSource toPath:wordlistDestination handler:self] )
+		if ( ![[NSFileManager defaultManager] copyItemAtPath:wordlistSource toPath:wordlistDestination error:NULL] )
 		{
 			[log210 appendFormat:@"%s - unable to copy wordlist from %@ to %@\n\n", __PRETTY_FUNCTION__, wordlistSource, wordlistDestination];
 			[ud setBool:NO forKey:@"EntryTextAutoCorrectSpelling"];
@@ -1305,7 +1305,7 @@ bail:
 	
 	if ( wordlistSource != nil && wordlistDestination != nil )
 	{
-		if ( ![[NSFileManager defaultManager] copyPath:wordlistSource toPath:wordlistDestination handler:self] )
+		if ( ![[NSFileManager defaultManager] copyItemAtPath:wordlistSource toPath:wordlistDestination error:NULL] )
 		{
 			[log210 appendFormat:@"%s - unable to copy wordlist from %@ to %@\n\n", __PRETTY_FUNCTION__, wordlistSource, wordlistDestination];
 			[ud setBool:NO forKey:@"EntryTextAutoCorrectSpelling"];

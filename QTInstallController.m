@@ -128,13 +128,13 @@
 	
 	if ( [fm fileExistsAtPath:[QTInstallController LAMEFrameworkBundlePath]] && 
 			![fm fileExistsAtPath:[QTInstallController LAMEFrameworkInstallPath]] )
-		success = [fm copyPath:[QTInstallController LAMEFrameworkBundlePath] 
-				toPath:[QTInstallController LAMEFrameworkInstallPath] handler:self];
+		success = [fm copyItemAtPath:[QTInstallController LAMEFrameworkBundlePath]
+				toPath:[QTInstallController LAMEFrameworkInstallPath] error:NULL];
 		
 	if ( [fm fileExistsAtPath:[QTInstallController LAMEComponentBundlePath]] && 
 			![fm fileExistsAtPath:[QTInstallController LAMEComponentInstallPath]] )
-		success = ( success && [fm copyPath:[QTInstallController LAMEComponentBundlePath] 
-				toPath:[QTInstallController LAMEComponentInstallPath] handler:self] );	
+		success = ( success && [fm copyItemAtPath:[QTInstallController LAMEComponentBundlePath]
+				toPath:[QTInstallController LAMEComponentInstallPath] error:NULL] );	
 	
 	if ( success ) {
 		
