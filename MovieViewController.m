@@ -269,9 +269,6 @@
 	container_size.width+=16;
 	container_size.height+=34;
 	
-	floor( container_size.width );
-	floor( container_size.height );
-	
 	// what if the dimensions hide the movie completely?
 	//if ( container_size.height < 100 )
 	//	container_size.height = 100;
