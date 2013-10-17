@@ -1535,7 +1535,7 @@ static NSArray *JObjectValues()
 			}
 			
 			// set the creation date on the copied file
-			NSDate *creation_date = [[fm fileAttributesAtPath:path traverseLink:NO] objectForKey:NSFileCreationDate];
+			NSDate *creation_date = [[fm attributesOfItemAtPath:path error:NULL] objectForKey:NSFileCreationDate];
 			if ( creation_date == nil ) creation_date = [NSDate date];
 			NSDictionary *file_attrs = [NSDictionary dictionaryWithObject:creation_date forKey:NSFileCreationDate];
 			[fm changeFileAttributes:file_attrs atPath:fullLocalPath];
@@ -1551,7 +1551,7 @@ static NSArray *JObjectValues()
 			}
 			
 			// set the creation date on the copied file
-			NSDate *creation_date = [[fm fileAttributesAtPath:path traverseLink:NO] objectForKey:NSFileCreationDate];
+			NSDate *creation_date = [[fm attributesOfItemAtPath:path error:NULL] objectForKey:NSFileCreationDate];
 			if ( creation_date == nil ) creation_date = [NSDate date];
 			NSDictionary *file_attrs = [NSDictionary dictionaryWithObject:creation_date forKey:NSFileCreationDate];
 			[fm changeFileAttributes:file_attrs atPath:fullLocalPath];
@@ -2503,7 +2503,7 @@ static NSArray *JObjectValues()
 	}
 	
 	// note the modification date on the file in case the user want's this preserved
-	_importModificationDate = [[[[NSFileManager defaultManager] fileAttributesAtPath:fullpath traverseLink:YES] objectForKey:NSFileModificationDate] retain];
+	_importModificationDate = [[[[NSFileManager defaultManager] attributesOfItemAtPath:[fullpath stringByResolvingSymlinksInPath] error:NULL] objectForKey:NSFileModificationDate] retain];
 	
 	return self;			
 }

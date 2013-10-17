@@ -218,7 +218,7 @@ static NSString* NoNullString( NSString *aString )
 	MDItemRef mdItem = MDItemCreate(NULL,(CFStringRef)path);
 	
 	// derive an icon for the file based on the unique file system file number
-	NSDictionary *fileAttributes = [fm fileAttributesAtPath:path traverseLink:NO];
+	NSDictionary *fileAttributes = [fm attributesOfItemAtPath:path error:NULL];
 	NSSize lwTitle, lwKind, lwSize, lwCreated, lwModified, lwLastOpened, lwMax;
 	
 	lwTitle = NSMakeSize(0, 0);

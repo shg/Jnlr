@@ -2018,7 +2018,7 @@
 		NSString *originalPath = [aResource originalPath];
 		if ( originalPath != nil )
 		{
-			NSDictionary *fileAttributes = [[NSFileManager defaultManager] fileAttributesAtPath:originalPath traverseLink:YES];
+			NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[originalPath stringByResolvingSymlinksInPath] error:NULL];
 			
 			[aResource setValue:[fileAttributes objectForKey:NSFileModificationDate] forKey:@"underlyingModificationDate"];
 			[aResource setValue:[originalPath stringByAbbreviatingWithTildeInPath] forKey:@"relativePath"];
@@ -4084,7 +4084,7 @@ bail:
 			NSString *path = [aResource originalPath];
 			if ( path != nil )
 			{
-				NSDictionary *fileAttributes = [fm fileAttributesAtPath:path traverseLink:YES];
+				NSDictionary *fileAttributes = [fm attributesOfItemAtPath:[path stringByResolvingSymlinksInPath] error:NULL];
 				
 				NSDate *savedDateModified = [aResource valueForKey:@"underlyingModificationDate"];
 				NSDate *actualDateModified = [fileAttributes objectForKey:NSFileModificationDate];

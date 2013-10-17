@@ -3710,7 +3710,7 @@ bail:
 			{
 				// hide the extension - this overrides the user preference?
 				NSMutableDictionary *tempDict = [[NSMutableDictionary alloc] initWithDictionary:
-						[[NSFileManager defaultManager] fileAttributesAtPath:saveWithExtension traverseLink:YES]];
+						[[NSFileManager defaultManager] attributesOfItemAtPath:[saveWithExtension stringByResolvingSymlinksInPath] error:NULL]];
 						
 				[tempDict setObject:[NSNumber numberWithBool:[sp isExtensionHidden]] forKey:@"NSFileExtensionHidden"];
 				[[NSFileManager defaultManager] changeFileAttributes:tempDict atPath:saveWithExtension];

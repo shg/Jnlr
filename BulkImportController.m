@@ -372,12 +372,12 @@
 		{
 		// file creation date
 		case 0:
-			creationDate = [[fm fileAttributesAtPath:path traverseLink:YES] objectForKey:NSFileCreationDate];
+			creationDate = [[fm attributesOfItemAtPath:[path stringByResolvingSymlinksInPath] error:NULL] objectForKey:NSFileCreationDate];
 			break;
 		
 		// file modification date
 		case 1:
-			creationDate = [[fm fileAttributesAtPath:path traverseLink:YES] objectForKey:NSFileModificationDate];
+			creationDate = [[fm attributesOfItemAtPath:[path stringByResolvingSymlinksInPath] error:NULL] objectForKey:NSFileModificationDate];
 			break;
 		
 		// use preference
