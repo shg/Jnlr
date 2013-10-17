@@ -387,7 +387,7 @@ static NSString *kJournlerABFileExtension = @"jaduid";
 	
     // DIRECTORY_ENUMERATION
     NSEnumerator *direnum;
-	allFiles = [fm directoryContentsAtPath:[_journal entriesPath]];
+	allFiles = [fm contentsOfDirectoryAtPath:[_journal entriesPath] error:NULL];
 	direnum = [allFiles objectEnumerator];
 	
 	[progressText210 setStringValue:NSLocalizedStringFromTable(@"converting entries", @"UpgradeController", @"")];
@@ -1452,7 +1452,7 @@ bail:
 	if ( resourcePath == nil || ![[NSFileManager defaultManager] fileExistsAtPath:resourcePath] )
 		return YES;
 	
-	NSArray *resources = [[NSFileManager defaultManager] directoryContentsAtPath:resourcePath];
+	NSArray *resources = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:resourcePath error:NULL];
 	if ( resources == nil || [resources count] == 0 )
 		return YES;
 	
