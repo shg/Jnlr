@@ -701,7 +701,7 @@
 		72886D770CC7D34800733960 /* BrowseTableFieldEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrowseTableFieldEditor.h; sourceTree = "<group>"; };
 		72886D780CC7D34800733960 /* BrowseTableFieldEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrowseTableFieldEditor.m; sourceTree = "<group>"; };
 		72886D7E0CC7D36B00733960 /* EntryExportController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntryExportController.h; sourceTree = "<group>"; };
-		72886D7F0CC7D36B00733960 /* EntryExportController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntryExportController.m; sourceTree = "<group>"; };
+		72886D7F0CC7D36B00733960 /* EntryExportController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EntryExportController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		72886D800CC7D36B00733960 /* ExportJournalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExportJournalController.h; sourceTree = "<group>"; };
 		72886D810CC7D36B00733960 /* ExportJournalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExportJournalController.m; sourceTree = "<group>"; };
 		72886D820CC7D36B00733960 /* PageSetupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageSetupController.h; sourceTree = "<group>"; };
@@ -739,7 +739,7 @@
 		72886DE40CC7D5B100733960 /* EntryCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntryCellController.h; sourceTree = "<group>"; };
 		72886DE50CC7D5B100733960 /* EntryCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntryCellController.m; sourceTree = "<group>"; };
 		72886DE60CC7D5B100733960 /* ResourceCellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceCellController.h; sourceTree = "<group>"; };
-		72886DE70CC7D5B100733960 /* ResourceCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceCellController.m; sourceTree = "<group>"; };
+		72886DE70CC7D5B100733960 /* ResourceCellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ResourceCellController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		72886DE80CC7D5B100733960 /* MissingFileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MissingFileController.h; sourceTree = "<group>"; };
 		72886DE90CC7D5B100733960 /* MissingFileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MissingFileController.m; sourceTree = "<group>"; };
 		72886DEA0CC7D5B100733960 /* FoldersController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FoldersController.h; sourceTree = "<group>"; };
@@ -863,7 +863,7 @@
 		72886F900CC7E5FB00733960 /* JournlerMediaViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerMediaViewer.h; sourceTree = "<group>"; };
 		72886F910CC7E5FB00733960 /* JournlerMediaViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournlerMediaViewer.m; sourceTree = "<group>"; };
 		72886F920CC7E5FB00733960 /* JournlerMediaContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerMediaContentController.h; sourceTree = "<group>"; };
-		72886F930CC7E5FB00733960 /* JournlerMediaContentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournlerMediaContentController.m; sourceTree = "<group>"; };
+		72886F930CC7E5FB00733960 /* JournlerMediaContentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = JournlerMediaContentController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		72886F940CC7E5FB00733960 /* AudioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioViewController.h; sourceTree = "<group>"; };
 		72886F950CC7E5FB00733960 /* AudioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioViewController.m; sourceTree = "<group>"; };
 		72886F960CC7E5FB00733960 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
@@ -871,7 +871,7 @@
 		72886F980CC7E5FB00733960 /* MovieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieViewController.h; sourceTree = "<group>"; };
 		72886F990CC7E5FB00733960 /* MovieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieViewController.m; sourceTree = "<group>"; };
 		72886F9A0CC7E5FB00733960 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
-		72886F9B0CC7E5FB00733960 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		72886F9B0CC7E5FB00733960 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = WebViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		72886F9C0CC7E5FB00733960 /* MailMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailMessageController.h; sourceTree = "<group>"; };
 		72886F9D0CC7E5FB00733960 /* MailMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MailMessageController.m; sourceTree = "<group>"; };
 		72886F9E0CC7E5FB00733960 /* WordDocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordDocumentController.h; sourceTree = "<group>"; };
@@ -879,7 +879,7 @@
 		72886FA00CC7E5FB00733960 /* TextDocumentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextDocumentController.h; sourceTree = "<group>"; };
 		72886FA10CC7E5FB00733960 /* TextDocumentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextDocumentController.m; sourceTree = "<group>"; };
 		72886FAE0CC7E62E00733960 /* AddressRecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressRecordController.h; sourceTree = "<group>"; };
-		72886FAF0CC7E62E00733960 /* AddressRecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressRecordController.m; sourceTree = "<group>"; };
+		72886FAF0CC7E62E00733960 /* AddressRecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AddressRecordController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		72886FB00CC7E62E00733960 /* PDPersonPropertyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDPersonPropertyCell.h; sourceTree = "<group>"; };
 		72886FB10CC7E62F00733960 /* PDPersonPropertyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDPersonPropertyCell.m; sourceTree = "<group>"; };
 		72886FB20CC7E62F00733960 /* PDPersonPropertyField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDPersonPropertyField.h; sourceTree = "<group>"; };

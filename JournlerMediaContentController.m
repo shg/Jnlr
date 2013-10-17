@@ -185,7 +185,7 @@
 	if ( [[self URL] isFileURL] )
 	{
 		NSSavePanel *savePanel = [NSSavePanel savePanel];
-		[savePanel setRequiredFileType:nil];
+		[savePanel setAllowedFileTypes:nil];
 		[savePanel setCanSelectHiddenExtension:YES];
 	
 		//[openPanel setMessage:NSLocalizedString(@"export resources panel text",@"")];

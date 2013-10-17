@@ -540,7 +540,7 @@
 		NSString *pageTitle = [[[defaultWebView mainFrame] dataSource] pageTitle];
 		
 		NSSavePanel *savePanel = [NSSavePanel savePanel];
-		[savePanel setRequiredFileType:@"webarchive"];
+		[savePanel setAllowedFileTypes:[NSArray arrayWithObject:@"webarchive"]];
 		[savePanel setCanSelectHiddenExtension:YES];
 
 		if ( [savePanel runModalForDirectory:nil file:( pageTitle ? pageTitle : @"Website" )] == NSOKButton )
