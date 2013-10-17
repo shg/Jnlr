@@ -142,8 +142,8 @@
 		NSDictionary *groupDict = [NSDictionary dictionaryWithObjectsAndKeys:
 				@"admin", NSFileGroupOwnerAccountName, nil];
 		
-		success = [fm changeFileAttributes:groupDict atPath:[QTInstallController LAMEFrameworkInstallPath]];
-		success = ( success && [fm changeFileAttributes:groupDict atPath:[QTInstallController LAMEComponentInstallPath]] );	
+		success = [fm setAttributes:groupDict ofItemAtPath:[QTInstallController LAMEFrameworkInstallPath] error:NULL];
+		success = ( success && [fm setAttributes:groupDict ofItemAtPath:[QTInstallController LAMEComponentInstallPath] error:NULL] );	
 		
 	}
 	

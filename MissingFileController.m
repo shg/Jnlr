@@ -210,7 +210,7 @@
 				NSDate *creation_date = [[fm attributesOfItemAtPath:filename error:NULL] objectForKey:NSFileCreationDate];
 				if ( creation_date == nil ) creation_date = [NSDate date];
 				NSDictionary *file_attrs = [NSDictionary dictionaryWithObject:creation_date forKey:NSFileCreationDate];
-				[fm changeFileAttributes:file_attrs atPath:newResourcePath];
+				[fm setAttributes:file_attrs ofItemAtPath:newResourcePath error:NULL];
 			}
 		}
 		

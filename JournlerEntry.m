@@ -1538,7 +1538,7 @@ static NSArray *JObjectValues()
 			NSDate *creation_date = [[fm attributesOfItemAtPath:path error:NULL] objectForKey:NSFileCreationDate];
 			if ( creation_date == nil ) creation_date = [NSDate date];
 			NSDictionary *file_attrs = [NSDictionary dictionaryWithObject:creation_date forKey:NSFileCreationDate];
-			[fm changeFileAttributes:file_attrs atPath:fullLocalPath];
+			[fm setAttributes:file_attrs ofItemAtPath:fullLocalPath error:NULL];
 		}
 		
 		else if ( operation == kNewResourceForceMove )
@@ -1554,7 +1554,7 @@ static NSArray *JObjectValues()
 			NSDate *creation_date = [[fm attributesOfItemAtPath:path error:NULL] objectForKey:NSFileCreationDate];
 			if ( creation_date == nil ) creation_date = [NSDate date];
 			NSDictionary *file_attrs = [NSDictionary dictionaryWithObject:creation_date forKey:NSFileCreationDate];
-			[fm changeFileAttributes:file_attrs atPath:fullLocalPath];
+			[fm setAttributes:file_attrs ofItemAtPath:fullLocalPath error:NULL];
 		}
 		
 		else if ( operation == kNewResourceForceLink )
@@ -3042,7 +3042,7 @@ static NSArray *JObjectValues()
 	if ( setLabel )
 		[[NSWorkspace sharedWorkspace] setLabel:kFinderLabelForEntryLabel[ [[self label] integerValue] ] forFile:saveWithExtension];
 		
-	[[NSFileManager defaultManager] changeFileAttributes:fileAttributes atPath:saveWithExtension];
+	[[NSFileManager defaultManager] setAttributes:fileAttributes ofItemAtPath:saveWithExtension error:NULL];
 
 	return YES;
 }

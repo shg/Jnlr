@@ -623,7 +623,7 @@
 		72886CEC0CC7D27800733960 /* JournlerCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerCollection.h; sourceTree = "<group>"; };
 		72886CED0CC7D27800733960 /* JournlerCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournlerCollection.m; sourceTree = "<group>"; };
 		72886CEE0CC7D27800733960 /* JournlerEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerEntry.h; sourceTree = "<group>"; };
-		72886CEF0CC7D27800733960 /* JournlerEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournlerEntry.m; sourceTree = "<group>"; };
+		72886CEF0CC7D27800733960 /* JournlerEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = JournlerEntry.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		72886CF00CC7D27800733960 /* JournlerResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerResource.h; sourceTree = "<group>"; };
 		72886CF10CC7D27800733960 /* JournlerResource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournlerResource.m; sourceTree = "<group>"; };
 		72886CF20CC7D27800733960 /* JournlerCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerCondition.h; sourceTree = "<group>"; };
@@ -859,7 +859,7 @@
 		72886F710CC7E51700733960 /* JournalUpgradeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournalUpgradeController.h; sourceTree = "<group>"; };
 		72886F720CC7E51700733960 /* JournalUpgradeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournalUpgradeController.m; sourceTree = "<group>"; };
 		72886F730CC7E51700733960 /* QTInstallController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QTInstallController.h; sourceTree = "<group>"; };
-		72886F740CC7E51700733960 /* QTInstallController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QTInstallController.m; sourceTree = "<group>"; };
+		72886F740CC7E51700733960 /* QTInstallController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = QTInstallController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		72886F900CC7E5FB00733960 /* JournlerMediaViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerMediaViewer.h; sourceTree = "<group>"; };
 		72886F910CC7E5FB00733960 /* JournlerMediaViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournlerMediaViewer.m; sourceTree = "<group>"; };
 		72886F920CC7E5FB00733960 /* JournlerMediaContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerMediaContentController.h; sourceTree = "<group>"; };

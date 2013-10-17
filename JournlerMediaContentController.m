@@ -211,7 +211,7 @@
 			else
 			{
 				NSDictionary *fileAttributes = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:[savePanel isExtensionHidden]] forKey:NSFileExtensionHidden];
-				[[NSFileManager defaultManager] changeFileAttributes:fileAttributes atPath:[savePanel filename]];
+				[[NSFileManager defaultManager] setAttributes:fileAttributes ofItemAtPath:[savePanel filename] error:NULL];
 			}
 		}
 	}
