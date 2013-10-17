@@ -1198,7 +1198,7 @@ bail:
 		NSString *path = [self originalPath];
 		if ( path != nil )
 		{
-			NSDictionary *fileAttributes = [[NSFileManager defaultManager] fileAttributesAtPath:path traverseLink:YES];
+			NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[path stringByResolvingSymlinksInPath] error:NULL];
 			
 			[self setValue:[fileAttributes objectForKey:NSFileModificationDate] forKey:@"underlyingModificationDate"];
 			[self setValue:[path stringByAbbreviatingWithTildeInPath] forKey:@"relativePath"];
@@ -1244,7 +1244,7 @@ bail:
 		[self setValue:[[NSWorkspace sharedWorkspace] UTIForFile:[[NSWorkspace sharedWorkspace] resolveForAliases:path]] forKey:@"uti"];
 	
 		// note the date modified of the underlying data
-		NSDictionary *fileAttributes = [[NSFileManager defaultManager] fileAttributesAtPath:[[NSWorkspace sharedWorkspace] resolveForAliases:path] traverseLink:YES];
+		NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[[[NSWorkspace sharedWorkspace] resolveForAliases:path] attributesOfItemAtPath] error:NULL];
 		[self setValue:[fileAttributes objectForKey:NSFileModificationDate] forKey:@"underlyingModificationDate"];
 	
 		// prepare the text representation for the resources
