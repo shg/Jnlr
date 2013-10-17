@@ -856,7 +856,8 @@ bail:
 	[savePanel setAllowedFileTypes:[NSArray arrayWithObject:@"webarchive"]];
 	[savePanel setCanSelectHiddenExtension:YES];
 
-	if ( [savePanel runModalForDirectory:nil file:( pageTitle ? pageTitle : @"Website" )] == NSOKButton )
+    [savePanel setNameFieldStringValue:( pageTitle ? pageTitle : @"Website" )];
+	if ( [savePanel runModal] == NSOKButton )
 	{
 		NSError *writeError;
 		NSString *filename = [savePanel filename];

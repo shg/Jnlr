@@ -149,7 +149,7 @@
     NSOpenPanel *oPanel = [NSOpenPanel openPanel];
 	
 	[oPanel setAccessoryView:locateAccessory];
-    result = [oPanel runModalForDirectory:nil file:nil types:nil];
+    result = [oPanel runModal];
 	
     if (result == NSOKButton) 
 	{

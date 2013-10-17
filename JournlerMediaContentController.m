@@ -192,7 +192,8 @@
 		//[openPanel setTitle:NSLocalizedString(@"export resources panel title",@"")];
 		//[openPanel setPrompt:NSLocalizedString(@"export resources panel prompt",@"")];
 		
-		if ( [savePanel runModalForDirectory:nil file:[[[self URL] path] lastPathComponent]] == NSOKButton )
+        [savePanel setNameFieldStringValue:[[[self URL] path] lastPathComponent]];
+		if ( [savePanel runModal] == NSOKButton )
 		{
 			NSString *filename = [savePanel filename];
 			if ( ![[NSFileManager defaultManager] copyItemAtPath:[[self URL] path] toPath:filename error:NULL] )

@@ -1937,7 +1937,7 @@ bail:
     [oPanel setAllowsMultipleSelection:YES];
 	[oPanel setPrompt:NSLocalizedString(@"choose button",@"")];
 	
-    result = [oPanel runModalForDirectory:nil file:nil types:nil];
+    result = [oPanel runModal];
     if (result != NSOKButton)
 		return;
 	
@@ -2408,7 +2408,9 @@ bail:
 			[op setTitle:NSLocalizedStringFromTable(@"load error locate title", @"LoadError", @"")];
 			[op setMessage:NSLocalizedStringFromTable(@"load error locate message", @"LoadError", @"")];
 			
-			result = [op runModalForDirectory:[self documentsFolder] file:@"Journler" types:nil];
+            [op setDirectoryURL:[NSURL fileURLWithPath:[self documentsFolder]]];
+            [op setNameFieldStringValue:@"Journler"];
+			result = [op runModal];
 			
 			if ( result == NSCancelButton )
 			{
@@ -3432,7 +3434,8 @@ bail:
 	[sp setPrompt:NSLocalizedString(@"export panel prompt",@"")];
 	
 	// display the NSSavePanel
-	runResult = [sp runModalForDirectory:nil file:[self valueForKeyPath:@"journal.title"] types:nil];
+    [sp setNameFieldStringValue:[self valueForKeyPath:@"journal.title"]];
+	runResult = [sp runModal];
 
 	// if successful, save file under designated name
 	if (runResult == NSOKButton) 
