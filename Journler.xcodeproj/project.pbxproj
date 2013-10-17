@@ -593,7 +593,7 @@
 		728400330CE8DC6B00B17296 /* JournlerAddressBookWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournlerAddressBookWindow.m; sourceTree = "<group>"; };
 		7284015F0CE95F5700B17296 /* ToolbarItemBlog.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ToolbarItemBlog.tiff; sourceTree = "<group>"; };
 		7284019C0CE97F8800B17296 /* JournlerWeblogInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerWeblogInterface.h; sourceTree = "<group>"; };
-		7284019D0CE97F8800B17296 /* JournlerWeblogInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournlerWeblogInterface.m; sourceTree = "<group>"; };
+		7284019D0CE97F8800B17296 /* JournlerWeblogInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = JournlerWeblogInterface.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		728861840CC6864000733960 /* iMediaBrowser.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iMediaBrowser.framework; sourceTree = "<group>"; };
 		728861850CC6864000733960 /* Pantomime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Pantomime.framework; sourceTree = "<group>"; };
 		728861860CC6864000733960 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
@@ -619,7 +619,7 @@
 		72886CE80CC7D27800733960 /* JournlerObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerObject.h; sourceTree = "<group>"; };
 		72886CE90CC7D27800733960 /* JournlerObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournlerObject.m; sourceTree = "<group>"; };
 		72886CEA0CC7D27800733960 /* JournlerJournal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerJournal.h; sourceTree = "<group>"; };
-		72886CEB0CC7D27800733960 /* JournlerJournal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournlerJournal.m; sourceTree = "<group>"; };
+		72886CEB0CC7D27800733960 /* JournlerJournal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = JournlerJournal.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		72886CEC0CC7D27800733960 /* JournlerCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerCollection.h; sourceTree = "<group>"; };
 		72886CED0CC7D27800733960 /* JournlerCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournlerCollection.m; sourceTree = "<group>"; };
 		72886CEE0CC7D27800733960 /* JournlerEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerEntry.h; sourceTree = "<group>"; };
@@ -841,13 +841,13 @@
 		72886F370CC7E4A800733960 /* MultipleEntryInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultipleEntryInfoController.h; sourceTree = "<group>"; };
 		72886F380CC7E4A800733960 /* MultipleEntryInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultipleEntryInfoController.m; sourceTree = "<group>"; };
 		72886F390CC7E4A800733960 /* FolderInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FolderInfoController.h; sourceTree = "<group>"; };
-		72886F3A0CC7E4A800733960 /* FolderInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FolderInfoController.m; sourceTree = "<group>"; };
+		72886F3A0CC7E4A800733960 /* FolderInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FolderInfoController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		72886F410CC7E4A800733960 /* IntelligentCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntelligentCollectionController.h; sourceTree = "<group>"; };
 		72886F420CC7E4A800733960 /* IntelligentCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntelligentCollectionController.m; sourceTree = "<group>"; };
 		72886F430CC7E4A800733960 /* DateSelectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateSelectionController.h; sourceTree = "<group>"; };
 		72886F440CC7E4A800733960 /* DateSelectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateSelectionController.m; sourceTree = "<group>"; };
 		72886F450CC7E4A800733960 /* PrefWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefWindowController.h; sourceTree = "<group>"; };
-		72886F460CC7E4A800733960 /* PrefWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefWindowController.m; sourceTree = "<group>"; };
+		72886F460CC7E4A800733960 /* PrefWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PrefWindowController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		72886F470CC7E4A800733960 /* ResourceInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceInfoController.h; sourceTree = "<group>"; };
 		72886F480CC7E4A800733960 /* ResourceInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceInfoController.m; sourceTree = "<group>"; };
 		72886F490CC7E4A800733960 /* LoadErrorReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadErrorReporter.h; sourceTree = "<group>"; };
@@ -1086,7 +1086,7 @@
 		72D2A2640CD66CB20065F4EC /* JournlerResourceMediaController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournlerResourceMediaController.m; sourceTree = "<group>"; };
 		72D2A2D30CD671700065F4EC /* English */ = {isa = PBXFileReference; lastKnownFileType = wrapper.nib; name = English; path = English.lproj/JournlerResourceMediaView.nib; sourceTree = "<group>"; };
 		72D2A4330CD82F0B0065F4EC /* PDExportableImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDExportableImageView.h; sourceTree = "<group>"; };
-		72D2A4340CD82F0B0065F4EC /* PDExportableImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDExportableImageView.m; sourceTree = "<group>"; };
+		72D2A4340CD82F0B0065F4EC /* PDExportableImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PDExportableImageView.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		72D2E5C80DAEBD19007E549F /* QLPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLPreviewView.h; sourceTree = "<group>"; };
 		72D2E5C90DAEBD19007E549F /* QLPreviewPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QLPreviewPanel.h; sourceTree = "<group>"; };
 		72D2E5EE0DAEC897007E549F /* JournlerLicenseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerLicenseManager.h; sourceTree = "<group>"; };

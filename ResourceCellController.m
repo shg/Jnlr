@@ -547,7 +547,7 @@
 		if ( [savePanel runModal] == NSOKButton )
 		{
 			NSError *writeError;
-			NSString *filename = [savePanel filename];
+			NSString *filename = [[savePanel URL] path];
 			
 			if ( ![archiveData writeToFile:filename options:NSAtomicWrite error:&writeError] )
 			{
@@ -559,7 +559,7 @@
 			else
 			{
 				NSDictionary *fileAttributes = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:[savePanel isExtensionHidden]] forKey:NSFileExtensionHidden];
-				[[NSFileManager defaultManager] setAttributes:fileAttributes ofItemAtPath:[savePanel filename] error:NULL];
+				[[NSFileManager defaultManager] setAttributes:fileAttributes ofItemAtPath:[[savePanel URL] path] error:NULL];
 			}
 		}
 	}

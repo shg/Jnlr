@@ -727,7 +727,7 @@ typedef enum {
     [openPanel setAllowedFileTypes:types];
 	if ( [openPanel runModal] == NSOKButton )
 	{
-		NSString *wordlistSource = [openPanel filename];
+		NSString *wordlistSource = [[openPanel URL] path];
 		NSDictionary *wordlist = [[NSApp delegate] autoCorrectDictionaryForFileAtPath:wordlistSource];
 		if ( wordlist == nil )
 		{

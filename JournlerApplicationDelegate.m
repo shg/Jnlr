@@ -3526,7 +3526,7 @@ bail:
 	{
 		BOOL success = YES;
 		
-		NSString *rootDir = [sp directory];
+		NSString *rootDir = [[sp directoryURL] path];
 		NSDate *fromDate = [exportController dateFrom];
 		NSDate *toDate = [exportController dateTo];
 		

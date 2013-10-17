@@ -254,7 +254,7 @@
 	
     if (result == NSOKButton) 
 	{
-        NSString *filename = [openPanel filename];
+        NSString *filename = [[openPanel URL] path];
 		NSImage *anImage = [[[NSImage alloc] initWithContentsOfFile:filename] autorelease];
 		if ( anImage == nil )
 		{
