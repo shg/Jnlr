@@ -168,7 +168,7 @@ static NSString *kMediabarItemOpenHomepage = @"kMediabarItemOpenHomepage";
 	}
 	
 	NSSavePanel *savePanel = [NSSavePanel savePanel];
-	[savePanel setRequiredFileType:@"vcf"];
+	[savePanel setAllowedFileTypes:[NSArray arrayWithObject:@"vcf"]];
 	[savePanel setCanSelectHiddenExtension:YES];
 
 	if ( [savePanel runModalForDirectory:nil file:[aPerson fullname]] == NSOKButton )

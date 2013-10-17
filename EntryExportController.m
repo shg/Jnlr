@@ -169,7 +169,7 @@
 	// if not "together in a single file" then set required type to nil
 	if ( ![self fileMode] == 2 )
 	{
-		[(NSSavePanel*)[_contentView window] setRequiredFileType:nil];
+		[(NSSavePanel*)[_contentView window] setAllowedFileTypes:nil];
 	}
 	
 	if ( [self updatesFileExtension] )
@@ -203,13 +203,13 @@
 		}
 		
 		// set the required file type
-		[(NSSavePanel*)[_contentView window] setRequiredFileType:extension];
+		[(NSSavePanel*)[_contentView window] setAllowedFileTypes:[NSArray arrayWithObject:extension]];
 		//NSLog(@"%s - %@", __PRETTY_FUNCTION__, extension);
 	}
 	else
 	{
 		// nil out the required file type
-		[(NSSavePanel*)[_contentView window] setRequiredFileType:nil];
+		[(NSSavePanel*)[_contentView window] setAllowedFileTypes:nil];
 	}
 	
 	[self setDataFormat:[sender tag]];
