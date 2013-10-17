@@ -1035,7 +1035,7 @@
 				{
 					NSDictionary *tempDict = [[[NSDictionary alloc] initWithObjectsAndKeys:
 								[NSNumber numberWithBool:[sp isExtensionHidden]], @"NSFileExtensionHidden", nil] autorelease];
-					[[NSFileManager defaultManager] changeFileAttributes:tempDict atPath:saveWithExtension];
+					[[NSFileManager defaultManager] setAttributes:tempDict ofItemAtPath:saveWithExtension error:NULL];
 				}
 			}
 			

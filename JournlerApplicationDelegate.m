@@ -3716,7 +3716,7 @@ bail:
 						[[NSFileManager defaultManager] attributesOfItemAtPath:[saveWithExtension stringByResolvingSymlinksInPath] error:NULL]];
 						
 				[tempDict setObject:[NSNumber numberWithBool:[sp isExtensionHidden]] forKey:@"NSFileExtensionHidden"];
-				[[NSFileManager defaultManager] changeFileAttributes:tempDict atPath:saveWithExtension];
+				[[NSFileManager defaultManager] setAttributes:tempDict ofItemAtPath:saveWithExtension error:NULL];
 				
 				[tempDict release];
 			}
