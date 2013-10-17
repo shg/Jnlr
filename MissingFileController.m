@@ -154,7 +154,7 @@
     if (result == NSOKButton) 
 	{
         BOOL success = YES;
-		NSString *filename = [oPanel filename];
+		NSString *filename = [[oPanel URL] path];
 		JournlerResource *theResource = [self resource];
 		
 		NSFileManager *fm = [NSFileManager defaultManager];

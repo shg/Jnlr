@@ -125,7 +125,7 @@ typedef void (*JournlerWeblogInterfaceDidChoosePreferredEditorIMP)(id, SEL, id, 
 	NSString *filename = nil;
 	
 	if ( returnCode == NSOKButton )
-		filename = [sheet filename];
+		filename = [[sheet URL] path];
 	
 	JournlerWeblogInterfaceDidChoosePreferredEditorIMP didChoose;
 	didChoose = (JournlerWeblogInterfaceDidChoosePreferredEditorIMP)[delegate methodForSelector:didChooseEditorCallback];

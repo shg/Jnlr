@@ -792,11 +792,11 @@
 			if ( [sp isExtensionHidden] )
 				flags |= kEntryHideExtension;
 			
-			if ( ![[theEntries objectAtIndex:0] writeToFile:[sp filename] as:[exportController dataFormat] flags:flags] )
+			if ( ![[theEntries objectAtIndex:0] writeToFile:[[sp URL] path] as:[exportController dataFormat] flags:flags] )
 			{
 				NSBeep();
 				[[NSAlert entryExportError] runModal];
-				NSLog(@"%s - error writing file to %@", __PRETTY_FUNCTION__, [sp filename]);
+				NSLog(@"%s - error writing file to %@", __PRETTY_FUNCTION__, [[sp URL] path]);
 			}
 		}
 	}
@@ -834,7 +834,7 @@
 			NSInteger folderPref = [exportController fileMode];
 			
 			BOOL success = YES;
-			NSString *rootDir = [sp directory];
+			NSString *rootDir = [[sp directoryURL] path];
 			
 			if ( folderPref == kExportByFolder ) 
 			{
@@ -1069,7 +1069,7 @@
 	
 	if ( [openPanel runModal] == NSOKButton )
 	{
-		NSString *path = [openPanel directory];
+		NSString *path = [[openPanel directoryURL] path];
 		
         for ( JournlerResource *aResource in [self selectedResources] )
 			[aResource createFileAtDestination:path];

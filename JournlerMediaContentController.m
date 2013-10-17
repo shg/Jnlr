@@ -195,7 +195,7 @@
         [savePanel setNameFieldStringValue:[[[self URL] path] lastPathComponent]];
 		if ( [savePanel runModal] == NSOKButton )
 		{
-			NSString *filename = [savePanel filename];
+			NSString *filename = [[savePanel URL] path];
 			if ( ![[NSFileManager defaultManager] copyItemAtPath:[[self URL] path] toPath:filename error:NULL] )
 			{
 				NSString *errorTitle = NSLocalizedString(@"file manager error title",@"");
@@ -211,7 +211,7 @@
 			else
 			{
 				NSDictionary *fileAttributes = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:[savePanel isExtensionHidden]] forKey:NSFileExtensionHidden];
-				[[NSFileManager defaultManager] setAttributes:fileAttributes ofItemAtPath:[savePanel filename] error:NULL];
+				[[NSFileManager defaultManager] setAttributes:fileAttributes ofItemAtPath:[[savePanel URL] path] error:NULL];
 			}
 		}
 	}
