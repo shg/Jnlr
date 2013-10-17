@@ -621,7 +621,7 @@
 		72886CEA0CC7D27800733960 /* JournlerJournal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerJournal.h; sourceTree = "<group>"; };
 		72886CEB0CC7D27800733960 /* JournlerJournal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = JournlerJournal.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		72886CEC0CC7D27800733960 /* JournlerCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerCollection.h; sourceTree = "<group>"; };
-		72886CED0CC7D27800733960 /* JournlerCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournlerCollection.m; sourceTree = "<group>"; };
+		72886CED0CC7D27800733960 /* JournlerCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = JournlerCollection.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		72886CEE0CC7D27800733960 /* JournlerEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerEntry.h; sourceTree = "<group>"; };
 		72886CEF0CC7D27800733960 /* JournlerEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = JournlerEntry.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		72886CF00CC7D27800733960 /* JournlerResource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerResource.h; sourceTree = "<group>"; };
@@ -689,7 +689,7 @@
 		72886D5B0CC7D31800733960 /* EntryFilterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntryFilterController.h; sourceTree = "<group>"; };
 		72886D5C0CC7D31800733960 /* EntryFilterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntryFilterController.m; sourceTree = "<group>"; };
 		72886D5D0CC7D31800733960 /* JournlerConditionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerConditionController.h; sourceTree = "<group>"; };
-		72886D5E0CC7D31800733960 /* JournlerConditionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournlerConditionController.m; sourceTree = "<group>"; };
+		72886D5E0CC7D31800733960 /* JournlerConditionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = JournlerConditionController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		72886D5F0CC7D31800733960 /* PDStylesBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDStylesBar.h; sourceTree = "<group>"; };
 		72886D600CC7D31800733960 /* PDStylesBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDStylesBar.m; sourceTree = "<group>"; };
 		72886D610CC7D31800733960 /* PDBorderedFill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDBorderedFill.h; sourceTree = "<group>"; };
@@ -892,7 +892,7 @@
 		72886FBD0CC7E63C00733960 /* PDFSelectionNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFSelectionNode.m; sourceTree = "<group>"; };
 		72886FCC0CC7E67800733960 /* GenericMediaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GenericMediaController.h; sourceTree = "<group>"; };
 		72886FCD0CC7E67800733960 /* GenericMediaController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GenericMediaController.m; sourceTree = "<group>"; };
-		7288700C0CC7ECFC00733960 /* Definitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Definitions.h; sourceTree = "<group>"; };
+		7288700C0CC7ECFC00733960 /* Definitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Definitions.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		7288700D0CC7ECFC00733960 /* Debug_Macros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug_Macros.h; sourceTree = "<group>"; };
 		7288728B0CC8190600733960 /* PDCornerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDCornerView.h; sourceTree = "<group>"; };
 		7288728C0CC8190600733960 /* PDCornerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDCornerView.m; sourceTree = "<group>"; };

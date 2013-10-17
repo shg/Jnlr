@@ -68,7 +68,7 @@ static NSArray *CollectionValues() {
 	if (!array) {
 		array = [[NSArray alloc] initWithObjects:
 			[NSNumber numberWithInteger:-1],							// tag
-			[NSString stringWithString:@"New Collection"],			// title
+			@"New Collection",			// title
 			/*[NSArray array],*/										// predicates
 			/*[NSNumber numberWithInteger:0],*/								// combination rule
 			[NSNumber numberWithInteger:PDCollectionTypeIDFolder],		// typeID	-- 1.2
