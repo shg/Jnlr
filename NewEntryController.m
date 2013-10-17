@@ -419,7 +419,7 @@ static NSSortDescriptor *FoldersByIndexSortPrototype()
 	BOOL added = YES;
 	
 	NSArray *allConditions = [theFolder allConditions:YES];
-	#ifdef __DEBUG __
+	#ifdef __DEBUG__
 	NSLog([allConditions description]);
 	#endif
 	
@@ -443,7 +443,7 @@ static NSSortDescriptor *FoldersByIndexSortPrototype()
         for ( NSString *aCondition in localConditions )
 		{
 			NSDictionary *conditionOp = [JournlerCondition operationForCondition:aCondition entry:nil];
-			#ifdef __DEBUG_
+			#ifdef __DEBUG__
 			NSLog([conditionOp description]); 
 			#endif
 			

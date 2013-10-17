@@ -901,7 +901,7 @@
 		JournlerEntry *theOwningEntry = [_entriesDic objectForKey:owningEntryID];
 		NSArray *allAssociatedEntries = [self entriesForTagIDs:theEntryIDs];
 		
-		#ifdef __DEBUG_
+		#ifdef __DEBUG__
 		NSLog(@"Resource %@ is owned by %@ has Entries %@", [aResource tagID], owningEntryID, [theEntryIDs componentsJoinedByString:@","]);
 		#endif
 		
