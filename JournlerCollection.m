@@ -1545,7 +1545,7 @@ static NSImage * DefaultImageForFolderType(NSNumber *type)
         for ( NSString *aCondition in localConditions )
 		{
 			NSDictionary *conditionOp = [JournlerCondition operationForCondition:aCondition entry:anEntry];
-			#ifdef __DEBUG_
+			#ifdef __DEBUG__
 			NSLog([conditionOp description]); 
 			#endif
 			

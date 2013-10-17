@@ -339,7 +339,7 @@
         for ( NSString *aCondition in localConditions )
 		{
 			NSDictionary *conditionOp = [JournlerCondition operationForCondition:aCondition entry:nil];
-			#ifdef __DEBUG_
+			#ifdef __DEBUG__
 			NSLog([conditionOp description]); 
 			#endif
 			
