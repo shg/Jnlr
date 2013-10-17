@@ -195,7 +195,7 @@
 	isSheet = sheet;
 	
 	id originalDelegate = [window delegate];
-	[window setDelegate:self];
+	[window setDelegate:(id)self];
 	
 	if ( sheet ) 
 	{

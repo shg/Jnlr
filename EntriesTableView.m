@@ -106,7 +106,7 @@
 	
 	[tokenCell setFont:[NSFont controlContentFontOfSize:11]];
 	[tokenCell setControlSize:NSSmallControlSize];
-	[tokenCell setDelegate:[self delegate]];
+	[tokenCell setDelegate:(id)[self delegate]];
 	[tokenCell setBezeled:NO];
 	[tokenCell setBordered:NO];
 	

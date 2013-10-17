@@ -1380,7 +1380,7 @@ typedef enum {
 	PDToolbar *toolbar = [[[PDToolbar alloc] initWithIdentifier: PrefToolbarIdentifier] autorelease];
 	
 	[toolbar setDisplayMode: NSToolbarDisplayModeIconAndLabel];
-    [toolbar setDelegate: self];
+    [toolbar setDelegate:(id)self];
 	
     [[self window] setToolbar: toolbar];
 	[[[self window] toolbar] setSelectedItemIdentifier:( licenseType != kJournlerLicenseFull && licenseType != kJournlerLicenseSpecial ? ToolbarItemDonations : ToolbarItemGeneral )];

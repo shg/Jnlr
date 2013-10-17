@@ -706,7 +706,7 @@ static NSString	*kLockoutToolbarItem			= @"kLockoutToolbarItem";
     [toolbar setDisplayMode: NSToolbarDisplayModeIconAndLabel];
 	[toolbar setAllowsUserCustomization:YES];
 	[toolbar setAutosavesConfiguration:YES];
-    [toolbar setDelegate: self];
+    [toolbar setDelegate:(id)self];
 	
     [[self window] setToolbar: toolbar];
 }
