@@ -3023,7 +3023,7 @@ bail:
 	RTFDPath = [RTFDContainer stringByAppendingPathComponent:PDEntryPackageRTFDContent];
 	
 	// ensure that a file exists at the package path
-	if ( (![fm fileExistsAtPath:packagePath isDirectory:&dir] || !dir) && ![fm createDirectoryAtPath:packagePath attributes:nil] )
+	if ( (![fm fileExistsAtPath:packagePath isDirectory:&dir] || !dir) && ![fm createDirectoryAtPath:packagePath withIntermediateDirectories:NO attributes:nil error:NULL] )
 	{
 		// critical error - unable to save entry
 		NSLog(@"%s - unable to create package for entry at path %@", __PRETTY_FUNCTION__, packagePath);
@@ -3057,7 +3057,7 @@ bail:
 	}
 	
 	// ensure that a directory exists for the entry text
-	if ( ![fm fileExistsAtPath:RTFDContainer] && ![fm createDirectoryAtPath:RTFDContainer attributes:nil] )
+	if ( ![fm fileExistsAtPath:RTFDContainer] && ![fm createDirectoryAtPath:RTFDContainer withIntermediateDirectories:NO attributes:nil error:NULL] )
 	{
 		NSLog(@"%s - unable to create text container at path %@", __PRETTY_FUNCTION__, RTFDContainer);
 		return NO;

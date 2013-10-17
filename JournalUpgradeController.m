@@ -158,7 +158,7 @@ static NSString *kJournlerABFileExtension = @"jaduid";
 		
 	if ( ![fm fileExistsAtPath:backupDir] ) 
 	{
-		if ( ![fm createDirectoryAtPath:backupDir attributes:nil] ) 
+		if ( ![fm createDirectoryAtPath:backupDir withIntermediateDirectories:NO attributes:nil error:NULL] )
 		{
 			// Unable to backup the journler directory, ask the user if he/she would like to continue
 			[log117 appendString:[NSString stringWithFormat:
@@ -219,7 +219,7 @@ static NSString *kJournlerABFileExtension = @"jaduid";
 	}
 	
 	// create the resources directory
-	if ( ![fm fileExistsAtPath:[_journal resourcesPath]] && ![fm createDirectoryAtPath:[_journal resourcesPath] attributes:nil] )
+	if ( ![fm fileExistsAtPath:[_journal resourcesPath]] && ![fm createDirectoryAtPath:[_journal resourcesPath] withIntermediateDirectories:NO attributes:nil error:NULL] )
 	{
 		// critical error
 		[log117 appendString:@"** Unable to create a resources directory **\n"];
@@ -239,7 +239,7 @@ static NSString *kJournlerABFileExtension = @"jaduid";
 	NSString *collectionsPath = [_journal collectionsPath];
 	if ( ![fm fileExistsAtPath:collectionsPath] ) 
 	{
-		if ( ![fm createDirectoryAtPath:collectionsPath attributes:nil] ) 
+		if ( ![fm createDirectoryAtPath:collectionsPath withIntermediateDirectories:NO attributes:nil error:NULL] )
 		{
 			// critical error
 			[log117 appendString:[NSString stringWithFormat:@"**2.5 Upgrade cannot create a collections folder at %@\n**", collectionsPath]];
@@ -534,7 +534,7 @@ static NSString *kJournlerABFileExtension = @"jaduid";
 	[progressIndicator210 setIndeterminate:YES];
 	[progressIndicator210 startAnimation:self];
 	
-	if ( ![[NSFileManager defaultManager] createDirectoryAtPath:[_journal blogsPath] attributes:nil] )
+	if ( ![[NSFileManager defaultManager] createDirectoryAtPath:[_journal blogsPath] withIntermediateDirectories:NO attributes:nil error:NULL] )
 	{
 		[log117 appendString:@"** Unable to create a blogs directory - you're blog preferences have been reset **\n"];
 	}
@@ -1058,7 +1058,7 @@ bail:
 	
 	if ( ![fm fileExistsAtPath:backupDir] ) 
 	{
-		if ( ![fm createDirectoryAtPath:backupDir attributes:nil] ) 
+		if ( ![fm createDirectoryAtPath:backupDir withIntermediateDirectories:NO attributes:nil error:NULL] )
 		{
 			// discontinue the upgrade if the user wants it
 			if ( [[NSAlert upgradeCreateBackupDirectoryFailure] runModal] == NSAlertFirstButtonReturn ) 
@@ -1099,7 +1099,7 @@ bail:
 	}
 	
 	// create the resources directory
-	if ( ![fm fileExistsAtPath:[_journal resourcesPath]] && ![fm createDirectoryAtPath:[_journal resourcesPath] attributes:nil] )
+	if ( ![fm fileExistsAtPath:[_journal resourcesPath]] && ![fm createDirectoryAtPath:[_journal resourcesPath] withIntermediateDirectories:NO attributes:nil error:NULL] )
 	{
 		// critical error
 		[log210 appendString:@"** Unable to create a resources directory **\n"];
@@ -1784,7 +1784,7 @@ bail:
 	
 	NSString *resourcesPath = [aJournal resourcesPath];
 	if ( ![[NSFileManager defaultManager] fileExistsAtPath:resourcesPath]
-		&& ![[NSFileManager defaultManager] createDirectoryAtPath:resourcesPath attributes:nil] )
+		&& ![[NSFileManager defaultManager] createDirectoryAtPath:resourcesPath withIntermediateDirectories:NO attributes:nil error:NULL] )
 	{
 		NSBeep();
 		NSLog(@"%s - unable to create resources path at %@", __PRETTY_FUNCTION__, resourcesPath);
@@ -1916,7 +1916,7 @@ bail:
 	NSString *desktop = ( [desktopPossibilities count] > 0 ? [desktopPossibilities objectAtIndex:0] : @"~/Desktop/" );
 	NSString *folderIconsPath = [desktop stringByAppendingPathComponent:@"Journler Folder Icons"];
 	
-	if ( ![[NSFileManager defaultManager] fileExistsAtPath:folderIconsPath] && ![[NSFileManager defaultManager] createDirectoryAtPath:folderIconsPath attributes:nil] )
+	if ( ![[NSFileManager defaultManager] fileExistsAtPath:folderIconsPath] && ![[NSFileManager defaultManager] createDirectoryAtPath:folderIconsPath withIntermediateDirectories:NO attributes:nil error:NULL] )
 		NSLog(@"%s - unable to create folder at path %@", __PRETTY_FUNCTION__, folderIconsPath);
 	
 	// do not index or collect entries while saving them

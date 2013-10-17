@@ -2106,7 +2106,7 @@ bail:
 	NSString *pathToMe = [[directoryPath stringByAppendingPathComponent:[self pathSafeTitle]] pathWithoutOverwritingSelf];
 					
 	if ( ![fm fileExistsAtPath:pathToMe isDirectory:&dir] || !dir )
-		[fm createDirectoryAtPath:pathToMe attributes:nil];
+		[fm createDirectoryAtPath:pathToMe withIntermediateDirectories:NO attributes:nil error:NULL];
 	
 	// entry save flags
 	NSInteger flags = kEntrySetLabelColor;
