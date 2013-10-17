@@ -171,7 +171,8 @@ static NSString *kMediabarItemOpenHomepage = @"kMediabarItemOpenHomepage";
 	[savePanel setAllowedFileTypes:[NSArray arrayWithObject:@"vcf"]];
 	[savePanel setCanSelectHiddenExtension:YES];
 
-	if ( [savePanel runModalForDirectory:nil file:[aPerson fullname]] == NSOKButton )
+    [savePanel setNameFieldStringValue:[aPerson fullname]];
+	if ( [savePanel runModal] == NSOKButton )
 	{
 		NSError *writeError;
 		NSString *filename = [savePanel filename];

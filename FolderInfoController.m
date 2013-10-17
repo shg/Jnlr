@@ -247,10 +247,10 @@
 - (IBAction) searchImage:(id)sender
 {
 	NSInteger result;
-	NSArray *fileTypes = [NSImage imageFileTypes];
+//	NSArray *fileTypes = [NSImage imageFileTypes];
 	NSOpenPanel *openPanel = [NSOpenPanel openPanel];
  
-    result = [openPanel runModalForDirectory:nil file:nil types:fileTypes];
+    result = [openPanel runModal];
 	
     if (result == NSOKButton) 
 	{

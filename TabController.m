@@ -790,7 +790,8 @@
 
 		
 		// display the NSSavePanel
-		runResult = [sp runModalForDirectory:nil file:[[theEntries objectAtIndex:0] pathSafeTitle]];
+        [sp setNameFieldStringValue:[[theEntries objectAtIndex:0] pathSafeTitle]];
+		runResult = [sp runModal];
 		
 		// if successful, save file under designated name
 		if (runResult == NSOKButton) 
@@ -834,7 +835,8 @@
 		[sp setPrompt:NSLocalizedString(@"export panel prompt",@"")];
 		
 		// display the save panel
-		runResult = [sp runModalForDirectory:nil file:[self valueForKeyPath:@"journal.title"] types:nil];
+        [sp setNameFieldStringValue:[self valueForKeyPath:@"journal.title"]];
+		runResult = [sp runModal];
 
 		// if successful, save file under designated name
 		if (runResult == NSOKButton) 
@@ -1082,7 +1084,7 @@
 	[openPanel setTitle:NSLocalizedString(@"export resources panel title",@"")];
 	[openPanel setPrompt:NSLocalizedString(@"export resources panel prompt",@"")];
 	
-	if ( [openPanel runModalForDirectory:nil file:nil types:nil] == NSOKButton )
+	if ( [openPanel runModal] == NSOKButton )
 	{
 		NSString *path = [openPanel directory];
 		

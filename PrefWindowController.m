@@ -724,7 +724,8 @@ typedef enum {
 	[openPanel setPrompt:NSLocalizedString(@"csv select prompt", @"")];
     [openPanel setMessage:NSLocalizedString(@"csv select message", @"")];
 	
-	if ( [openPanel runModalForDirectory:nil file:nil types:types] == NSOKButton )
+    [openPanel setAllowedFileTypes:types];
+	if ( [openPanel runModal] == NSOKButton )
 	{
 		NSString *wordlistSource = [openPanel filename];
 		NSDictionary *wordlist = [[NSApp delegate] autoCorrectDictionaryForFileAtPath:wordlistSource];

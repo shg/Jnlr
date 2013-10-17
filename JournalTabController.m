@@ -3695,7 +3695,7 @@ bail:
 	[oPanel setTitle:NSLocalizedString(@"word insert", @"")];
 	[oPanel setPrompt:NSLocalizedString(@"word insert", @"")];
 	
-	result = [oPanel runModalForDirectory:nil file:nil types:nil];
+	result = [oPanel runModal];
     if (result == NSOKButton) 
 	{
         // create and select a new default entry if necessary
