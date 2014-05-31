@@ -203,7 +203,7 @@
 				[fileError objectForKey:@"Error"], [fileError objectForKey:@"Path"]];
 				
 				NSBeep();
-				NSRunAlertPanel(errorTitle, errorMessage, nil, nil, nil); 
+				NSRunAlertPanel(errorTitle, @"%@", nil, nil, nil, errorMessage);
 				
 				[fileError release];
 				fileError = nil;

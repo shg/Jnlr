@@ -1200,35 +1200,35 @@ typedef enum {
 	
 	if ( licenseType == kJournlerLicensePersonal )
 	{
-		NSRunAlertPanel(NSLocalizedString(@"alert valid license title",@""),NSLocalizedString(@"alert valid personal use",@""),nil,nil,nil);
+		NSRunAlertPanel(NSLocalizedString(@"alert valid license title", @""), @"%@", nil, nil, nil, NSLocalizedString(@"alert valid personal use", @""));
 		[[NSUserDefaults standardUserDefaults] setObject:name forKey:@"LicenseName"];
 		[[NSUserDefaults standardUserDefaults] setObject:code forKey:@"LicenseCode"];
 		[NSApp endSheet:licenseSheet returnCode:NSRunStoppedResponse];
 	}
 	else if ( licenseType == kJournlerLicenseNonPersonal )
 	{
-		NSRunAlertPanel(NSLocalizedString(@"alert valid license title",@""),NSLocalizedString(@"alert valid nonpersonal use",@""),nil,nil,nil);
+		NSRunAlertPanel(NSLocalizedString(@"alert valid license title", @""), @"%@", nil, nil, nil, NSLocalizedString(@"alert valid nonpersonal use", @""));
 		[[NSUserDefaults standardUserDefaults] setObject:name forKey:@"LicenseName"];
 		[[NSUserDefaults standardUserDefaults] setObject:code forKey:@"LicenseCode"];
 		[NSApp endSheet:licenseSheet returnCode:NSRunStoppedResponse];
 	}
 	else if ( licenseType == kJournlerLicenseBeta )
 	{
-		NSRunAlertPanel(NSLocalizedString(@"alert valid license title",@""),NSLocalizedString(@"alert valid beta",@""),nil,nil,nil);
+		NSRunAlertPanel(NSLocalizedString(@"alert valid license title", @""), @"%@", nil, nil, nil, NSLocalizedString(@"alert valid beta", @""));
 		[[NSUserDefaults standardUserDefaults] setObject:name forKey:@"LicenseName"];
 		[[NSUserDefaults standardUserDefaults] setObject:code forKey:@"LicenseCode"];
 		[NSApp endSheet:licenseSheet returnCode:NSRunStoppedResponse];
 	}
 	else if ( licenseType == kJournlerLicenseSpecial )
 	{
-		NSRunAlertPanel(NSLocalizedString(@"alert valid license title",@""),NSLocalizedString(@"alert valid journler",@""),nil,nil,nil);
+		NSRunAlertPanel(NSLocalizedString(@"alert valid license title", @""), @"%@", nil, nil, nil, NSLocalizedString(@"alert valid journler", @""));
 		[[NSUserDefaults standardUserDefaults] setObject:name forKey:@"LicenseName"];
 		[[NSUserDefaults standardUserDefaults] setObject:code forKey:@"LicenseCode"];
 		[NSApp endSheet:licenseSheet returnCode:NSRunStoppedResponse];
 	}
 	else if ( licenseType == kJournlerLicenseFull )
 	{
-		NSRunAlertPanel(NSLocalizedString(@"alert valid license title",@""),NSLocalizedString(@"alert valid full",@""),nil,nil,nil);
+		NSRunAlertPanel(NSLocalizedString(@"alert valid license title", @""), @"%@", nil, nil, nil, NSLocalizedString(@"alert valid full", @""));
 		[[NSUserDefaults standardUserDefaults] setObject:name forKey:@"LicenseName"];
 		[[NSUserDefaults standardUserDefaults] setObject:code forKey:@"LicenseCode"];
 		[NSApp endSheet:licenseSheet returnCode:NSRunStoppedResponse];
@@ -1236,7 +1236,7 @@ typedef enum {
 	else
 	{
 		NSBeep();
-		NSRunAlertPanel(NSLocalizedString(@"alert invalid license title",@""),NSLocalizedString(@"alert invalid msg",@""),nil,nil,nil);
+		NSRunAlertPanel(NSLocalizedString(@"alert invalid license title", @""), @"%@", nil, nil, nil, NSLocalizedString(@"alert invalid msg", @""));
 	}
 
 }
