@@ -101,7 +101,7 @@
 			
 	[self registerForDraggedTypes:[NSArray arrayWithObjects:
 			kABPeopleUIDsPboardType, NSFilenamesPboardType, WebURLsWithTitlesPboardType, NSURLPboardType,
-			NSRTFDPboardType, NSRTFPboardType, NSStringPboardType, NSTIFFPboardType, NSPICTPboardType,
+			NSRTFDPboardType, NSRTFPboardType, NSStringPboardType, NSTIFFPboardType,
 			PDEntryIDPboardType, PDResourceIDPboardType, PDFolderIDPboardType, 
 			kMailMessagePboardType, kiLifeIntegrationPboardType, nil]];
 

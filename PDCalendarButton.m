@@ -53,7 +53,7 @@
 	// how can I just register for everything under the sun?
 	[self registerForDraggedTypes:[NSArray arrayWithObjects:
 			kABPeopleUIDsPboardType, kMailMessagePboardType, NSFilenamesPboardType, WebURLsWithTitlesPboardType, NSURLPboardType,
-			NSRTFDPboardType, NSRTFPboardType, NSStringPboardType, NSTIFFPboardType, NSPICTPboardType,
+			NSRTFDPboardType, NSRTFPboardType, NSStringPboardType, NSTIFFPboardType,
 			PDFolderIDPboardType, PDEntryIDPboardType, PDResourceIDPboardType, nil]];
 }
 

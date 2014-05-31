@@ -155,7 +155,7 @@ static NSString *mailSelectionPathInfoSource = @"tell application \"Mail\"\nset 
 			NSFilenamesPboardType, WebURLsWithTitlesPboardType, 
 			NSURLPboardType, NSRTFDPboardType, 
 			NSRTFPboardType, NSStringPboardType, 
-			NSTIFFPboardType, NSPICTPboardType,
+			NSTIFFPboardType,
 			PDFolderIDPboardType, PDEntryIDPboardType, 
 			PDResourceIDPboardType, nil]];
 }
@@ -374,7 +374,7 @@ static NSString *mailSelectionPathInfoSource = @"tell application \"Mail\"\nset 
 		
 	BOOL success = YES;
 	
-	if ( [type isEqualToString:NSPICTPboardType] || [type isEqualToString:NSTIFFPboardType] ) 
+	if ( [type isEqualToString:NSTIFFPboardType] )
 	{
 		success = [self addImageDataToText:[pboard dataForType:type] dataType:type fileName:nil];
 	}
@@ -470,7 +470,7 @@ static NSString *mailSelectionPathInfoSource = @"tell application \"Mail\"\nset 
 			PDEntryIDPboardType, PDFolderIDPboardType, 
 			PDResourceIDPboardType, kABPeopleUIDsPboardType, 
 			kMailMessagePboardType, NSFilenamesPboardType,
-			NSTIFFPboardType, NSPICTPboardType, 
+			NSTIFFPboardType,
 			NSRTFDPboardType, NSRTFPboardType, 
 			WebURLsWithTitlesPboardType, NSURLPboardType, 
 			NSStringPboardType, nil];
@@ -604,7 +604,7 @@ static NSString *mailSelectionPathInfoSource = @"tell application \"Mail\"\nset 
 		}
 		
 		// add an image to the text, producing a hard copy of the image while I'm at it
-		else if ( [desiredType isEqualToString:NSTIFFPboardType] || [desiredType isEqualToString:NSPICTPboardType] ) 
+		else if ( [desiredType isEqualToString:NSTIFFPboardType] )
 		{
 			NSUInteger charIndex = [self _charIndexForDraggingLoc:[sender draggingLocation]];
 			[self setSelectedRange:NSMakeRange(charIndex,0)];
@@ -679,7 +679,7 @@ static NSString *mailSelectionPathInfoSource = @"tell application \"Mail\"\nset 
 			PDEntryIDPboardType, PDFolderIDPboardType, 
 			PDResourceIDPboardType, kABPeopleUIDsPboardType, 
 			kMailMessagePboardType, 
-			NSTIFFPboardType, NSPICTPboardType,
+			NSTIFFPboardType,
 			NSRTFDPboardType, NSRTFPboardType, 
 			WebURLsWithTitlesPboardType, NSFilenamesPboardType,
 			NSURLPboardType, NSStringPboardType, nil];
@@ -705,7 +705,7 @@ static NSString *mailSelectionPathInfoSource = @"tell application \"Mail\"\nset 
 			operation = NSDragOperationLink;
 		
 		// images are always copied to text
-		else if ( [NSTIFFPboardType isEqualToString:desiredType] || [NSPICTPboardType isEqualToString:desiredType] )
+		else if ( [NSTIFFPboardType isEqualToString:desiredType] )
 			operation = NSDragOperationCopy;
 			
 		// journler objects are always linked
@@ -799,7 +799,7 @@ bail:
 			PDEntryIDPboardType, PDFolderIDPboardType, 
 			PDResourceIDPboardType, kABPeopleUIDsPboardType, 
 			kMailMessagePboardType, NSTIFFPboardType, 
-			NSPICTPboardType, NSRTFDPboardType, 
+			NSRTFDPboardType,
 			NSRTFPboardType, WebURLsWithTitlesPboardType, 
 			NSFilenamesPboardType, NSURLPboardType, 
 			NSStringPboardType, nil];
