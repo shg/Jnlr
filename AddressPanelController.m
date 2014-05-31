@@ -50,7 +50,8 @@
 
 - (id)init 
 {
-    if ( [super initWithWindowNibName:@"AddressPanel"] )
+    self = [super initWithWindowNibName:@"AddressPanel"];
+    if (self)
 	{
 		[self setWindowFrameAutosaveName:@"Address Panel"];
 	}

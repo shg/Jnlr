@@ -1920,7 +1920,7 @@
 			
 			if ( attr_value != nil ) 
 			{
-				NSURL *theURL;
+				NSURL *theURL = nil;
 				NSURL *replacementURL = nil;
 				
 				// make sure we're dealing with a url
@@ -1930,7 +1930,7 @@
 					theURL = [NSURL URLWithString:attr_value];
 				
 				// check for a file url
-				if ( [theURL isFileURL] )
+				if ( theURL && [theURL isFileURL] )
 				{
 					// fist see if this filepath has already yielded a resource
 					JournlerResource *theResource = [pathToResourceDictionary objectForKey:theURL];
@@ -2557,6 +2557,8 @@ bail:
 		writeArray = [NSArray arrayWithObject:collection];
 	else if ( [collection isKindOfClass:[NSArray class]] )
 		writeArray = collection;
+    else
+        return NO;
 	
 	for ( i = 0; i < [writeArray count]; i++ ) {
 		

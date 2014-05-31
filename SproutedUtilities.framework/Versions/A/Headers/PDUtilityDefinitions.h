@@ -10,7 +10,7 @@
 #include <Carbon/Carbon.h>
 #include <Cocoa/Cocoa.h>
 
-#define TempDirectory() ( NSTemporaryDirectory() != nil ? NSTemporaryDirectory() : [NSString stringWithString:@"/tmp"] )
+#define TempDirectory() ( NSTemporaryDirectory() != nil ? NSTemporaryDirectory() : @"/tmp" )
 #define BundledImageWithName(x,y) [[[NSImage alloc] initWithContentsOfFile:[[NSBundle bundleWithIdentifier:y] pathForImageResource:x]] autorelease]
 
 #define kiLifeIntegrationPboardType		@"iMBNativePasteboardFlavor"

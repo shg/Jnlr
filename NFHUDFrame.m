@@ -16,13 +16,14 @@
 
 - (id)initWithFrame:(NSRect)frame styleMask:(NSUInteger)style owner:(id)owner
 {
-	if([super initWithFrame:frame styleMask:style owner:owner])
+    self = [super initWithFrame:frame styleMask:style owner:owner];
+	if(self)
 	{
 		// Some of Apple's HUD windows have a slight shadow below the title
 		EtchedTextCell *cell = [[EtchedTextCell alloc] initTextCell: @""];
 		[cell setFont:[NSFont fontWithName:@"LucidaGrande" size:11.0]];
 		[cell setShadowColor:[NSColor colorWithCalibratedWhite:32/255.0 alpha:0.5]];
-		titleCell = cell;
+        titleCell = cell;
 		
 		// get the regular controls out of the picture
 		[closeButton setHidden:YES];
