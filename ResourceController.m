@@ -1192,7 +1192,7 @@ static NSSortDescriptor *ResourceByRankSortPrototype()
 			PDEntryIDPboardType, PDResourceIDPboardType, 
 			kABPeopleUIDsPboardType, kMailMessagePboardType,
 			NSFilenamesPboardType, NSTIFFPboardType, 
-			NSPICTPboardType, NSRTFDPboardType, 
+			NSRTFDPboardType,
 			NSRTFPboardType, WebURLsWithTitlesPboardType, 
 			NSURLPboardType, NSStringPboardType, nil];
 	
@@ -1316,7 +1316,7 @@ static NSSortDescriptor *ResourceByRankSortPrototype()
 	}
 	
 	// add an image to the text, producing a hard copy of the image while I'm at it
-	else if ( [desiredType isEqualToString:NSTIFFPboardType] || [desiredType isEqualToString:NSPICTPboardType] ) 
+	else if ( [desiredType isEqualToString:NSTIFFPboardType] )
 	{		
 		success = [self _addImageData:[pboard dataForType:desiredType] dataType:desiredType title:nil toEntry:targetEntry];
 	}
@@ -1393,7 +1393,7 @@ static NSSortDescriptor *ResourceByRankSortPrototype()
 			PDEntryIDPboardType, PDResourceIDPboardType, 
 			PDFolderIDPboardType, kABPeopleUIDsPboardType, 
 			kMailMessagePboardType, NSTIFFPboardType, 
-			NSPICTPboardType, NSRTFDPboardType, 
+			NSRTFDPboardType,
 			NSRTFPboardType, WebURLsWithTitlesPboardType, 
 			NSFilenamesPboardType, NSURLPboardType, 
 			NSStringPboardType, nil];
@@ -1415,7 +1415,7 @@ static NSSortDescriptor *ResourceByRankSortPrototype()
 			operation = NSDragOperationLink; 
 		
 		// images are always copied to text
-		else if ( [NSTIFFPboardType isEqualToString:desiredType] || [NSPICTPboardType isEqualToString:desiredType] )
+		else if ( [NSTIFFPboardType isEqualToString:desiredType] )
 			operation = NSDragOperationCopy; 
 			
 		// journler objects are always linked

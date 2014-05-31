@@ -140,7 +140,7 @@ static void SetSegmentDescriptions(NSSegmentedControl *control, NSString *firstD
 		
 		[self registerForDraggedTypes:[NSArray arrayWithObjects:PDEntryIDPboardType, 
 			NSFilenamesPboardType, NSURLPboardType, NSRTFDPboardType, NSRTFPboardType, 
-			NSStringPboardType, NSTIFFPboardType, NSPICTPboardType, kMailMessagePboardType, nil]];
+			NSStringPboardType, NSTIFFPboardType, kMailMessagePboardType, nil]];
 		
 		monthYearCell = [[MonthAndYearCell alloc] init];
 		monthBackCell = [[CalendarButtonCell alloc] init];

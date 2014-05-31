@@ -5038,7 +5038,7 @@ bail:
 	
 	if ( types == nil )
 		types = [NSArray arrayWithObjects: kMailMessagePboardType, NSTIFFPboardType, 
-				NSPICTPboardType, NSRTFDPboardType, 
+				NSRTFDPboardType, 
 				NSRTFPboardType, WebURLsWithTitlesPboardType, 
 				kMailMessagePboardType, NSFilenamesPboardType, 
 				NSURLPboardType, NSStringPboardType, 
@@ -5120,7 +5120,7 @@ bail:
 		}
 	}
 	
-	else if ( [desiredType isEqualToString:NSTIFFPboardType] || [desiredType isEqualToString:NSPICTPboardType] ) 
+	else if ( [desiredType isEqualToString:NSTIFFPboardType] ) 
 	{
 		NSError *error = nil;
 		NSData *tiff_rep;
@@ -5515,7 +5515,7 @@ bail:
 {
 	static NSString *kPDUTTypeURLName = @"public.url-name";
 	NSArray *types = [NSArray arrayWithObjects: kMailMessagePboardType, NSFilenamesPboardType, 
-			NSTIFFPboardType, NSPICTPboardType, 
+			NSTIFFPboardType, 
 			NSRTFDPboardType, NSRTFPboardType, WebURLsWithTitlesPboardType, kMailMessagePboardType, 
 			NSURLPboardType, NSStringPboardType, kPDUTTypeURLName, nil];
 	
@@ -5568,7 +5568,7 @@ bail:
 
 - (void)appendSelection:(NSPasteboard *)pboard userData:(NSString *)userData error:(NSString **)error
 {
-	NSArray *types = [NSArray arrayWithObjects: NSTIFFPboardType, NSPICTPboardType, 
+	NSArray *types = [NSArray arrayWithObjects: NSTIFFPboardType, 
 			NSRTFDPboardType, NSRTFPboardType, WebURLsWithTitlesPboardType, NSURLPboardType, NSStringPboardType, nil];
 	
 	NSString *desiredType = [pboard availableTypeFromArray:types];

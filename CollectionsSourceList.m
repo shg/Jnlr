@@ -83,7 +83,7 @@ static NSString *kMailMessagePboardType = @"MV Super-secret message transfer pas
 	// drag types
 	NSArray *draggedTypes = [NSArray arrayWithObjects: PDFolderIDPboardType, PDEntryIDPboardType, 
 			NSFilenamesPboardType, WebURLsWithTitlesPboardType, NSURLPboardType, NSRTFDPboardType, NSRTFPboardType, 
-			NSStringPboardType, NSTIFFPboardType, NSPICTPboardType, kMailMessagePboardType, nil];
+			NSStringPboardType, NSTIFFPboardType, kMailMessagePboardType, nil];
 			
 	[self registerForDraggedTypes:draggedTypes];
 	
