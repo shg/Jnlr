@@ -115,9 +115,7 @@
 		728865DA0CC686B600733960 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728865D70CC686B600733960 /* QuartzCore.framework */; };
 		728868D40CC686E000733960 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728868C80CC686E000733960 /* AddressBook.framework */; };
 		728868D50CC686E000733960 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728868C90CC686E000733960 /* CoreServices.framework */; };
-		728868D60CC686E000733960 /* Message.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728868CA0CC686E000733960 /* Message.framework */; };
 		728868D70CC686E000733960 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728868CB0CC686E000733960 /* Security.framework */; };
-		728868D90CC686E000733960 /* vecLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728868CD0CC686E000733960 /* vecLib.framework */; };
 		728868DA0CC686E000733960 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728868CE0CC686E000733960 /* WebKit.framework */; };
 		728868DB0CC686E000733960 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728868CF0CC686E000733960 /* AudioToolbox.framework */; };
 		728868DC0CC686E000733960 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728868D00CC686E000733960 /* AudioUnit.framework */; };
@@ -605,10 +603,8 @@
 		728865D70CC686B600733960 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = /System/Library/Frameworks/QuartzCore.framework; sourceTree = "<absolute>"; };
 		728868C80CC686E000733960 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = /System/Library/Frameworks/AddressBook.framework; sourceTree = "<absolute>"; };
 		728868C90CC686E000733960 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
-		728868CA0CC686E000733960 /* Message.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Message.framework; path = /System/Library/Frameworks/Message.framework; sourceTree = "<absolute>"; };
 		728868CB0CC686E000733960 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
 		728868CC0CC686E000733960 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
-		728868CD0CC686E000733960 /* vecLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = vecLib.framework; path = /System/Library/Frameworks/vecLib.framework; sourceTree = "<absolute>"; };
 		728868CE0CC686E000733960 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
 		728868CF0CC686E000733960 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
 		728868D00CC686E000733960 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = /System/Library/Frameworks/AudioUnit.framework; sourceTree = "<absolute>"; };
@@ -1113,9 +1109,7 @@
 				728865DA0CC686B600733960 /* QuartzCore.framework in Frameworks */,
 				728868D40CC686E000733960 /* AddressBook.framework in Frameworks */,
 				728868D50CC686E000733960 /* CoreServices.framework in Frameworks */,
-				728868D60CC686E000733960 /* Message.framework in Frameworks */,
 				728868D70CC686E000733960 /* Security.framework in Frameworks */,
-				728868D90CC686E000733960 /* vecLib.framework in Frameworks */,
 				728868DA0CC686E000733960 /* WebKit.framework in Frameworks */,
 				728868DB0CC686E000733960 /* AudioToolbox.framework in Frameworks */,
 				728868DC0CC686E000733960 /* AudioUnit.framework in Frameworks */,
@@ -1171,10 +1165,8 @@
 				728874660CC8468D00733960 /* Carbon.framework */,
 				728868C80CC686E000733960 /* AddressBook.framework */,
 				728868C90CC686E000733960 /* CoreServices.framework */,
-				728868CA0CC686E000733960 /* Message.framework */,
 				728868CB0CC686E000733960 /* Security.framework */,
 				728868CC0CC686E000733960 /* SystemConfiguration.framework */,
-				728868CD0CC686E000733960 /* vecLib.framework */,
 				728868CE0CC686E000733960 /* WebKit.framework */,
 				728868CF0CC686E000733960 /* AudioToolbox.framework */,
 				728868D00CC686E000733960 /* AudioUnit.framework */,
@@ -2246,7 +2238,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Journler" */;
 			compatibilityVersion = "Xcode 3.2";
