@@ -975,7 +975,7 @@ static NSImage * DefaultImageForFolderType(NSNumber *type)
 
 - (void) _threadedEvaluateAndAct:(NSDictionary*)evalDict
 {
-	BOOL adds;
+	BOOL adds = NO;
 	
 	[entriesLock lock];
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
