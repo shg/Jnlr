@@ -708,7 +708,7 @@ extern void QTSetProcessProperty(UInt32 type, UInt32 creator, size_t size, uint8
 		{
 			// critical setup error - cannot procede as there will not be a journal
 			NSString *errorString = @"setup error";
-			NSRunCriticalAlertPanel(@"Critical Error", NSLocalizedString( errorString, @""), nil,nil,nil);
+			NSRunCriticalAlertPanel(@"Critical Error", @"%@", nil, nil, nil, NSLocalizedString( errorString, @""));
 			NSLog(@"%s - Critical error on first run, unable to setup the journal", __PRETTY_FUNCTION__);
 			
 		}
@@ -2357,7 +2357,7 @@ bail:
 			{
 				// yet another error! at this point, it's too critical
 				NSString *errorString = @"setup error";
-				NSRunCriticalAlertPanel(@"Critical Error", NSLocalizedString( errorString, @""), nil,nil,nil);
+				NSRunCriticalAlertPanel(@"Critical Error", @"%@", nil, nil, nil, NSLocalizedString( errorString, @""));
 				NSLog(@"%s - critical error setuping up journal, must quit", __PRETTY_FUNCTION__);
 				[NSApp terminate:self];
 				
@@ -2378,7 +2378,7 @@ bail:
 				// yet another error! at this point, it's too critical
 				NSLog(@"%s could't load journal, user requested new journal, still unable to load journal, quitting", __PRETTY_FUNCTION__);
 				NSString *errorString = [NSString stringWithFormat:@"creation error %i", newError];
-				NSRunCriticalAlertPanel(@"Critical Error", NSLocalizedString( errorString, @""), nil,nil,nil);
+				NSRunCriticalAlertPanel(@"Critical Error", @"%@", nil, nil, nil, NSLocalizedString( errorString, @""));
 				[NSApp terminate:self];
 				
 			}
@@ -2437,7 +2437,7 @@ bail:
 				// yet another error! at this point, it's too critical
 				NSLog(@"%s - could't load journal, user specified different location, still unable to load journal, quitting", __PRETTY_FUNCTION__);
 				NSString *errorString = [NSString stringWithFormat:@"creation error %i", newError];
-				NSRunCriticalAlertPanel(@"Critical Error", NSLocalizedString( errorString, @""), nil,nil,nil);
+				NSRunCriticalAlertPanel(@"Critical Error", @"%@", nil, nil, nil, NSLocalizedString( errorString, @""));
 				[NSApp terminate:self];
 				#warning give the user all the options she would have on a first pass load
 			}
