@@ -43,7 +43,7 @@
 #import "Debug_Macros.h"
 #import "Definitions.h"
 
-#import <Message/NSMailDelivery.h>
+// #import <Message/NSMailDelivery.h>
 #import <SproutedUtilities/SproutedUtilities.h>
 
 #import "JournlerJournal.h"
@@ -5758,33 +5758,33 @@ bail:
 
 	// Can we even use the mail framework?
 	
-	if ( wM && [NSMailDelivery hasDeliveryClassBeenConfigured]) {
-		
-		// we use error handling in case there is trouble in the NSMailDelivery framework
-
-		@try 
-		{
-			// first we try SMPT, then if that fails, we try sendmail:
-			if ( ![NSMailDelivery deliverMessage:richBody headers:toFromDict 
-					format:isMIME?NSMIMEMailFormat:NSASCIIMailFormat protocol:NSSMTPDeliveryProtocol] )
-				[NSMailDelivery deliverMessage:richBody headers:toFromDict 
-				format:isMIME?NSMIMEMailFormat:NSASCIIMailFormat protocol:NSSendmailDeliveryProtocol];
-		}
-
-		@catch (NSException *localException) 
-		{
-			NSLog(@"NSMailDelivery: an exception was raised: %@",[localException reason]);
-			success = NO;
-		}
-		@finally
-		{
-		
-		}
-	
-	}
-	else {
+//	if ( wM && [NSMailDelivery hasDeliveryClassBeenConfigured]) {
+//		
+//		// we use error handling in case there is trouble in the NSMailDelivery framework
+//
+//		@try 
+//		{
+//			// first we try SMPT, then if that fails, we try sendmail:
+//			if ( ![NSMailDelivery deliverMessage:richBody headers:toFromDict 
+//					format:isMIME?NSMIMEMailFormat:NSASCIIMailFormat protocol:NSSMTPDeliveryProtocol] )
+//				[NSMailDelivery deliverMessage:richBody headers:toFromDict 
+//				format:isMIME?NSMIMEMailFormat:NSASCIIMailFormat protocol:NSSendmailDeliveryProtocol];
+//		}
+//
+//		@catch (NSException *localException) 
+//		{
+//			NSLog(@"NSMailDelivery: an exception was raised: %@",[localException reason]);
+//			success = NO;
+//		}
+//		@finally
+//		{
+//		
+//		}
+//	
+//	}
+//	else {
 		success = NO;
-	}
+//	}
 	
 	// 2. Check the result here, if failure, attempt to send using nsurl ------------
 	
