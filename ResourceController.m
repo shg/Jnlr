@@ -2690,13 +2690,7 @@ bail:
 	
 	else 
 	{
-		if ( [NSApplicationFileType isEqualToString:type] || [NSShellCommandFileType isEqualToString:type] ) 
-		{
-			// always link applications
-			actualCommand = kNewResourceForceLink;
-		}
-		
-		else if ( [NSDirectoryFileType isEqualToString:type] || ( dir && !package)  ) 
+		if ( dir && !package ) 
 		{
 			if ( [[NSUserDefaults standardUserDefaults] integerForKey:@"MediaPolicyDirectories"] == 0 )
 			{
@@ -2709,12 +2703,6 @@ bail:
 				// copy if otherwise
 				actualCommand = kNewResourceForceCopy;
 			}
-		}
-		
-		else if ( [NSFilesystemFileType isEqualToString:type] ) 
-		{
-			// always link mount points
-			actualCommand = kNewResourceForceLink;
 		}
 		
 		else 
