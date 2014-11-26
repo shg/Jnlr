@@ -150,7 +150,6 @@ extern NSString *JournlerDidFinishImportNotification;
 
 - (IBAction) toggleContinuousSpellcheckingAppwide:(id)sender;
 - (IBAction) toggleSpeakableItems:(id)sender;
-- (IBAction) toggleLowLightDisplay:(id)sender;
 - (IBAction) lockJournal:(id)sender;
 
 - (IBAction) recordAudio:(id)sender;

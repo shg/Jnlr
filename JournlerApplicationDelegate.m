@@ -2137,10 +2137,6 @@ bail:
 	// sync the preferences
 	[[NSUserDefaults standardUserDefaults] synchronize];
 	
-	// disinvert the display
-	if ( displayInverted )
-		[self toggleLowLightDisplay:self];
-	
 	// disable the speech recognizer
 	if ( speechRecognizer != nil )
 		[speechRecognizer stopListening];
@@ -3119,24 +3115,6 @@ bail:
 {
 	BOOL value = [[NSUserDefaults standardUserDefaults] boolForKey:@"EntryTextEnableSpellChecking"];
 	[[NSUserDefaults standardUserDefaults] setBool:!value forKey:@"EntryTextEnableSpellChecking"];
-}
-
-- (IBAction) toggleLowLightDisplay:(id)sender
-{
-	CGPostKeyboardEvent((CGCharCode)0, (CGKeyCode)55, true); // command
-	CGPostKeyboardEvent((CGCharCode)0, (CGKeyCode)58, true); // option
-	CGPostKeyboardEvent((CGCharCode)0, (CGKeyCode)59, true); // ctrl
-	//CGPostKeyboardEvent((CGCharCode)0, (CGKeyCode)56, true); // shift
-	
-	CGPostKeyboardEvent((CGCharCode)0, (CGKeyCode)28, true); // number 8
-	CGPostKeyboardEvent((CGCharCode)0, (CGKeyCode)28, false);
-	
-	//CGPostKeyboardEvent((CGCharCode)0, (CGKeyCode)56, false); // shift
-	CGPostKeyboardEvent((CGCharCode)0, (CGKeyCode)59, false);
-	CGPostKeyboardEvent((CGCharCode)0, (CGKeyCode)58, false);
-	CGPostKeyboardEvent((CGCharCode)0, (CGKeyCode)55, false);
-	
-	displayInverted = !displayInverted;
 }
 
 - (IBAction) lockJournal:(id)sender
