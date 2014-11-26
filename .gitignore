@@ -13,6 +13,7 @@ build/*
 xcuserdata
 profile
 *.moved-aside
+*~.nib
 
 .DS_Store
 Icon?
