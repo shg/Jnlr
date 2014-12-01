@@ -2903,7 +2903,7 @@ static NSArray *JObjectValues()
 
 		printInfo = [[[NSPrintInfo sharedPrintInfo] copyWithZone:[self zone]] autorelease];
 		[printInfo setJobDisposition:NSPrintSaveJob];
-		[[printInfo dictionary]  setObject:saveWithExtension forKey:NSPrintSavePath];
+		[[printInfo dictionary]  setObject:[NSURL fileURLWithPath:saveWithExtension] forKey:NSPrintJobSavingURL];
 			
 		[printInfo setHorizontalPagination: NSAutoPagination];
 		[printInfo setVerticalPagination: NSAutoPagination];
