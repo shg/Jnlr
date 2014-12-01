@@ -880,7 +880,7 @@
 
 				printInfo = [[[NSPrintInfo sharedPrintInfo] copyWithZone:[self zone]] autorelease];
 				[printInfo setJobDisposition:NSPrintSaveJob];
-				[[printInfo dictionary]  setObject:[filename stringByAppendingPathExtension:@"pdf"] forKey:NSPrintSavePath];
+				[[printInfo dictionary]  setObject:[NSURL fileURLWithPath:[filename stringByAppendingPathExtension:@"pdf"]] forKey:NSPrintJobSavingURL];
 				[[printInfo dictionary] setValue:[NSNumber numberWithBool:NO] forKey:NSPrintHeaderAndFooter];
 				
 				[printInfo setHorizontalPagination: NSAutoPagination];
