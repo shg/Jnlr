@@ -168,11 +168,11 @@
 	//NSFrameRect(NSMakeRect(0,6,[returnImage size].width,[returnImage size].height-6));
 	[[NSBezierPath bezierPathWithRoundedRect:NSMakeRect(0,6,[returnImage size].width,[returnImage size].height-6) cornerRadius:10.0] stroke];
 		
-	[icon compositeToPoint:NSMakePoint(2,6) operation:NSCompositeSourceOver fraction:1.0];
+	[icon drawAtPoint:NSMakePoint(2,6) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
 	[title drawAtPoint:NSMakePoint(iconSize.width+7,8) withAttributes:attributes];
 		
 	if ( dragBadge ) {
-		[dragBadge compositeToPoint:NSMakePoint(iconSize.width+7-[dragBadge size].width, 0) operation:NSCompositeSourceOver fraction:1.0];
+		[dragBadge drawAtPoint:NSMakePoint(iconSize.width+7-[dragBadge size].width, 0) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
 	}
 	
 	[returnImage unlockFocus];

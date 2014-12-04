@@ -94,10 +94,10 @@
 	NSImage *topLeft = [NSImage frameworkImageNamed: @"IWWindowCornerTL"];
 	NSImage *topRight = [NSImage frameworkImageNamed: @"IWWindowCornerTR"];
 	
-	[topLeft compositeToPoint:NSMakePoint(rect.origin.x,
-				rect.origin.y + [self titleBarHeight] - [topLeft size].height) operation: NSCompositeSourceOver];
-	[topRight compositeToPoint:NSMakePoint(rect.origin.x + rect.size.width-[topRight size].width,
-				rect.origin.y + [self titleBarHeight] - [topLeft size].height) operation: NSCompositeSourceOver];
+	[topLeft drawAtPoint:NSMakePoint(rect.origin.x,
+									 rect.origin.y + [self titleBarHeight] - [topLeft size].height) fromRect:NSZeroRect operation: NSCompositeSourceOver fraction:1.0];
+	[topRight drawAtPoint:NSMakePoint(rect.origin.x + rect.size.width-[topRight size].width,
+									  rect.origin.y + [self titleBarHeight] - [topLeft size].height) fromRect:NSZeroRect operation: NSCompositeSourceOver fraction:1.0];
 	
 	[self _drawTitle:rect];
 }
@@ -152,8 +152,8 @@
 	NSImage *bottomLeft = [NSImage frameworkImageNamed: @"IWWindowCornerBL"];
 	NSImage *bottomRight = [NSImage frameworkImageNamed: @"IWWindowCornerBR"];
 	
-	[bottomLeft compositeToPoint:NSMakePoint(rect.origin.x, rect.origin.y) operation: NSCompositeSourceOver];
-	[bottomRight compositeToPoint:NSMakePoint(rect.origin.x + rect.size.width-[bottomRight size].width, rect.origin.y) operation: NSCompositeSourceOver];
+	[bottomLeft drawAtPoint:NSMakePoint(rect.origin.x, rect.origin.y) fromRect:NSZeroRect operation: NSCompositeSourceOver fraction:1.0];
+	[bottomRight drawAtPoint:NSMakePoint(rect.origin.x + rect.size.width-[bottomRight size].width, rect.origin.y) fromRect:NSZeroRect operation: NSCompositeSourceOver fraction:1.0];
 }
 
 - (void)drawRect:(struct _NSRect)_rect
@@ -191,7 +191,7 @@
 	rect.origin.x += 3;
 	rect.origin.y += 2;
 	NSImage *resize = [NSImage frameworkImageNamed:@"IWWindowResizeControl"];
-	[resize compositeToPoint:rect.origin operation: NSCompositeSourceOver];
+	[resize drawAtPoint:rect.origin fromRect:NSZeroRect operation: NSCompositeSourceOver fraction:1.0];
 }
 
 - (float)titleBarHeight

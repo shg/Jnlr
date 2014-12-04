@@ -487,12 +487,12 @@ static NSString *kMailMessagePboardType = @"MV Super-secret message transfer pas
 	
 	//[graphicsContext restoreGraphicsState];
 	
-	[icon compositeToPoint:NSMakePoint(6,6) operation:NSCompositeSourceOver fraction:1.0];
+	[icon drawAtPoint:NSMakePoint(6,6) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
 	[title drawAtPoint:NSMakePoint(iconSize.width+7,8) withAttributes:attributes];
 	
 	if ( dragBadge ) 
 	{
-		[dragBadge compositeToPoint:NSMakePoint(iconSize.width+7-[dragBadge size].width, 0) operation:NSCompositeSourceOver fraction:1.0];
+		[dragBadge drawAtPoint:NSMakePoint(iconSize.width+7-[dragBadge size].width, 0) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
 	}
 	
 	[returnImage unlockFocus];

@@ -1251,7 +1251,7 @@ static NSDictionary * StatusAttributes()
 	
 	[[NSColor colorWithCalibratedWhite:0.5 alpha:0.3] set];
 	[[NSBezierPath bezierPathWithRoundedRect:NSMakeRect(0,6,[returnImage size].width,[returnImage size].height-6) cornerRadius:10.0] stroke];	
-	[[icon imageWithWidth:26 height:26] compositeToPoint:NSMakePoint(6,8) operation:NSCompositeSourceOver fraction:1.0];
+	[[icon imageWithWidth:26 height:26] drawAtPoint:NSMakePoint(6,8) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
 	[title drawAtPoint:NSMakePoint(iconSize.width+7,8) withAttributes:attributes];
 	
 	[returnImage unlockFocus];
