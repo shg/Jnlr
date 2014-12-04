@@ -239,7 +239,7 @@
 		[imageCopy unlockFocus];
 		
 		//[imageCopy drawInRect:imageFrame fromRect:NSMakeRect(0,0,[imageCopy size].width,[imageCopy size].height) operation:NSCompositeSourceOver fraction:1.0];
-		[imageCopy compositeToPoint:imageFrame.origin operation:NSCompositeSourceOver];
+		[imageCopy drawAtPoint:imageFrame.origin fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
 	}
 
     [super drawWithFrame:cellFrame inView:controlView];

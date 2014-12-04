@@ -309,7 +309,7 @@
 	
 	//[graphicsContext restoreGraphicsState];
 	
-	[icon compositeToPoint:NSMakePoint(6,6) operation:NSCompositeSourceOver fraction:1.0];
+	[icon drawAtPoint:NSMakePoint(6,6) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
 	[title drawAtPoint:NSMakePoint(iconSize.width+7,8) withAttributes:attributes];
 
 	

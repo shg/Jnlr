@@ -146,7 +146,7 @@
 		[[NSColor colorWithCalibratedWhite:0.4 alpha:0.5] set];
 		[[NSBezierPath bezierPathWithRoundedRect:NSMakeRect(0,0,[returnImage size].width,[returnImage size].height) cornerRadius:7.0] stroke];
 			
-		[dragImage compositeToPoint:NSMakePoint(6,6) operation:NSCompositeSourceOver fraction:0.9];
+		[dragImage drawAtPoint:NSMakePoint(6,6) fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:0.9];
 		[returnImage unlockFocus];
 		
         imageSize = [returnImage size];
