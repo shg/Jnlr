@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		721DE49D0DD2AC5700AB7438 /* SproutedAVI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 721DE49C0DD2AC5700AB7438 /* SproutedAVI.framework */; };
-		721DE49F0DD2AC5A00AB7438 /* SproutedAVI.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 721DE49C0DD2AC5700AB7438 /* SproutedAVI.framework */; };
+		721DE49F0DD2AC5A00AB7438 /* SproutedAVI.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 721DE49C0DD2AC5700AB7438 /* SproutedAVI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		726EC0770CCC512D008AE420 /* SmallEntryIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 726EC0570CCC512C008AE420 /* SmallEntryIcon.png */; };
 		726EC0780CCC512D008AE420 /* SmallAltDisclosure.tif in Resources */ = {isa = PBXBuildFile; fileRef = 726EC0580CCC512C008AE420 /* SmallAltDisclosure.tif */; };
 		726EC0790CCC512D008AE420 /* SmallDisclosure.tif in Resources */ = {isa = PBXBuildFile; fileRef = 726EC0590CCC512C008AE420 /* SmallDisclosure.tif */; };
@@ -105,10 +105,10 @@
 		7288618C0CC6864000733960 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728861860CC6864000733960 /* Sparkle.framework */; };
 		7288618D0CC6864000733960 /* SproutedInterface.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728861870CC6864000733960 /* SproutedInterface.framework */; };
 		7288618E0CC6864000733960 /* SproutedUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728861880CC6864000733960 /* SproutedUtilities.framework */; };
-		728862880CC6864600733960 /* SproutedUtilities.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 728861880CC6864000733960 /* SproutedUtilities.framework */; };
-		7288628B0CC6864600733960 /* Pantomime.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 728861850CC6864000733960 /* Pantomime.framework */; };
-		7288628C0CC6864600733960 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 728861860CC6864000733960 /* Sparkle.framework */; };
-		7288638D0CC6867700733960 /* SproutedInterface.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 728861870CC6864000733960 /* SproutedInterface.framework */; };
+		728862880CC6864600733960 /* SproutedUtilities.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 728861880CC6864000733960 /* SproutedUtilities.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		7288628B0CC6864600733960 /* Pantomime.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 728861850CC6864000733960 /* Pantomime.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		7288628C0CC6864600733960 /* Sparkle.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 728861860CC6864000733960 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		7288638D0CC6867700733960 /* SproutedInterface.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 728861870CC6864000733960 /* SproutedInterface.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		728863E10CC686AC00733960 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728863E00CC686AC00733960 /* CoreFoundation.framework */; };
 		728865D80CC686B600733960 /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728865D50CC686B600733960 /* ApplicationServices.framework */; };
 		728865D90CC686B600733960 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728865D60CC686B600733960 /* Quartz.framework */; };
@@ -422,7 +422,7 @@
 		7290D9D20DAA8219001B30B6 /* EntryWindow_105.nib in Resources */ = {isa = PBXBuildFile; fileRef = 7290D9D00DAA8219001B30B6 /* EntryWindow_105.nib */; };
 		7290DB1F0DAAB6B2001B30B6 /* MediaBarEquals.png in Resources */ = {isa = PBXBuildFile; fileRef = 7290DB1E0DAAB6B2001B30B6 /* MediaBarEquals.png */; };
 		7296CCE213D7A45D00371D50 /* ID3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7296CCE113D7A45D00371D50 /* ID3.framework */; };
-		72976DB313D7C786008FB3EC /* ID3.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 7296CCE113D7A45D00371D50 /* ID3.framework */; };
+		72976DB313D7C786008FB3EC /* ID3.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 7296CCE113D7A45D00371D50 /* ID3.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		729852050CD2611500BB4A53 /* libcrypto.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 729852040CD2611500BB4A53 /* libcrypto.dylib */; };
 		729852580CD26F5100BB4A53 /* HUDCloseButton.tiff in Resources */ = {isa = PBXBuildFile; fileRef = 729852570CD26F5100BB4A53 /* HUDCloseButton.tiff */; };
 		729854520CD292F600BB4A53 /* DefaultJournal.zip in Resources */ = {isa = PBXBuildFile; fileRef = 729854510CD292F600BB4A53 /* DefaultJournal.zip */; };
@@ -2238,7 +2238,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0640;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Journler" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -3389,8 +3389,9 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.9;
 				VALID_ARCHS = i386;
 			};
 			name = Debug;
@@ -3402,7 +3403,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks";
-				SDKROOT = macosx;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx10.9;
 				VALID_ARCHS = i386;
 			};
 			name = Release;
