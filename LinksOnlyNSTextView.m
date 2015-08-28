@@ -668,7 +668,7 @@ static NSString *mailSelectionPathInfoSource = @"tell application \"Mail\"\nset 
 	return success;
 }
 
-- (NSUInteger)dragOperationForDraggingInfo:(id <NSDraggingInfo>)dragInfo type:(NSString *)type 
+- (NSDragOperation)dragOperationForDraggingInfo:(id <NSDraggingInfo>)dragInfo type:(NSString *)type
 {
 	
 	NSUInteger operation;
