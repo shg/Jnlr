@@ -143,7 +143,7 @@
 #pragma mark -
 #pragma mark Dragging
 
-- (NSUInteger)draggingSourceOperationMaskForLocal:(BOOL)isLocal 
+- (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)isLocal
 {
 	if ( isLocal )
 		return ( NSDragOperationLink );

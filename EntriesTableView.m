@@ -312,7 +312,7 @@
 	[[NSNotificationCenter defaultCenter] postNotificationName:EntriesTableViewDidEndDragNotification object:self userInfo:nil];
 }
 
-- (NSUInteger)draggingSourceOperationMaskForLocal:(BOOL)isLocal {
+- (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)isLocal {
 	
 	if ( isLocal )
 		return ( NSDragOperationDelete | NSDragOperationCopy );
