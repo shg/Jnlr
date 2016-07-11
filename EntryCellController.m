@@ -985,7 +985,7 @@ static NSDictionary * StatusAttributes()
 	
 	NSBitmapImageRep *bitmapRep = [[[NSBitmapImageRep alloc] initWithData:[tempImage TIFFRepresentation]] autorelease];
 	NSFileWrapper *newWrapper = [[[NSFileWrapper alloc]
-			initRegularFileWithContents:[bitmapRep representationUsingType:NSPNGFileType properties:nil]] autorelease];
+			initRegularFileWithContents:[bitmapRep representationUsingType:NSPNGFileType properties:@{}]] autorelease];
 			
 	[newWrapper setPreferredFilename:preferredName];
 	NSTextAttachment *newAttachment = [[[NSTextAttachment alloc] initWithFileWrapper:newWrapper] autorelease];

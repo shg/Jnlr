@@ -659,7 +659,7 @@ static NSArray *JObjectValues()
 - (NSData*) attributedData
 {
 	NSAttributedString *content = [self attributedContent];
-	return [content RTFDFromRange:NSMakeRange(0,[content length]) documentAttributes:nil];
+	return [content RTFDFromRange:NSMakeRange(0,[content length]) documentAttributes:@{}];
 }
 
 - (void) setAttributedData:(NSData*)aData

@@ -2503,7 +2503,7 @@ bail:
 {
 	BOOL success = NO;
 	
-	NSFileWrapper *fileWrapper = [anAttributedString RTFDFileWrapperFromRange:NSMakeRange(0,[anAttributedString length]) documentAttributes:nil];
+	NSFileWrapper *fileWrapper = [anAttributedString RTFDFileWrapperFromRange:NSMakeRange(0,[anAttributedString length]) documentAttributes:@{}];
 	if ( fileWrapper == nil )
 		NSLog(@"%s - unable to create file wrapper for attributed string", __PRETTY_FUNCTION__);
 	else

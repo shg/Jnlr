@@ -3456,10 +3456,10 @@ bail:
 			//text only or pictures as well?
 			if ( printMode == kPrintModeText )
 				[printView replaceCharactersInRange:NSMakeRange([[printView string] length],0) 
-						withRTF:[preppedEntry RTFFromRange:NSMakeRange(0, [[preppedEntry string] length]) documentAttributes:nil]];
+						withRTF:[preppedEntry RTFFromRange:NSMakeRange(0, [[preppedEntry string] length]) documentAttributes:@{}]];
 			else
 				[printView replaceCharactersInRange:NSMakeRange([[printView string] length],0) 
-						withRTFD:[preppedEntry RTFDFromRange:NSMakeRange(0, [[preppedEntry string] length]) documentAttributes:nil]];
+						withRTFD:[preppedEntry RTFDFromRange:NSMakeRange(0, [[preppedEntry string] length]) documentAttributes:@{}]];
 			
 			[printView replaceCharactersInRange:NSMakeRange([[printView string] length],0) withString:@"\n\n"];
 			[pool release];
@@ -3645,7 +3645,7 @@ bail:
 				
 				[printView replaceCharactersInRange:NSMakeRange([[printView textStorage] length],0) 
 						withRTFD:[preppedEntry RTFDFromRange:NSMakeRange(0, [preppedEntry length]) 
-						documentAttributes:nil]];
+						documentAttributes:@{}]];
 				
 				[printView replaceCharactersInRange:NSMakeRange([[printView textStorage] length],0) withString:@"\n\n"];
 				
@@ -3661,7 +3661,7 @@ bail:
 				
 				saveWithExtension = [[filename stringByAppendingPathExtension:@"rtf"] pathWithoutOverwritingSelf];
 				rtfWrapper = [[[NSFileWrapper alloc] initRegularFileWithContents:[[printView textStorage] 
-						RTFFromRange:NSMakeRange(0, [[printView textStorage] length]) documentAttributes:nil]] autorelease];
+						RTFFromRange:NSMakeRange(0, [[printView textStorage] length]) documentAttributes:@{}]] autorelease];
 
 				if ( rtfWrapper == nil || ![rtfWrapper writeToFile:saveWithExtension atomically:YES updateFilenames:YES] ) 
 				{
@@ -3675,7 +3675,7 @@ bail:
 				
 				saveWithExtension = [[filename stringByAppendingPathExtension:@"doc"] pathWithoutOverwritingSelf];
 				NSData *docData = [[printView textStorage] docFormatFromRange:NSMakeRange(0, [[printView textStorage] length]) 
-						documentAttributes:nil];
+						documentAttributes:@{}];
 				
 				if ( docData == nil || ![docData writeToFile:saveWithExtension atomically:YES] ) 
 				{
@@ -3689,7 +3689,7 @@ bail:
 				
 				saveWithExtension = [[filename stringByAppendingPathExtension:@"rtfd"] pathWithoutOverwritingSelf];
 				NSFileWrapper *rtfdWrapper = [[printView textStorage] RTFDFileWrapperFromRange:NSMakeRange(0, [[printView textStorage] length])
-						documentAttributes:nil];
+						documentAttributes:@{}];
 
 				if ( rtfdWrapper == nil || ![rtfdWrapper writeToFile:saveWithExtension atomically:YES updateFilenames:YES] ) 
 				{
@@ -4406,7 +4406,7 @@ bail:
 	if ( GetCurrentKeyModifiers() & shiftKey ) 
 	{
 		// if the shift key is down, reveal the item in the finder
-		[[NSWorkspace sharedWorkspace] selectFile:[fileURL path] inFileViewerRootedAtPath:nil];
+		[[NSWorkspace sharedWorkspace] selectFile:[fileURL path] inFileViewerRootedAtPath:@""];
 	}
 	
 	else if ( GetCurrentKeyModifiers() & optionKey ) 
@@ -5069,7 +5069,7 @@ bail:
 		}
 		
 		NSFileWrapper *attributed_wrapper = [attributed_service RTFDFileWrapperFromRange:
-		NSMakeRange(0,[attributed_service length]) documentAttributes:nil];
+		NSMakeRange(0,[attributed_service length]) documentAttributes:@{}];
 		
 		destinationPaths = [NSArray arrayWithObject: [[destinationFolder 
 		stringByAppendingPathComponent:NSLocalizedString(@"untitled title", @"")] stringByAppendingPathExtension:@"rtfd"] ];

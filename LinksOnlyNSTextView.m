@@ -817,11 +817,11 @@ bail:
 	// I don't know why.
 	
 	if ( ![self isEditable] )
-		operation = [self dragOperationForDraggingInfo:sender type:nil];
+		operation = [self dragOperationForDraggingInfo:sender type:@""];
 	else if ( [[[sender draggingPasteboard] types] containsObject:kMailMessagePboardType] )
-		operation = [self dragOperationForDraggingInfo:sender type:nil];
+		operation = [self dragOperationForDraggingInfo:sender type:@""];
 	else if ( [[[sender draggingPasteboard] types] containsObject:kABPeopleUIDsPboardType] )
-		operation = [self dragOperationForDraggingInfo:sender type:nil];
+		operation = [self dragOperationForDraggingInfo:sender type:@""];
 	else
 		operation = [super draggingEntered:sender];
 	
@@ -833,11 +833,11 @@ bail:
 	NSDragOperation operation;
 	
 	if ( ![self isEditable] )
-		operation = [self dragOperationForDraggingInfo:sender type:nil];
+		operation = [self dragOperationForDraggingInfo:sender type:@""];
 	else if ( [[[sender draggingPasteboard] types] containsObject:kMailMessagePboardType] )
-		operation = [self dragOperationForDraggingInfo:sender type:nil];
+		operation = [self dragOperationForDraggingInfo:sender type:@""];
 	else if ( [[[sender draggingPasteboard] types] containsObject:kABPeopleUIDsPboardType] )
-		operation = [self dragOperationForDraggingInfo:sender type:nil];
+		operation = [self dragOperationForDraggingInfo:sender type:@""];
 	else
 		operation = [super draggingUpdated:sender];
 	
@@ -1077,7 +1077,7 @@ bail:
 	
 	//now load this into an attributed string via a file wrapper, mind the quality preferences
 	pngFileWrapper = [[NSFileWrapper alloc]
-			initRegularFileWithContents:[bitmapRep representationUsingType:NSPNGFileType properties:nil]];
+			initRegularFileWithContents:[bitmapRep representationUsingType:NSPNGFileType properties:@{}]];
 	[pngFileWrapper setPreferredFilename:@"PDCheckboxUnchecked.png"];
 		
 	NSTextAttachment *pngAttachment = [[NSTextAttachment alloc] initWithFileWrapper:pngFileWrapper];
