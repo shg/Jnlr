@@ -785,7 +785,7 @@ bail:
 	
 	// whenever the date is selected, immediately deselect the folders
 	recordNavigationEvent = NO;
-	[sourceList selectRowIndexes:nil byExtendingSelection:NO];
+	[sourceList selectRowIndexes:[NSIndexSet new] byExtendingSelection:NO];
 	recordNavigationEvent = YES;
 }
 

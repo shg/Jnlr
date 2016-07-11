@@ -519,7 +519,7 @@
 		// print browsed entries prints images by default
 		[printView replaceCharactersInRange:NSMakeRange([[printView string] length],0) 
 				withRTFD:[preppedEntry RTFDFromRange:NSMakeRange(0, [[preppedEntry string] length]) 
-				documentAttributes:nil]];
+				documentAttributes:@{}]];
 		
 		if ( i != [printArray count] - 1 )
 			[printView replaceCharactersInRange:NSMakeRange([[printView string] length],0) withString:@"\n\n"];
@@ -917,7 +917,7 @@
 					
 					[printView replaceCharactersInRange:NSMakeRange([[printView textStorage] length],0) 
 							withRTFD:[preppedEntry RTFDFromRange:NSMakeRange(0, [preppedEntry length]) 
-							documentAttributes:nil]];
+							documentAttributes:@{}]];
 					
 					[printView replaceCharactersInRange:NSMakeRange([[printView textStorage] length],0) withString:@"\n\n"];
 					
@@ -931,7 +931,7 @@
 						
 						saveWithExtension = [filename stringByAppendingPathExtension:@"rtf"];
 						rtfWrapper = [[[NSFileWrapper alloc] initRegularFileWithContents:[[printView textStorage] 
-								RTFFromRange:NSMakeRange(0, [[printView textStorage] length]) documentAttributes:nil]] autorelease];
+								RTFFromRange:NSMakeRange(0, [[printView textStorage] length]) documentAttributes:@{}]] autorelease];
 
 						if ( ![rtfWrapper writeToFile:saveWithExtension atomically:YES updateFilenames:YES] ) 
 						{
@@ -945,7 +945,7 @@
 						
 						saveWithExtension = [filename stringByAppendingPathExtension:@"doc"];
 						NSData *docData = [[printView textStorage] docFormatFromRange:NSMakeRange(0, [[printView textStorage] length]) 
-								documentAttributes:nil];
+								documentAttributes:@{}];
 						
 						if ( ![docData writeToFile:saveWithExtension atomically:YES] ) 
 						{
@@ -959,7 +959,7 @@
 						
 						saveWithExtension = [filename stringByAppendingPathExtension:@"rtfd"];
 						NSFileWrapper *rtfdWrapper = [[printView textStorage] RTFDFileWrapperFromRange:NSMakeRange(0, [[printView textStorage] length])
-								documentAttributes:nil];
+								documentAttributes:@{}];
 
 						if ( ![rtfdWrapper writeToFile:saveWithExtension atomically:YES updateFilenames:YES] ) 
 						{

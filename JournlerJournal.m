@@ -3035,7 +3035,7 @@ bail:
 	// create a file wrapper for the attributed content
 	NSFileWrapper *rtfdWrapper = ( attributedContent == nil 
 			? nil 
-			: [attributedContent RTFDFileWrapperFromRange:NSMakeRange(0,[attributedContent length]) documentAttributes:nil] );
+			: [attributedContent RTFDFileWrapperFromRange:NSMakeRange(0,[attributedContent length]) documentAttributes:@{}] );
 	
 	if ( rtfdWrapper == nil && attributedContent != nil )
 	{

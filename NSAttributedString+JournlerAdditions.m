@@ -174,7 +174,7 @@
 		if ( !bitmapRep ) 
 			continue;
 						
-		NSData *imageData = [bitmapRep representationUsingType:type properties:nil];
+		NSData *imageData = [bitmapRep representationUsingType:type properties:@{}];
 		if ( !imageData ) 
 			continue;
 		
