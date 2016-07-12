@@ -1942,7 +1942,7 @@ bail:
 		return;
 	
 	NSArray *filesToOpen = nil;
-	NSArray *selectedFiles = [oPanel filenames];
+	NSArray *selectedFiles = [oPanel URLs];
 	
 	if ( [selectedFiles count] == 1 && 
 			[[NSFileManager defaultManager] fileExistsAtPath:[selectedFiles objectAtIndex:0] isDirectory:&dir] && dir && 
@@ -2419,7 +2419,7 @@ bail:
 				return loadResult;
 			}
 			
-			filenames = [op filenames];
+			filenames = [op URLs];
 			if ( !filenames || [filenames count] == 0 )
 			{
 				NSLog(@"%s - quitting after user cancelled locate request", __PRETTY_FUNCTION__);

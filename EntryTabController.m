@@ -1248,7 +1248,7 @@ static NSSortDescriptor *ResourceByRankSortPrototype()
 		else
 		{
 			NSInteger j;
-			NSArray *files = [oPanel filenames];
+			NSArray *files = [oPanel URLs];
 			
 			// add the files to the entry
 			for ( j = 0; j < [files count]; j++ ) {
