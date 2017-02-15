@@ -74,26 +74,6 @@ typedef enum {
 	kResourceRequestEntry = 6
 } NewResourceRequest;
 
-static NSSortDescriptor *ResourceByTitleSortPrototype()
-{
-	static NSSortDescriptor *descriptor = nil;
-	if ( descriptor == nil )
-	{
-		descriptor = [[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)];
-	}
-	return descriptor;
-}
-
-static NSSortDescriptor *ResourceByRankSortPrototype()
-{
-	static NSSortDescriptor *descriptor = nil;
-	if ( descriptor == nil )
-	{
-		descriptor = [[NSSortDescriptor alloc] initWithKey:@"relevance" ascending:NO selector:@selector(compare:)];
-	}
-	return descriptor;
-}
-
 @implementation EntryTabController
 
 - (id) initWithOwner:(JournlerWindowController*)anObject 

@@ -9,10 +9,6 @@
 #import <Cocoa/Cocoa.h>
 #import <QTKit/QTKit.h>
 
-static short GetLabelNumber (short flags);
-static void SetLabelInFlags (short *flags, short labelNum);
-static OSErr FSpGetPBRec(const FSSpec* fileSpec, CInfoPBRec *infoRec);
-
 @interface NSWorkspace (PDCategories)
 
 - (NSString*) UTIForFile:(NSString*)path;

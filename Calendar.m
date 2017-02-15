@@ -66,31 +66,6 @@
 
 @implementation Calendar
 
-static void SetSegmentDescriptions(NSSegmentedControl *control, NSString *firstDescription, ...) {
-    // Use NSAccessibilityUnignoredDescendant to be sure we start with the correct object.
-    id segmentElement = NSAccessibilityUnignoredDescendant(control);
-
-    // Use the accessibility protocol to get the children.
-    NSArray *segments = [segmentElement accessibilityAttributeValue:NSAccessibilityChildrenAttribute];
-
-    va_list args;
-    va_start(args, firstDescription);
-
-    NSString *description = firstDescription;
-
-    for ( id segment in segments ) {
-        if (description != nil) {
-            [segment accessibilitySetOverrideValue:description forAttribute:NSAccessibilityDescriptionAttribute];
-        } else {
-            // Exit loop if we run out of descriptions.
-            break;
-        }
-        description = va_arg(args, id);
-    }
-
-    va_end(args);
-}
-
 #pragma mark -
 
 + (void)initialize
@@ -115,7 +90,7 @@ static void SetSegmentDescriptions(NSSegmentedControl *control, NSString *firstD
 		myYear = [selectedDate yearOfCommonEra];
 		
 		//set up a timer to catch the day change
-		NSCalendarDate *daychangeFireDate = [[NSCalendarDate dateWithYear:[todaysDate yearOfCommonEra] 
+		NSCalendarDate *daychangeFireDate = [[NSCalendarDate dateWithYear:[todaysDate yearOfCommonEra]
 				month:[todaysDate monthOfYear] day:[todaysDate dayOfMonth] hour:0 minute:0 second:1 timeZone:nil]
 				dateByAddingYears:0 months:0 days:1 hours:0 minutes:0 seconds:0];
 				
