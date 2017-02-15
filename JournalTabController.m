@@ -94,34 +94,6 @@ typedef enum {
 	kResourceRequestEntry = 6
 } NewResourceRequest;
 
-static NSDictionary* StatusBarTextAttributes()
-{
-	static NSDictionary *textAttributes = nil;
-	if ( textAttributes == nil )
-	{
-		NSShadow *textShadow;
-		NSMutableParagraphStyle *paragraphStyle;
-		
-		textShadow = [[NSShadow alloc] init];
-		[textShadow setShadowColor:[NSColor colorWithCalibratedWhite:1.0 alpha:0.6]];
-		[textShadow setShadowOffset:NSMakeSize(0,-1)];
-		
-		paragraphStyle = [[NSParagraphStyle defaultParagraphStyle] mutableCopy];
-		[paragraphStyle setAlignment:NSCenterTextAlignment];
-		[paragraphStyle setLineBreakMode:NSLineBreakByTruncatingTail];
-		
-		textAttributes = [[NSDictionary alloc] initWithObjectsAndKeys:
-				textShadow, NSShadowAttributeName, 
-				[NSFont boldSystemFontOfSize:11], NSFontAttributeName,
-				[NSColor blackColor], NSForegroundColorAttributeName,
-				paragraphStyle, NSParagraphStyleAttributeName, nil];
-		
-		[textShadow release];
-		[paragraphStyle release];
-	}
-	return textAttributes;
-}
-
 static NSArray* EntrySearchDescriptors()
 {
 	static NSArray *descriptors = nil;

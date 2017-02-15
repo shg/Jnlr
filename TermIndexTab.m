@@ -66,23 +66,6 @@
 #import "EntryWindowController.h"
 
 
-static NSArray *DefaultDocumentsSort()
-{
-	static NSArray *documentSort = nil;
-	if ( documentSort == nil )
-	{
-		NSSortDescriptor *titleSort = [[[NSSortDescriptor alloc] 
-				initWithKey:@"title" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)] autorelease];
-		
-		NSSortDescriptor *utiSort = [[[NSSortDescriptor alloc] 
-				initWithKey:@"uti" ascending:YES selector:@selector(caseInsensitiveCompare:)] autorelease];
-		
-		documentSort = [[NSArray alloc] initWithObjects:titleSort, utiSort, nil];
-	}
-	
-	return documentSort;
-}
-
 #pragma mark -
 
 @implementation TermIndexTab
@@ -793,103 +776,7 @@ bail:
 	if ( [anObject isKindOfClass:[NSString class]] )
 	{
 		content = (NSArray*)[indexServer documentNodesForTermNodes:selectedNodes];
-		
-		/*
-		NSMutableArray *multiArray = [NSMutableArray array];
-		NSEnumerator *nodesEnumerator = [selectedNodes objectEnumerator];
-		
-		while ( selectedNode = [nodesEnumerator nextObject] )
-		{
-			
-			anObject = [selectedNode representedObject];
-			if ( ![anObject isKindOfClass:[NSString class]] )
-				continue;
-			
-			NSString *theTerm = anObject;
-			
-			// get an array of journler objects that have been prepared for this selection (no duplicates allowed)
-			NSArray *alreadyRepresented = [multiArray valueForKey:@"representedObject"];
-			
-			// try the cache
-			NSArray *journlerObjects = [termToDocumentsDictionary objectForKey:theTerm];
-			if ( journlerObjects == nil ) 
-			{
-				NSMutableArray *thisTermsObjects = [NSMutableArray array];
-				
-				// grab the objects and set the cache
-				journlerObjects = [[searchManager journlerObjectsForTerm:theTerm options:kIgnoreNumericTerms]
-						sortedArrayUsingDescriptors:DefaultDocumentsSort()];
-				
-				JournlerObject *aJournlerObject;
-				NSEnumerator *enumerator = [journlerObjects objectEnumerator];
-				
-				while ( aJournlerObject = [enumerator nextObject] )
-				{
-					IndexNode *aNode = [[[IndexNode alloc] init] autorelease];
-					
-					[aNode setTitle:[aJournlerObject title]];
-					[aNode setRepresentedObject:aJournlerObject];
-					//[aNode setCount:0];
-					
-					// produce children for the journler object
-					NSArray *children = nil;
-					NSMutableArray *childNodes = [NSMutableArray array];
-					
-					if ( [aJournlerObject isKindOfClass:[JournlerResource class]] )
-						children = [NSArray arrayWithObject:[(JournlerResource*)aJournlerObject entry]];
-					else if ( [aJournlerObject isKindOfClass:[JournlerEntry class]] )
-						children = [(JournlerEntry*)aJournlerObject resources];
-					
-					JournlerObject *aChildObject;
-					NSEnumerator *childEnumerator = [children objectEnumerator];
-					
-					while ( aChildObject = [childEnumerator nextObject] )
-					{
-						IndexNode *aChildNode = [[[IndexNode alloc] init] autorelease];
-					
-						[aChildNode setTitle:[aChildObject title]];
-						[aChildNode setRepresentedObject:aChildObject];
-						[aChildNode setParent:aNode];
-						
-						[childNodes addObject:aChildNode];
-					}
-					
-					// actually set the child nodes - could do the same for user defined term synonyms
-					[aNode setChildren:childNodes];
-					
-					[content addObject:aNode];
-					[thisTermsObjects addObject:aNode];
-					
-					if ( ![alreadyRepresented containsObject:aJournlerObject] )
-						[multiArray addObject:aNode];
-				}
-				
-				[termToDocumentsDictionary setObject:thisTermsObjects forKey:theTerm];
-			}
-			else
-			{
-				//[content setArray:journlerObjects];
-				
-				// only add objects that have not been added already
-				IndexNode *aCachedNode;
-				NSEnumerator *journlerObjectsEnumerator = [journlerObjects objectEnumerator];
-				
-				while ( aCachedNode = [journlerObjectsEnumerator nextObject] )
-				{
-					if ( ![alreadyRepresented containsObject:[aCachedNode representedObject]] )
-						[multiArray addObject:aCachedNode];
-				}
-			}
-			
-		}
-		
-		// reset the count on this node
-		[selectedNode setCount:[content count]];
-		
-		// set the returned content to our parsed-for-duplicates multi array
-		[content setArray:multiArray];
-		*/
-	}
+    }
 	
 	else if ( [anObject isKindOfClass:[JournlerObject class]] )
 	{
