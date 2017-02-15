@@ -101,7 +101,7 @@ typedef enum {
 	
 } EntrySaveFileTypes;
 
-enum {
+typedef enum {
 	kEntrySetFileCreationDate = 1 << 1,
 	kEntrySetFileModificationDate = 1 << 2,
 	kEntryIncludeHeader = 1 << 3,
@@ -110,7 +110,7 @@ enum {
 	kEntryDoNotOverwrite = 1 << 6
 } EntrySaveFlags;
 
-enum {
+typedef enum {
 	kEntryImportIncludeIcon = 1 << 1,
 	kEntryImportSetDefaultResource = 1 << 2,
 	kEntryImportPreserveDateModified = 1 << 3
