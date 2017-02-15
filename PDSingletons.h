@@ -58,21 +58,21 @@ static NSNumber *BooleanNumber(BOOL isTrue)
 	}
 }
 
-static NSNumber *ZeroNumber()
+static inline NSNumber *ZeroNumber()
 {
 	static NSNumber *zeroNumber = nil;
 	if ( zeroNumber == nil ) zeroNumber = [[NSNumber alloc] initWithInt:0];
 	return zeroNumber;
 }
 
-static NSString *EmptyString()
+static inline NSString *EmptyString()
 {
 	static NSString *emptyString = nil;
 	if ( emptyString == nil ) emptyString = [[NSString alloc] init];
 	return emptyString;
 }
 
-static NSArray *EmptyArray()
+static inline NSArray *EmptyArray()
 {
 	static NSArray *emptyArray = nil;
 	if ( emptyArray == nil ) emptyArray = [[NSArray alloc] init];

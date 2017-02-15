@@ -53,7 +53,7 @@
 	#include <syslog.h>
 	#include <string.h>
 	
-	static const char * rFILE(const char * inStr) { 
+	static inline const char * rFILE(const char * inStr) {
 		int count = strlen(inStr); 
 		while (count && *(inStr + count - 1) != '/')
 			count--;
