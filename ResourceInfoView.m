@@ -359,7 +359,7 @@ static NSString* NoNullString( NSString *aString )
 		{
 			if ( file_size / kBytesInGigabyte > 1 ) 
 			{
-				NSNumber *gigabytes = [NSNumber numberWithInteger:(file_size / kBytesInGigabyte)];
+				NSNumber *gigabytes = [NSNumber numberWithInteger:(NSInteger)(file_size / kBytesInGigabyte)];
 				fileSizeAsString = NoNullString( [[gigabytes stringValue] stringByAppendingString:
 				NSLocalizedStringFromTableInBundle(@"mditem size gb", @"FileInfo", sproutedInterfaceBundle, @"")] );
 			}
@@ -367,13 +367,13 @@ static NSString* NoNullString( NSString *aString )
 			{
 				if ( file_size / kBytesInMegabyte > 1 ) 
 				{
-					NSNumber *megabytes = [NSNumber numberWithInteger:(file_size / kBytesInMegabyte)];
+					NSNumber *megabytes = [NSNumber numberWithInteger:(NSInteger)(file_size / kBytesInMegabyte)];
 					fileSizeAsString = NoNullString( [[megabytes stringValue] stringByAppendingString:
 					NSLocalizedStringFromTableInBundle(@"mditem size mb", @"FileInfo", sproutedInterfaceBundle, @"")] );
 				}
 				else 
 				{
-					NSNumber *kilobytes = [NSNumber numberWithInteger:(file_size / kBytesInKilobyte)];
+					NSNumber *kilobytes = [NSNumber numberWithInteger:(NSInteger)(file_size / kBytesInKilobyte)];
 					fileSizeAsString = NoNullString( [[kilobytes stringValue] stringByAppendingString:
 					NSLocalizedStringFromTableInBundle(@"mditem size kb", @"FileInfo", sproutedInterfaceBundle, @"")] );
 				}
