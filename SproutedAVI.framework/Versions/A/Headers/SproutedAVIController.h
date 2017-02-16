@@ -105,7 +105,7 @@ extern NSString *kExpirationDate;
 	@param sender the method's caller.
 */
 
-- (IBAction) takeSnapshot:(id)sender;
+- (IBAction) recordVideo:(id)sender;
 
 /*!
 	@function takeSnapshot:
