@@ -161,7 +161,6 @@
 - (void) handleDeregisterDragTypes;
 
 - (IBAction) modifyingAttributes:(NSDictionary*)attributes;
-- (IBAction) applyDefaultStyle:(id)sender;
 
 #pragma mark -
 
@@ -186,7 +185,6 @@
 
 - (IBAction) linkToEntryFromMenu:(id)sender;
 
-- (void) setFullScreen:(BOOL)isFullScreen;
 - (IBAction) makeBlockQuote:(id)sender;
 - (IBAction) scaleText:(id)sender;
 - (IBAction) setSpacing:(id)sender;
