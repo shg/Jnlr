@@ -393,6 +393,7 @@
 
 #pragma mark - Recording Targets
 
+/*X
 - (void) sproutedVideoRecorder:(SproutedRecorder*)recorder insertRecording:(NSString*)path title:(NSString*)title
 {
 	NSLog(@"%s - **** subclasses must override ****", __PRETTY_FUNCTION__);
@@ -407,6 +408,7 @@
 {
 	NSLog(@"%s - **** subclasses must override ****", __PRETTY_FUNCTION__);
 }
+*/
 
 #pragma mark -
 

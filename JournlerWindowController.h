@@ -44,7 +44,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <SproutedInterface/SproutedInterface.h>
-#import <SproutedAVI/SproutedAVI.h>
+//X #import <SproutedAVI/SproutedAVI.h>
 
 @class JournlerJournal;
 @class JournlerEntry;

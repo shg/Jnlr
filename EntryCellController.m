@@ -1787,6 +1787,7 @@ static NSDictionary * StatusAttributes()
 	[[self textView] showFindIndicatorForRange:[rangeValue rangeValue]];
 }
 
+/*X
 #pragma mark -
 #pragma mark Audio/Video Delegation
 
@@ -1834,6 +1835,7 @@ static NSDictionary * StatusAttributes()
 	
 	[textView addFileToText:path fileName:title forceTitle:YES resourceCommand:kNewResourceForceCopy];
 }
+*/
 
 #pragma mark -
 #pragma mark ResourceCell Delegation

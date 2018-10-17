@@ -4189,6 +4189,7 @@ bail:
 #pragma mark -
 #pragma mark Audio/Video Recording
 
+/*X
 - (void) sproutedVideoRecorder:(SproutedRecorder*)recorder insertRecording:(NSString*)path title:(NSString*)title
 {
 	#ifdef __DEBUG__
@@ -4255,6 +4256,7 @@ bail:
 	// pass the message to the cell controller
 	[entryCellController sproutedSnapshot:recorder insertRecording:path title:title];
 }
+*/
 
 #pragma mark -
 

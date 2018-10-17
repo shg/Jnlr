@@ -3033,6 +3033,7 @@ bail:
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://journler.com/community/forums/"]];
 }
 
+/*X
 #pragma mark -
 #pragma mark Make a Recording
 
@@ -3110,6 +3111,7 @@ bail:
 	
 	return executableSize;
 }
+*/
 
 #pragma mark -
 

@@ -968,8 +968,8 @@ bail:
 	
 	*/
 	
-	BOOL success = [SproutedLAMEInstaller simplyInstallLameComponents];
-	if ( !success ) [[NSAlert lameInstallFailure] runModal];
+	//X BOOL success = [SproutedLAMEInstaller simplyInstallLameComponents];
+	//X if ( !success ) [[NSAlert lameInstallFailure] runModal];
 }
 
 - (id) objectForURIRepresentation:(NSURL*)aURL

@@ -1751,6 +1751,7 @@ static NSString *kJournlerWindowControllerObserver = @"JournlerWindowControllerO
 		return nil;
 }	
 
+/*X
 - (void) sproutedVideoRecorder:(SproutedRecorder*)recorder insertRecording:(NSString*)path title:(NSString*)title
 {
 	if ( [[self selectedTab] respondsToSelector:@selector(sproutedVideoRecorder:insertRecording:title:)] )
@@ -1780,6 +1781,7 @@ static NSString *kJournlerWindowControllerObserver = @"JournlerWindowControllerO
 		NSBeep();
 	}
 }
+*/
 
 /*
 - (IBAction) captureSnapshot:(id)sender

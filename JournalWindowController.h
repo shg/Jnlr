@@ -41,7 +41,7 @@
 // and if you notice any please point them out.
 
 #import <Cocoa/Cocoa.h>
-#import <SproutedAVI/SproutedAVI.h>
+//X #import <SproutedAVI/SproutedAVI.h>
 
 #import "JournlerWindowController.h"
 
