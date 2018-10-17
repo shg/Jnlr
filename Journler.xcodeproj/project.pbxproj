@@ -237,9 +237,7 @@
 		72886F790CC7E51700733960 /* QTInstallController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72886F740CC7E51700733960 /* QTInstallController.m */; };
 		72886FA20CC7E5FB00733960 /* JournlerMediaViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 72886F910CC7E5FB00733960 /* JournlerMediaViewer.m */; };
 		72886FA30CC7E5FB00733960 /* JournlerMediaContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72886F930CC7E5FB00733960 /* JournlerMediaContentController.m */; };
-		72886FA40CC7E5FB00733960 /* AudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72886F950CC7E5FB00733960 /* AudioViewController.m */; };
 		72886FA50CC7E5FB00733960 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72886F970CC7E5FB00733960 /* ImageViewController.m */; };
-		72886FA60CC7E5FB00733960 /* MovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72886F990CC7E5FB00733960 /* MovieViewController.m */; };
 		72886FA70CC7E5FB00733960 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72886F9B0CC7E5FB00733960 /* WebViewController.m */; };
 		72886FA80CC7E5FB00733960 /* MailMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72886F9D0CC7E5FB00733960 /* MailMessageController.m */; };
 		72886FA90CC7E5FB00733960 /* WordDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72886F9F0CC7E5FB00733960 /* WordDocumentController.m */; };
@@ -849,12 +847,8 @@
 		72886F910CC7E5FB00733960 /* JournlerMediaViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournlerMediaViewer.m; sourceTree = "<group>"; };
 		72886F920CC7E5FB00733960 /* JournlerMediaContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerMediaContentController.h; sourceTree = "<group>"; };
 		72886F930CC7E5FB00733960 /* JournlerMediaContentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournlerMediaContentController.m; sourceTree = "<group>"; };
-		72886F940CC7E5FB00733960 /* AudioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioViewController.h; sourceTree = "<group>"; };
-		72886F950CC7E5FB00733960 /* AudioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioViewController.m; sourceTree = "<group>"; };
 		72886F960CC7E5FB00733960 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		72886F970CC7E5FB00733960 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
-		72886F980CC7E5FB00733960 /* MovieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieViewController.h; sourceTree = "<group>"; };
-		72886F990CC7E5FB00733960 /* MovieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieViewController.m; sourceTree = "<group>"; };
 		72886F9A0CC7E5FB00733960 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		72886F9B0CC7E5FB00733960 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		72886F9C0CC7E5FB00733960 /* MailMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailMessageController.h; sourceTree = "<group>"; };
@@ -1731,9 +1725,7 @@
 				72886FD40CC7E6C500733960 /* Text Document Media Controller */,
 				72886FD30CC7E6B600733960 /* Mail Message Media Controller */,
 				72886FD20CC7E6AA00733960 /* Web Content Media Controller */,
-				72886FD10CC7E69E00733960 /* Movie Media Controller */,
 				72886FD00CC7E68F00733960 /* Image Media Controller */,
-				72886FCF0CC7E67C00733960 /* Audio Media Controller */,
 				72886FAC0CC7E61400733960 /* PDFs Media Controller */,
 				72886FAD0CC7E61E00733960 /* Address Book Media Controller */,
 				72D2A2620CD66C900065F4EC /* Journler Resource Media Controller */,
@@ -1781,15 +1773,6 @@
 			name = "Address Book Media Controller";
 			sourceTree = "<group>";
 		};
-		72886FCF0CC7E67C00733960 /* Audio Media Controller */ = {
-			isa = PBXGroup;
-			children = (
-				72886F940CC7E5FB00733960 /* AudioViewController.h */,
-				72886F950CC7E5FB00733960 /* AudioViewController.m */,
-			);
-			name = "Audio Media Controller";
-			sourceTree = "<group>";
-		};
 		72886FD00CC7E68F00733960 /* Image Media Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -1799,15 +1782,6 @@
 				72D2A4340CD82F0B0065F4EC /* PDExportableImageView.m */,
 			);
 			name = "Image Media Controller";
-			sourceTree = "<group>";
-		};
-		72886FD10CC7E69E00733960 /* Movie Media Controller */ = {
-			isa = PBXGroup;
-			children = (
-				72886F980CC7E5FB00733960 /* MovieViewController.h */,
-				72886F990CC7E5FB00733960 /* MovieViewController.m */,
-			);
-			name = "Movie Media Controller";
 			sourceTree = "<group>";
 		};
 		72886FD20CC7E6AA00733960 /* Web Content Media Controller */ = {
@@ -2636,9 +2610,7 @@
 				72886F790CC7E51700733960 /* QTInstallController.m in Sources */,
 				72886FA20CC7E5FB00733960 /* JournlerMediaViewer.m in Sources */,
 				72886FA30CC7E5FB00733960 /* JournlerMediaContentController.m in Sources */,
-				72886FA40CC7E5FB00733960 /* AudioViewController.m in Sources */,
 				72886FA50CC7E5FB00733960 /* ImageViewController.m in Sources */,
-				72886FA60CC7E5FB00733960 /* MovieViewController.m in Sources */,
 				72886FA70CC7E5FB00733960 /* WebViewController.m in Sources */,
 				72886FA80CC7E5FB00733960 /* MailMessageController.m in Sources */,
 				72886FA90CC7E5FB00733960 /* WordDocumentController.m in Sources */,

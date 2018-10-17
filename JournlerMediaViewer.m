@@ -35,8 +35,8 @@
 #import "JournlerMediaViewer.h"
 #import "JournlerMediaContentController.h"
 
-#import "AudioViewController.h"
-#import "MovieViewController.h"
+//X #import "AudioViewController.h"
+//X #import "MovieViewController.h"
 #import "WebViewController.h"
 #import "PDPDFViewController.h"
 #import "ImageViewController.h"

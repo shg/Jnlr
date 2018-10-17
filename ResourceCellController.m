@@ -56,9 +56,9 @@
 #import "JournlerMediaContentController.h"
 
 #import "AddressRecordController.h"
-#import "AudioViewController.h"
+//X #import "AudioViewController.h"
 #import "ImageViewController.h"
-#import "MovieViewController.h"
+//X #import "MovieViewController.h"
 #import "PDPDFViewController.h"
 #import "WebViewController.h"
 #import "MailMessageController.h"
