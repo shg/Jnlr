@@ -478,7 +478,7 @@ Additional Columns:
 //#warning recognize recorded movies as audio files, or at least display them so
 //#warning when opening an entry into a new tab, the currently selected folder is not saved
 
-extern void QTSetProcessProperty(UInt32 type, UInt32 creator, size_t size, uint8_t *data);
+//extern void QTSetProcessProperty(UInt32 type, UInt32 creator, size_t size, uint8_t *data);
 
 @implementation JournlerApplicationDelegate
 
@@ -658,7 +658,7 @@ extern void QTSetProcessProperty(UInt32 type, UInt32 creator, size_t size, uint8
 	SKLoadDefaultExtractorPlugIns();
 	
 	char *fairplay = "FairPlay";
-	QTSetProcessProperty('dmmc', 'play', strlen(fairplay), (uint8_t *)fairplay);
+//	QTSetProcessProperty('dmmc', 'play', strlen(fairplay), (uint8_t *)fairplay);
 
 	// install journler as the provider of certain services
 	[self installPDFService];
