@@ -1426,8 +1426,8 @@
 - (IBAction) sendEntryToiWeb:(id)sender
 {
 	static NSString *imageHandlerName = @"send_images";
-	static NSString *audioHandlerName = @"send_podcast";
-	static NSString *videoHandlerName = @"send_movie";
+//	static NSString *audioHandlerName = @"send_podcast";
+//	static NSString *videoHandlerName = @"send_movie";
 	
 	NSDictionary *errors = [NSDictionary dictionary];
 	
@@ -1577,37 +1577,37 @@
 				[scriptAlert showWindow:self];
 			}
 		}
-		else if ( castType == 2 )
-		{
-			if ( ![script executeHandler:audioHandlerName error:&errors withParameters: castPath, nil] 
-				&& [[errors objectForKey:NSAppleScriptErrorNumber] integerValue] != kScriptWasCancelledError )
-			{
-				NSLog(@"%s - unable to execute image handler, error %@", __PRETTY_FUNCTION__, errors);
-				
-				id theSource = [script richTextSource];
-				if ( theSource == nil ) theSource = [script source];
-				AppleScriptAlert *scriptAlert = [[[AppleScriptAlert alloc] initWithSource:theSource error:errors] autorelease];
-			
-				NSBeep();
-				[scriptAlert showWindow:self];
-			}
-		}
-		else if ( castType == 3 )
-		{
-			NSString *castTitle = [[entries objectAtIndex:i] valueForKey:@"title"];
-			if ( ![script executeHandler:videoHandlerName error:&errors withParameters: castPath, castTitle, nil]
-				&& [[errors objectForKey:NSAppleScriptErrorNumber] integerValue] != kScriptWasCancelledError )
-			{
-				NSLog(@"%s - unable to execute image handler, error %@", __PRETTY_FUNCTION__, errors);
-				
-				id theSource = [script richTextSource];
-				if ( theSource == nil ) theSource = [script source];
-				AppleScriptAlert *scriptAlert = [[[AppleScriptAlert alloc] initWithSource:theSource error:errors] autorelease];
-			
-				NSBeep();
-				[scriptAlert showWindow:self];
-			}
-		}
+//		else if ( castType == 2 )
+//		{
+//			if ( ![script executeHandler:audioHandlerName error:&errors withParameters: castPath, nil]
+//				&& [[errors objectForKey:NSAppleScriptErrorNumber] integerValue] != kScriptWasCancelledError )
+//			{
+//				NSLog(@"%s - unable to execute image handler, error %@", __PRETTY_FUNCTION__, errors);
+//				
+//				id theSource = [script richTextSource];
+//				if ( theSource == nil ) theSource = [script source];
+//				AppleScriptAlert *scriptAlert = [[[AppleScriptAlert alloc] initWithSource:theSource error:errors] autorelease];
+//			
+//				NSBeep();
+//				[scriptAlert showWindow:self];
+//			}
+//		}
+//		else if ( castType == 3 )
+//		{
+//			NSString *castTitle = [[entries objectAtIndex:i] valueForKey:@"title"];
+//			if ( ![script executeHandler:videoHandlerName error:&errors withParameters: castPath, castTitle, nil]
+//				&& [[errors objectForKey:NSAppleScriptErrorNumber] integerValue] != kScriptWasCancelledError )
+//			{
+//				NSLog(@"%s - unable to execute image handler, error %@", __PRETTY_FUNCTION__, errors);
+//				
+//				id theSource = [script richTextSource];
+//				if ( theSource == nil ) theSource = [script source];
+//				AppleScriptAlert *scriptAlert = [[[AppleScriptAlert alloc] initWithSource:theSource error:errors] autorelease];
+//			
+//				NSBeep();
+//				[scriptAlert showWindow:self];
+//			}
+//		}
 	}
 }
 

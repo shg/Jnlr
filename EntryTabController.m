@@ -65,9 +65,9 @@
 
 
 typedef enum {
-	kResourceRequestAudio = 0,
+//	kResourceRequestAudio = 0,
 	kResourceRequestPhoto = 1,
-	kResourceRequestMovie = 2,
+//	kResourceRequestMovie = 2,
 	kResourceRequestBookmark = 3,
 	kResourceRequestContact = 4,
 	kResourceRequestFile = 5,

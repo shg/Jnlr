@@ -251,10 +251,10 @@ static NSString *kAndSeparatorString = @" && ";
 			[resourcesTypePop selectItemWithTag:PDResourceTypeWebArchive];
 		else if ( [condition rangeOfString:(NSString*)kUTTypeImage].location != NSNotFound )
 			[resourcesTypePop selectItemWithTag:PDResourceTypeImage];
-		else if ( [condition rangeOfString:(NSString*)kUTTypeAudio].location != NSNotFound )
-			[resourcesTypePop selectItemWithTag:PDResourceTypeAudio];
-		else if ( [condition rangeOfString:(NSString*)@"public.movie"].location != NSNotFound )
-			[resourcesTypePop selectItemWithTag:PDResourceTypeVideo];
+//		else if ( [condition rangeOfString:(NSString*)kUTTypeAudio].location != NSNotFound )
+//			[resourcesTypePop selectItemWithTag:PDResourceTypeAudio];
+//		else if ( [condition rangeOfString:(NSString*)@"public.movie"].location != NSNotFound )
+//			[resourcesTypePop selectItemWithTag:PDResourceTypeVideo];
 		else if ( [condition rangeOfString:(NSString*)kUTTypePDF].location != NSNotFound )
 			[resourcesTypePop selectItemWithTag:PDResourceTypePDFDocument];
 		else if ( [condition rangeOfString:@"com.journler.abperson"].location != NSNotFound )
