@@ -1373,7 +1373,7 @@
 	NSEnumerator *contentsEnumerator;
 	
 	// LOAD THE BLOGS
-	contentsEnumerator = [[fm directoryContentsAtPath:[self blogsPath]] objectEnumerator];
+	contentsEnumerator = [[fm contentsOfDirectoryAtPath:[self blogsPath] error:NULL] objectEnumerator];
 
 	c = 0;
 	while ( pname = [contentsEnumerator nextObject] ) 
@@ -1426,7 +1426,7 @@
 	[self setBlogs:tempBlogs];
 	
 	// LOAD THE ENTRIES
-	contentsEnumerator = [[fm directoryContentsAtPath:[self entriesPath]] objectEnumerator];
+	contentsEnumerator = [[fm contentsOfDirectoryAtPath:[self entriesPath] error:NULL] objectEnumerator];
 	
 	c = 0;
 	while ( pname = [contentsEnumerator nextObject] ) 
@@ -1466,7 +1466,7 @@
 			JournlerEntry *readEntry = nil;
 			
 			NSString *propertiesPath;
-			NSArray *propertiesPossibilities = [[fm directoryContentsAtPath:[[self entriesPath] stringByAppendingPathComponent:pname]] 
+			NSArray *propertiesPossibilities = [[fm contentsOfDirectoryAtPath:[[self entriesPath] stringByAppendingPathComponent:pname] error:NULL]
 					pathsMatchingExtensions:[NSArray arrayWithObject:@"jobj"]];
 					
 			if ( [propertiesPossibilities count] == 1 )
@@ -1522,7 +1522,7 @@
 	
 	// handle collections for 1.2 - the root node
 	// ----------------------------------------------------------	
-	contentsEnumerator = [[fm directoryContentsAtPath:[self collectionsPath]] objectEnumerator];
+	contentsEnumerator = [[fm contentsOfDirectoryAtPath:[self collectionsPath] error:NULL] objectEnumerator];
 	
 	c = 0;
 	while ( pname = [contentsEnumerator nextObject] ) 
@@ -1563,7 +1563,7 @@
 	// LOAD THE RESOURCES
 	if ( [[self version] integerValue] >= 250 )
 	{
-		contentsEnumerator = [[fm directoryContentsAtPath:[self resourcesPath]] objectEnumerator];
+		contentsEnumerator = [[fm contentsOfDirectoryAtPath:[self resourcesPath] error:NULL] objectEnumerator];
 	
 		c = 0;
 		while ( pname = [contentsEnumerator nextObject] ) 
@@ -2272,7 +2272,7 @@
 	packagePath = filepath;
 	
 	//archivePath = [packagePath stringByAppendingPathComponent:PDEntryPackageEntryContents];
-	NSArray *archivePossibilities = [[[NSFileManager defaultManager] directoryContentsAtPath:packagePath] 
+	NSArray *archivePossibilities = [[[NSFileManager defaultManager] contentsOfDirectoryAtPath:packagePath error:NULL]
 			pathsMatchingExtensions:[NSArray arrayWithObject:@"jobj"]];
 	if ( [archivePossibilities count] == 1 )
 		archivePath = [packagePath stringByAppendingPathComponent:[archivePossibilities objectAtIndex:0]];
@@ -3013,7 +3013,7 @@ bail:
 	packagePath = [entry packagePath];
 	
 	// #warning what if the contents aren't there because of an error or something?
-	NSArray *propertiesPossibilities = [[fm directoryContentsAtPath:packagePath] pathsMatchingExtensions:[NSArray arrayWithObject:@"jobj"]];
+	NSArray *propertiesPossibilities = [[fm contentsOfDirectoryAtPath:packagePath error:NULL] pathsMatchingExtensions:[NSArray arrayWithObject:@"jobj"]];
 	if ( [propertiesPossibilities count] == 1 )
 		propertiesPath = [packagePath stringByAppendingPathComponent:[propertiesPossibilities objectAtIndex:0]];
 	else
@@ -3053,7 +3053,7 @@ bail:
 		#warning file manager ignores case?
 		NSString *renamedPropertiesFilename = [NSString stringWithFormat:@"%@.jobj", [entry pathSafeTitle]];
 		if ( ![[propertiesPath lastPathComponent] isEqualToString:renamedPropertiesFilename] )
-			[fm movePath:propertiesPath toPath:[packagePath stringByAppendingPathComponent:renamedPropertiesFilename] handler:self];
+			[fm moveItemAtPath:propertiesPath toPath:[packagePath stringByAppendingPathComponent:renamedPropertiesFilename] error:NULL];
 	}
 	
 	// ensure that a directory exists for the entry text
@@ -3357,7 +3357,7 @@ bail:
 	[_rootCollection removeEntry:anEntry considerChildren:YES];
 	
 	// physically delete the file
-	success = ( [[NSFileManager defaultManager] removeFileAtPath:full_path handler:self] );
+	success = ( [[NSFileManager defaultManager] removeItemAtPath:full_path error:NULL] );
 
 	// mark the entry as deleted in case its being held elsewhere
 	[anEntry setValue:BooleanNumber(YES) forKey:@"deleted"];
@@ -3419,14 +3419,14 @@ bail:
 	{
 		// if the resource is file based, delete it
 		if ( [[NSFileManager defaultManager] fileExistsAtPath:[aResource path]] 
-			&& ![[NSFileManager defaultManager] removeFileAtPath:[aResource path] handler:self] )
+			&& ![[NSFileManager defaultManager] removeItemAtPath:[aResource path] error:NULL] )
 		{
 			success = NO;
 			NSLog(@"%s - problem removing file based resource at path %@", __PRETTY_FUNCTION__, [aResource path]);
 		}
 		
 		if ( [[NSFileManager defaultManager] fileExistsAtPath:[aResource _pathForFileThumbnail]] 
-				&& ![[NSFileManager defaultManager] removeFileAtPath:[aResource _pathForFileThumbnail] handler:self] )
+				&& ![[NSFileManager defaultManager] removeItemAtPath:[aResource _pathForFileThumbnail] error:NULL] )
 		{
 			NSLog(@"%s - problem removing icon for file based resource at path %@", __PRETTY_FUNCTION__, [aResource path]);
 		}
@@ -3474,7 +3474,7 @@ bail:
 	[NSString stringWithFormat:@"%@.jresource", [aResource tagID]]];
 	
 	if ( [[NSFileManager defaultManager] fileExistsAtPath:journalResourcePath] 
-			&& ![[NSFileManager defaultManager] removeFileAtPath:journalResourcePath handler:self] )
+			&& ![[NSFileManager defaultManager] removeItemAtPath:journalResourcePath error:NULL] )
 		NSLog(@"%s - problem deleting the physical representation of the resource at %@", __PRETTY_FUNCTION__, journalResourcePath);
 	
 	// mark the entry as deleted
@@ -3537,7 +3537,7 @@ bail:
 	
 	// remove the collection from the computer
 	if ( fullPath )
-		success = [[NSFileManager defaultManager] removeFileAtPath:fullPath handler:self];
+		success = [[NSFileManager defaultManager] removeItemAtPath:fullPath error:NULL];
 	else
 		success = NO;
 	
@@ -3595,7 +3595,7 @@ bail:
 			[NSString stringWithFormat:@"%@.jblog", [aBlog valueForKey:@"tagID"]]];
 
 	if ( [[NSFileManager defaultManager] fileExistsAtPath:path] ) {
-		if ( ![[NSFileManager defaultManager] removeFileAtPath:path handler:self] )
+		if ( ![[NSFileManager defaultManager] removeItemAtPath:path error:NULL] )
 			NSLog(@"%s - trouble removing blog at path %@", __PRETTY_FUNCTION__, path);
 	}
 	
@@ -3881,11 +3881,11 @@ bail:
 							NSLog(@"%s - moving resource %@ from %@ to %@", __PRETTY_FUNCTION__, [aResource tagID], oldPath, newPath);
 							#endif
 							
-							if ( [[NSFileManager defaultManager] movePath:oldPath toPath:newPath handler:self] )
+							if ( [[NSFileManager defaultManager] moveItemAtPath:oldPath toPath:newPath error:NULL] )
 							{
 								// remove the icon representation
 								if ( [[NSFileManager defaultManager] fileExistsAtPath:[aResource _pathForFileThumbnail]] )
-									[[NSFileManager defaultManager] removeFileAtPath:[aResource _pathForFileThumbnail] handler:self];
+									[[NSFileManager defaultManager] removeItemAtPath:[aResource _pathForFileThumbnail] error:NULL];
 								
 								// re-parent the resource
 								[aResource setEntry:newParent];

@@ -286,7 +286,7 @@
 	
     //DIRECTORY_ENUMERATOR
 	NSString *completePath, *aPath;
-	NSEnumerator *enumerator = [[fm directoryContentsAtPath:path] objectEnumerator];
+	NSEnumerator *enumerator = [[fm contentsOfDirectoryAtPath:path error:NULL] objectEnumerator];
 	
 	while ( aPath = [enumerator nextObject] )
 	{

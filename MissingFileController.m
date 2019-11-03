@@ -168,7 +168,7 @@
 		// delete the current resource file
 		if ( [fm fileExistsAtPath:resourcePath] )
 		{
-			if ( ![fm removeFileAtPath:resourcePath handler:self] )
+			if ( ![fm removeItemAtPath:resourcePath error:NULL] )
 			{
 				success = NO;
 				NSLog(@"%s - unable to delete file at path %@", __PRETTY_FUNCTION__, resourcePath);
@@ -183,7 +183,7 @@
 		// delete the current resource file
 		if ( [fm fileExistsAtPath:thumbnailPath] )
 		{
-			if ( ![fm removeFileAtPath:thumbnailPath handler:self] )
+			if ( ![fm removeItemAtPath:thumbnailPath error:NULL] )
 			{
 				success = NO;
 				NSLog(@"%s - unable to delete thumnail at path %@", __PRETTY_FUNCTION__, thumbnailPath);

@@ -948,7 +948,7 @@ typedef enum {
 				return;
 			}
 			
-			if ( ![[NSFileManager defaultManager] removeFileAtPath:encryptedFilename handler:self] )
+			if ( ![[NSFileManager defaultManager] removeItemAtPath:encryptedFilename error:NULL] )
 			{
 				NSBeep();
 				[[NSAlert passfileDeletionError] runModal];

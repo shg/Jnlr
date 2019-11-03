@@ -1544,7 +1544,7 @@ static NSArray *JObjectValues()
 		else if ( operation == kNewResourceForceMove )
 		{
 			// actually move the file
-			if ( ![fm movePath:path toPath:fullLocalPath handler:self] )
+			if ( ![fm moveItemAtPath:path toPath:fullLocalPath error:NULL] )
 			 {
 				NSLog(@"%s - unable to move %@ to %@", __PRETTY_FUNCTION__, path, fullLocalPath);
 				return nil;
@@ -1986,7 +1986,7 @@ static NSArray *JObjectValues()
 	
 	//
 	// grab an array of the contents
-	contents = [[NSFileManager defaultManager] directoryContentsAtPath:resourcesPath];
+	contents = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:resourcesPath error:NULL];
 	pathURLs = [[NSMutableArray alloc] initWithCapacity:[contents count]];
 	
 	//

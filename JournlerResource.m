@@ -769,7 +769,7 @@ bail:
 {
 	// delete the thumbnail
 	NSString *thumbnailPath = [self _pathForFileThumbnail];
-	if ( [[NSFileManager defaultManager] fileExistsAtPath:thumbnailPath] && ![[NSFileManager defaultManager] removeFileAtPath:thumbnailPath handler:self] )
+	if ( [[NSFileManager defaultManager] fileExistsAtPath:thumbnailPath] && ![[NSFileManager defaultManager] removeItemAtPath:thumbnailPath error:NULL] )
 		NSLog(@"%s - unable to remove thumbnail at path %@", __PRETTY_FUNCTION__, thumbnailPath);
 	
 	// reload the icon

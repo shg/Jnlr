@@ -458,7 +458,7 @@ static NSString *kJournlerABFileExtension = @"jaduid";
 			}
 			
 			// delete the old entry no matter what
-			if ( ![fm removeFileAtPath:entryPath handler:self] ) 
+			if ( ![fm removeItemAtPath:entryPath error:NULL] )
 			{
 				// error deleting the old file
 				[log117 appendString:[NSString stringWithFormat:@"** Unable to delete old format entry at %@ **\n", entryPath]];
@@ -799,7 +799,7 @@ static NSString *kJournlerABFileExtension = @"jaduid";
 	
 	// remove the old entries index
 	if ( [[NSFileManager defaultManager] fileExistsAtPath:[[journal journalPath] stringByAppendingPathComponent:@"Entries Index"]] )
-		[[NSFileManager defaultManager] removeFileAtPath:[[journal journalPath] stringByAppendingPathComponent:@"Entries Index"] handler:self];
+		[[NSFileManager defaultManager] removeItemAtPath:[[journal journalPath] stringByAppendingPathComponent:@"Entries Index"] error:NULL];
 	
 	endMessage = NSLocalizedStringFromTable(@"upgrade complete", @"UpgradeController", @"");
 	[progressText210 setStringValue:endMessage];
@@ -1189,7 +1189,7 @@ bail:
 		[anEntry perform210Maintenance];
 		
 		// rename the package
-		if ( ![[NSFileManager defaultManager] movePath:[anEntry pathToPackage] toPath:[anEntry packagePath] handler:self] )
+		if ( ![[NSFileManager defaultManager] moveItemAtPath:[anEntry pathToPackage] toPath:[anEntry packagePath] error:NULL] )
 		{
 			completeSuccess = NO;
 			[log210 appendFormat:@"****\n%s - unable to rename entry %@\n****\n", __PRETTY_FUNCTION__, [anEntry valueForKey:@"tagID"]];
@@ -1206,7 +1206,7 @@ bail:
 		// delete the encrypted marking
 		NSString *encryptedPath = [[anEntry packagePath] stringByAppendingPathComponent:PDEntryPackageEncrypted];
 		if ( [[NSFileManager defaultManager] fileExistsAtPath:encryptedPath] )
-			[fm removeFileAtPath:encryptedPath handler:self];
+			[fm removeItemAtPath:encryptedPath error:NULL];
 		
 		// save the entry using the new method to preserve packaging
 		if ( ![_journal saveEntry:anEntry] )
@@ -1580,8 +1580,8 @@ bail:
 						
 						NSString *abPath = [[targetEntry fileURLForResourceURL:theURL] path];
 						if ( abPath != nil && [[NSFileManager defaultManager] fileExistsAtPath:abPath] )
-							[[NSFileManager defaultManager] removeFileAtPath:[[targetEntry fileURLForResourceURL:theURL] path] 
-									handler:self];
+							[[NSFileManager defaultManager] removeItemAtPath:[[targetEntry fileURLForResourceURL:theURL] path]
+									error:NULL];
 							
 						break;
 					}
@@ -2057,7 +2057,7 @@ bail:
 				else
 				{
 					// 10.4 fork
-					success = [fileManager movePath:journalPath toPath:journalInDocumentsFolder handler:self];
+					success = [fileManager moveItemAtPath:journalPath toPath:journalInDocumentsFolder error:NULL];
 				}
 				
 				
