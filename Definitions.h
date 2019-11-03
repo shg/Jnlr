@@ -51,7 +51,7 @@
 #define BeepAndBail() NSBeep(); return
 #define BeepAndBoolBail(x) NSBeep(); return x
 
-#define TempDirectory() ( NSTemporaryDirectory() != nil ? NSTemporaryDirectory() : [NSString stringWithString:@"/tmp"] )
+#define TempDirectory() ( NSTemporaryDirectory() != nil ? NSTemporaryDirectory() : @"/tmp" )
 
 #define WebURLsWithTitlesPboardType @"WebURLsWithTitlesPboardType"
 #define kMVMessageContentsPboardType @"MVMessageContentsPboardType"

@@ -1389,23 +1389,23 @@ static NSString *kAndSeparatorString = @" && ";
 		case PDConditionBlogged:
 			
 			// much simpler
-			return [NSString stringWithString:@"blogged == YES"];
+			return @"blogged == YES";
 			break;
 			
 		case PDConditionNotBlogged:
 		
-			return [NSString stringWithString:@"blogged == NO"];
+			return @"blogged == NO";
 			break;
 			
 		case PDConditionFlagged:
 			
 			// much simpler
-			return [NSString stringWithString:@"flaggedBool == YES"];
+			return @"flaggedBool == YES";
 			break;
 		
 		case PDConditionNotFlagged:
 			
-			return [NSString stringWithString:@"flaggedBool == NO"];
+			return @"flaggedBool == NO";
 			break;
 		
 		case PDConditionLabel:
@@ -1429,22 +1429,22 @@ static NSString *kAndSeparatorString = @" && ";
 			switch ( [[markingOperationPop selectedItem] tag] ) {
 				
 				case PDConditionMarkFlagged:
-					returnString = [NSString stringWithString:@"markedInt == 1"];
+					returnString = @"markedInt == 1";
 					break;
 				case PDConditionMarkNotFlagged:
-					returnString = [NSString stringWithString:@"markedInt != 1"];
+					returnString = @"markedInt != 1";
 					break;
 				case PDConditionMarkChecked:
-					returnString = [NSString stringWithString:@"markedInt == 2"];
+					returnString = @"markedInt == 2";
 					break;
 				case PDConditionMarkNotChecked:
-					returnString = [NSString stringWithString:@"markedInt != 2"];
+					returnString = @"markedInt != 2";
 					break;
 				case PDConditionMarkFlaggedOrChecked:
-					returnString = [NSString stringWithString:@"markedInt == 1 OR markedInt == 2"];
+					returnString = @"markedInt == 1 OR markedInt == 2";
 					break;
 				case PDConditionMarkNotFlaggedNorChecked:
-					returnString = [NSString stringWithString:@"markedInt == 0"];
+					returnString = @"markedInt == 0";
 					break;
 				
 			}
