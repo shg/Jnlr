@@ -663,7 +663,6 @@ static NSString *kJournlerABFileExtension = @"jaduid";
 	[ud setFont:[NSFont controlContentFontOfSize:11]  forKey:@"ReferencesTableFont"];
 	
 	[ud setInteger:0 forKey:@"DefaultSnapshotFormat"];
-	[ud setInteger:0 forKey:@"DefaultAudioCodec"];
 	
 	[ud removeObjectForKey:@"Lockout Enabled"];
 	
@@ -732,7 +731,6 @@ static NSString *kJournlerABFileExtension = @"jaduid";
 	[ud setObject:[NSNumber numberWithInteger:0] forKey:@"OpenMediaInto"];
 	[ud setObject:[NSNumber numberWithInteger:0] forKey:@"MediaPolicyFiles"];
 	[ud setObject:[NSNumber numberWithInteger:0] forKey:@"MediaPolicyDirectories"];
-	[ud setObject:[NSNumber numberWithInteger:0] forKey:@"DefaultVideoCodec"];
 	[ud setObject:[NSNumber numberWithInteger:0] forKey:@"CalendarStartDay"];
 	[ud setObject:[NSNumber numberWithInteger:0] forKey:@"LaunchToOption"];
 	[ud setObject:[NSNumber numberWithInteger:200] forKey:@"EmbeddedImageMaxWidth"];
@@ -752,7 +750,6 @@ static NSString *kJournlerABFileExtension = @"jaduid";
 	[ud setObject:@"Purple" forKey:@"LabelName6"];
 	[ud setObject:@"Gray" forKey:@"LabelName7"];
 	
-	[ud setInteger:0 forKey:@"AudioRecordingFormat"];
 	[ud setInteger:0 forKey:@"ScriptsInstallationDirectory"];
 	
 	// Wrap things up
@@ -968,8 +965,8 @@ bail:
 	
 	*/
 	
-	BOOL success = [SproutedLAMEInstaller simplyInstallLameComponents];
-	if ( !success ) [[NSAlert lameInstallFailure] runModal];
+	//X BOOL success = [SproutedLAMEInstaller simplyInstallLameComponents];
+	//X if ( !success ) [[NSAlert lameInstallFailure] runModal];
 }
 
 - (id) objectForURIRepresentation:(NSURL*)aURL
@@ -1385,7 +1382,6 @@ bail:
 	[ud setColor:[NSColor colorWithCalibratedWhite:0.00 alpha:1.0] forKey:@"HeaderTextColor"];
 	
 	[ud setInteger:0 forKey:@"DefaultSnapshotFormat"];
-	[ud setInteger:0 forKey:@"DefaultAudioCodec"];
 	[ud setObject:[NSNumber numberWithBool:NO] forKey:@"CommandWClosesWindow"];
 	
 	[ud removeObjectForKey:@"DateTimeFormat"];
@@ -1417,7 +1413,6 @@ bail:
 	[ud setObject:@"Purple" forKey:@"LabelName6"];
 	[ud setObject:@"Gray" forKey:@"LabelName7"];
 
-	[ud setInteger:0 forKey:@"AudioRecordingFormat"];
 	[ud setInteger:0 forKey:@"ScriptsInstallationDirectory"];
 	
 	[log210 appendFormat:@"%s - Completed 2.0 to 2.5 Upgrade\n\n", __PRETTY_FUNCTION__];

@@ -524,8 +524,6 @@ static NSString	*kEmailToolbarItem				= @"kEmailToolbarItem";
 static NSString	*kiWebToolbarItem				= @"kiWebToolbarItem";
 static NSString	*kiPodToolbarItem				= @"kiPodToolbarItem";
 
-static NSString	*kRecordAudioToolbarItem		= @"kRecordAudioToolbarItem";
-static NSString	*kRecordVideoToolbarItem		= @"kRecordVideoToolbarItem";
 static NSString *kRecordSnapshotToolarItem		= @"kRecordSnapshotToolarItem";
 
 static NSString	*kHeaderToolbarItem				= @"kHeaderToolbarItem";
@@ -809,29 +807,7 @@ static NSString *kLexiconToolbarItem = @"kLexiconToolbarItem";
 	}
 	
 	
-	else if ( [itemIdent isEqual: kRecordAudioToolbarItem] ) 
-	{
-		[toolbarItem setLabel: NSLocalizedStringFromTable(@"record label", @"Toolbar", @"")];
-		[toolbarItem setPaletteLabel:NSLocalizedStringFromTable(@"record label", @"Toolbar", @"")];
-		
-		[toolbarItem setToolTip: NSLocalizedStringFromTable(@"record tip", @"Toolbar", @"")];
-		[toolbarItem setImage: [NSImage imageByReferencingImageNamed: @"ToolbarItemRecordAudio.png"]];
-		
-		[toolbarItem setTarget: nil];
-		[toolbarItem setAction: @selector(recordAudio:)];
-	}
-	else if ([itemIdent isEqual:kRecordVideoToolbarItem]) 
-	{
-		[toolbarItem setLabel: NSLocalizedStringFromTable(@"record video label", @"Toolbar", @"")];
-		[toolbarItem setPaletteLabel: NSLocalizedStringFromTable(@"record video label", @"Toolbar", @"")];
-		
-		[toolbarItem setToolTip: NSLocalizedStringFromTable(@"record video tip", @"Toolbar", @"")];
-		[toolbarItem setImage: [NSImage imageByReferencingImageNamed: @"ToolbarItemRecordVideo.png"]];
-		
-		[toolbarItem setTarget: nil];
-		[toolbarItem setAction: @selector(recordVideo:)];
-	}
-	else if ([itemIdent isEqual:kRecordSnapshotToolarItem]) 
+	else if ([itemIdent isEqual:kRecordSnapshotToolarItem])
 	{
 		[toolbarItem setLabel: NSLocalizedStringFromTable(@"snapshot label", @"Toolbar", @"")];
 		[toolbarItem setPaletteLabel: NSLocalizedStringFromTable(@"snapshot label", @"Toolbar", @"")];
@@ -1039,7 +1015,7 @@ static NSString *kLexiconToolbarItem = @"kLexiconToolbarItem";
 	return [NSArray arrayWithObjects:
 			kNavToolbarItem, NSToolbarSeparatorItemIdentifier, 
 			NSToolbarShowColorsItemIdentifier, NSToolbarShowFontsItemIdentifier, NSToolbarSeparatorItemIdentifier,
-			kRecordAudioToolbarItem, kRecordVideoToolbarItem, kRecordSnapshotToolarItem, NSToolbarFlexibleSpaceItemIdentifier, 
+			nil, nil, kRecordSnapshotToolarItem, NSToolbarFlexibleSpaceItemIdentifier,
 			kIMediaToolbarItem, nil];
 }
 
@@ -1051,7 +1027,7 @@ static NSString *kLexiconToolbarItem = @"kLexiconToolbarItem";
 			kSubscriptToolbarItem, kSuperscriptToolbarItem, kHighlightToolbarItem, kBlockQuoteToolbarItem,
 			kInsertDateTimeToolbarItem, kInsertCheckoxToolbarItem, kInsertTableToolbarItem, kInsertLinkToolbarItem, kInsertListToolbarItem,	
 			kExportToolbarItem, NSToolbarPrintItemIdentifier, kEmailToolbarItem, kiWebToolbarItem, kiPodToolbarItem, kBlogToolbarItem,
-			kRecordAudioToolbarItem, kRecordVideoToolbarItem, kRecordSnapshotToolarItem,
+			nil, nil, kRecordSnapshotToolarItem,
 			kEntryInfoToolbarItem, kFlagEntryToolbarItem, kHeaderToolbarItem,
 			kIMediaToolbarItem, /*kCorrespondenceToolbarItem,*/ kAddressBookToolarItem, kLexiconToolbarItem,
 			NSToolbarSpaceItemIdentifier, NSToolbarFlexibleSpaceItemIdentifier, 

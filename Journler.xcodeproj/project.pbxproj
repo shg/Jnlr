@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		721DE49D0DD2AC5700AB7438 /* SproutedAVI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 721DE49C0DD2AC5700AB7438 /* SproutedAVI.framework */; };
-		721DE49F0DD2AC5A00AB7438 /* SproutedAVI.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 721DE49C0DD2AC5700AB7438 /* SproutedAVI.framework */; };
 		726EC0770CCC512D008AE420 /* SmallEntryIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 726EC0570CCC512C008AE420 /* SmallEntryIcon.png */; };
 		726EC0780CCC512D008AE420 /* SmallAltDisclosure.tif in Resources */ = {isa = PBXBuildFile; fileRef = 726EC0580CCC512C008AE420 /* SmallAltDisclosure.tif */; };
 		726EC0790CCC512D008AE420 /* SmallDisclosure.tif in Resources */ = {isa = PBXBuildFile; fileRef = 726EC0590CCC512C008AE420 /* SmallDisclosure.tif */; };
@@ -119,11 +117,6 @@
 		728868D70CC686E000733960 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728868CB0CC686E000733960 /* Security.framework */; };
 		728868D90CC686E000733960 /* vecLib.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728868CD0CC686E000733960 /* vecLib.framework */; };
 		728868DA0CC686E000733960 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728868CE0CC686E000733960 /* WebKit.framework */; };
-		728868DB0CC686E000733960 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728868CF0CC686E000733960 /* AudioToolbox.framework */; };
-		728868DC0CC686E000733960 /* AudioUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728868D00CC686E000733960 /* AudioUnit.framework */; };
-		728868DD0CC686E000733960 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728868D10CC686E000733960 /* CoreAudio.framework */; };
-		728868DE0CC686E000733960 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728868D20CC686E000733960 /* QTKit.framework */; };
-		728868DF0CC686E000733960 /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 728868D30CC686E000733960 /* QuickTime.framework */; };
 		72886D000CC7D27800733960 /* JournlerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 72886CE90CC7D27800733960 /* JournlerObject.m */; };
 		72886D010CC7D27800733960 /* JournlerJournal.m in Sources */ = {isa = PBXBuildFile; fileRef = 72886CEB0CC7D27800733960 /* JournlerJournal.m */; };
 		72886D020CC7D27800733960 /* JournlerCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 72886CED0CC7D27800733960 /* JournlerCollection.m */; };
@@ -244,9 +237,7 @@
 		72886F790CC7E51700733960 /* QTInstallController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72886F740CC7E51700733960 /* QTInstallController.m */; };
 		72886FA20CC7E5FB00733960 /* JournlerMediaViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = 72886F910CC7E5FB00733960 /* JournlerMediaViewer.m */; };
 		72886FA30CC7E5FB00733960 /* JournlerMediaContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72886F930CC7E5FB00733960 /* JournlerMediaContentController.m */; };
-		72886FA40CC7E5FB00733960 /* AudioViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72886F950CC7E5FB00733960 /* AudioViewController.m */; };
 		72886FA50CC7E5FB00733960 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72886F970CC7E5FB00733960 /* ImageViewController.m */; };
-		72886FA60CC7E5FB00733960 /* MovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72886F990CC7E5FB00733960 /* MovieViewController.m */; };
 		72886FA70CC7E5FB00733960 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72886F9B0CC7E5FB00733960 /* WebViewController.m */; };
 		72886FA80CC7E5FB00733960 /* MailMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72886F9D0CC7E5FB00733960 /* MailMessageController.m */; };
 		72886FA90CC7E5FB00733960 /* WordDocumentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72886F9F0CC7E5FB00733960 /* WordDocumentController.m */; };
@@ -455,7 +446,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				721DE49F0DD2AC5A00AB7438 /* SproutedAVI.framework in Copy Frameworks */,
 				72976DB313D7C786008FB3EC /* ID3.framework in Copy Frameworks */,
 				7288638D0CC6867700733960 /* SproutedInterface.framework in Copy Frameworks */,
 				728862880CC6864600733960 /* SproutedUtilities.framework in Copy Frameworks */,
@@ -498,7 +488,6 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32CA4F630368D1EE00C91783 /* Journler_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Journler_Prefix.pch; sourceTree = "<group>"; };
-		721DE49C0DD2AC5700AB7438 /* SproutedAVI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SproutedAVI.framework; sourceTree = "<group>"; };
 		7220B855146B206100CBFE76 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		726EC0570CCC512C008AE420 /* SmallEntryIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SmallEntryIcon.png; sourceTree = "<group>"; };
 		726EC0580CCC512C008AE420 /* SmallAltDisclosure.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = SmallAltDisclosure.tif; sourceTree = "<group>"; };
@@ -594,7 +583,6 @@
 		7284015F0CE95F5700B17296 /* ToolbarItemBlog.tiff */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; path = ToolbarItemBlog.tiff; sourceTree = "<group>"; };
 		7284019C0CE97F8800B17296 /* JournlerWeblogInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerWeblogInterface.h; sourceTree = "<group>"; };
 		7284019D0CE97F8800B17296 /* JournlerWeblogInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournlerWeblogInterface.m; sourceTree = "<group>"; };
-		728861840CC6864000733960 /* iMediaBrowser.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = iMediaBrowser.framework; sourceTree = "<group>"; };
 		728861850CC6864000733960 /* Pantomime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Pantomime.framework; sourceTree = "<group>"; };
 		728861860CC6864000733960 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		728861870CC6864000733960 /* SproutedInterface.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SproutedInterface.framework; sourceTree = "<group>"; };
@@ -610,11 +598,6 @@
 		728868CC0CC686E000733960 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = /System/Library/Frameworks/SystemConfiguration.framework; sourceTree = "<absolute>"; };
 		728868CD0CC686E000733960 /* vecLib.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = vecLib.framework; path = /System/Library/Frameworks/vecLib.framework; sourceTree = "<absolute>"; };
 		728868CE0CC686E000733960 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
-		728868CF0CC686E000733960 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
-		728868D00CC686E000733960 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = /System/Library/Frameworks/AudioUnit.framework; sourceTree = "<absolute>"; };
-		728868D10CC686E000733960 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = /System/Library/Frameworks/CoreAudio.framework; sourceTree = "<absolute>"; };
-		728868D20CC686E000733960 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
-		728868D30CC686E000733960 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
 		72886CE70CC7D27800733960 /* PDSingletons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDSingletons.h; sourceTree = "<group>"; };
 		72886CE80CC7D27800733960 /* JournlerObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerObject.h; sourceTree = "<group>"; };
 		72886CE90CC7D27800733960 /* JournlerObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournlerObject.m; sourceTree = "<group>"; };
@@ -864,12 +847,8 @@
 		72886F910CC7E5FB00733960 /* JournlerMediaViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournlerMediaViewer.m; sourceTree = "<group>"; };
 		72886F920CC7E5FB00733960 /* JournlerMediaContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JournlerMediaContentController.h; sourceTree = "<group>"; };
 		72886F930CC7E5FB00733960 /* JournlerMediaContentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JournlerMediaContentController.m; sourceTree = "<group>"; };
-		72886F940CC7E5FB00733960 /* AudioViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioViewController.h; sourceTree = "<group>"; };
-		72886F950CC7E5FB00733960 /* AudioViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioViewController.m; sourceTree = "<group>"; };
 		72886F960CC7E5FB00733960 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewController.h; sourceTree = "<group>"; };
 		72886F970CC7E5FB00733960 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewController.m; sourceTree = "<group>"; };
-		72886F980CC7E5FB00733960 /* MovieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieViewController.h; sourceTree = "<group>"; };
-		72886F990CC7E5FB00733960 /* MovieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieViewController.m; sourceTree = "<group>"; };
 		72886F9A0CC7E5FB00733960 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		72886F9B0CC7E5FB00733960 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		72886F9C0CC7E5FB00733960 /* MailMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MailMessageController.h; sourceTree = "<group>"; };
@@ -1117,14 +1096,8 @@
 				728868D70CC686E000733960 /* Security.framework in Frameworks */,
 				728868D90CC686E000733960 /* vecLib.framework in Frameworks */,
 				728868DA0CC686E000733960 /* WebKit.framework in Frameworks */,
-				728868DB0CC686E000733960 /* AudioToolbox.framework in Frameworks */,
-				728868DC0CC686E000733960 /* AudioUnit.framework in Frameworks */,
-				728868DD0CC686E000733960 /* CoreAudio.framework in Frameworks */,
-				728868DE0CC686E000733960 /* QTKit.framework in Frameworks */,
-				728868DF0CC686E000733960 /* QuickTime.framework in Frameworks */,
 				728874670CC8468D00733960 /* Carbon.framework in Frameworks */,
 				729852050CD2611500BB4A53 /* libcrypto.dylib in Frameworks */,
-				721DE49D0DD2AC5700AB7438 /* SproutedAVI.framework in Frameworks */,
 				7296CCE213D7A45D00371D50 /* ID3.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1176,11 +1149,6 @@
 				728868CC0CC686E000733960 /* SystemConfiguration.framework */,
 				728868CD0CC686E000733960 /* vecLib.framework */,
 				728868CE0CC686E000733960 /* WebKit.framework */,
-				728868CF0CC686E000733960 /* AudioToolbox.framework */,
-				728868D00CC686E000733960 /* AudioUnit.framework */,
-				728868D10CC686E000733960 /* CoreAudio.framework */,
-				728868D20CC686E000733960 /* QTKit.framework */,
-				728868D30CC686E000733960 /* QuickTime.framework */,
 				728865D50CC686B600733960 /* ApplicationServices.framework */,
 				728865D60CC686B600733960 /* Quartz.framework */,
 				728865D70CC686B600733960 /* QuartzCore.framework */,
@@ -1338,10 +1306,8 @@
 			isa = PBXGroup;
 			children = (
 				7296CCE113D7A45D00371D50 /* ID3.framework */,
-				721DE49C0DD2AC5700AB7438 /* SproutedAVI.framework */,
 				728861870CC6864000733960 /* SproutedInterface.framework */,
 				728861880CC6864000733960 /* SproutedUtilities.framework */,
-				728861840CC6864000733960 /* iMediaBrowser.framework */,
 				728861850CC6864000733960 /* Pantomime.framework */,
 				728861860CC6864000733960 /* Sparkle.framework */,
 			);
@@ -1759,9 +1725,7 @@
 				72886FD40CC7E6C500733960 /* Text Document Media Controller */,
 				72886FD30CC7E6B600733960 /* Mail Message Media Controller */,
 				72886FD20CC7E6AA00733960 /* Web Content Media Controller */,
-				72886FD10CC7E69E00733960 /* Movie Media Controller */,
 				72886FD00CC7E68F00733960 /* Image Media Controller */,
-				72886FCF0CC7E67C00733960 /* Audio Media Controller */,
 				72886FAC0CC7E61400733960 /* PDFs Media Controller */,
 				72886FAD0CC7E61E00733960 /* Address Book Media Controller */,
 				72D2A2620CD66C900065F4EC /* Journler Resource Media Controller */,
@@ -1809,15 +1773,6 @@
 			name = "Address Book Media Controller";
 			sourceTree = "<group>";
 		};
-		72886FCF0CC7E67C00733960 /* Audio Media Controller */ = {
-			isa = PBXGroup;
-			children = (
-				72886F940CC7E5FB00733960 /* AudioViewController.h */,
-				72886F950CC7E5FB00733960 /* AudioViewController.m */,
-			);
-			name = "Audio Media Controller";
-			sourceTree = "<group>";
-		};
 		72886FD00CC7E68F00733960 /* Image Media Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -1827,15 +1782,6 @@
 				72D2A4340CD82F0B0065F4EC /* PDExportableImageView.m */,
 			);
 			name = "Image Media Controller";
-			sourceTree = "<group>";
-		};
-		72886FD10CC7E69E00733960 /* Movie Media Controller */ = {
-			isa = PBXGroup;
-			children = (
-				72886F980CC7E5FB00733960 /* MovieViewController.h */,
-				72886F990CC7E5FB00733960 /* MovieViewController.m */,
-			);
-			name = "Movie Media Controller";
 			sourceTree = "<group>";
 		};
 		72886FD20CC7E6AA00733960 /* Web Content Media Controller */ = {
@@ -2664,9 +2610,7 @@
 				72886F790CC7E51700733960 /* QTInstallController.m in Sources */,
 				72886FA20CC7E5FB00733960 /* JournlerMediaViewer.m in Sources */,
 				72886FA30CC7E5FB00733960 /* JournlerMediaContentController.m in Sources */,
-				72886FA40CC7E5FB00733960 /* AudioViewController.m in Sources */,
 				72886FA50CC7E5FB00733960 /* ImageViewController.m in Sources */,
-				72886FA60CC7E5FB00733960 /* MovieViewController.m in Sources */,
 				72886FA70CC7E5FB00733960 /* WebViewController.m in Sources */,
 				72886FA80CC7E5FB00733960 /* MailMessageController.m in Sources */,
 				72886FA90CC7E5FB00733960 /* WordDocumentController.m in Sources */,

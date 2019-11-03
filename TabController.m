@@ -391,23 +391,6 @@
 		[self restoreStateWithDictionary:stateDictionary];
 }
 
-#pragma mark - Recording Targets
-
-- (void) sproutedVideoRecorder:(SproutedRecorder*)recorder insertRecording:(NSString*)path title:(NSString*)title
-{
-	NSLog(@"%s - **** subclasses must override ****", __PRETTY_FUNCTION__);
-}
-
-- (void) sproutedAudioRecorder:(SproutedRecorder*)recorder insertRecording:(NSString*)path title:(NSString*)title
-{
-	NSLog(@"%s - **** subclasses must override ****", __PRETTY_FUNCTION__);
-}
-
-- (void) sproutedSnapshot:(SproutedRecorder*)recorder insertRecording:(NSString*)path title:(NSString*)title
-{
-	NSLog(@"%s - **** subclasses must override ****", __PRETTY_FUNCTION__);
-}
-
 #pragma mark -
 
 - (BOOL) isFiltering
@@ -1424,8 +1407,6 @@
 - (IBAction) sendEntryToiWeb:(id)sender
 {
 	static NSString *imageHandlerName = @"send_images";
-	static NSString *audioHandlerName = @"send_podcast";
-	static NSString *videoHandlerName = @"send_movie";
 	
 	NSDictionary *errors = [NSDictionary dictionary];
 	
@@ -1487,13 +1468,6 @@
 			JournlerResource *aResource = [entryResources objectAtIndex:j];
 			if ( [aResource representsFile] )
 			{
-				/* // The audio file must be aac - and is there a special bundle?
-				if ( UTTypeConformsTo((CFStringRef)[aResource valueForKey:@"uti"],kUTTypeAudio) )
-				{
-					castType = 2;
-					castPath = [aResource originalPath];
-				}
-				*/
 				if ( UTTypeConformsTo((CFStringRef)[aResource valueForKey:@"uti"],(CFStringRef)@"public.movie") )
 				{
 					castType = 3;
@@ -1563,37 +1537,6 @@
 			NSArray *contents = [NSArray arrayWithObjects:[[entries objectAtIndex:i] stringValue], nil];
 			
 			if ( ![script executeHandler:imageHandlerName error:&errors withParameters: totalCount, images, titles, contents, nil] 
-				&& [[errors objectForKey:NSAppleScriptErrorNumber] integerValue] != kScriptWasCancelledError )
-			{
-				NSLog(@"%s - unable to execute image handler, error %@", __PRETTY_FUNCTION__, errors);
-				
-				id theSource = [script richTextSource];
-				if ( theSource == nil ) theSource = [script source];
-				AppleScriptAlert *scriptAlert = [[[AppleScriptAlert alloc] initWithSource:theSource error:errors] autorelease];
-			
-				NSBeep();
-				[scriptAlert showWindow:self];
-			}
-		}
-		else if ( castType == 2 )
-		{
-			if ( ![script executeHandler:audioHandlerName error:&errors withParameters: castPath, nil] 
-				&& [[errors objectForKey:NSAppleScriptErrorNumber] integerValue] != kScriptWasCancelledError )
-			{
-				NSLog(@"%s - unable to execute image handler, error %@", __PRETTY_FUNCTION__, errors);
-				
-				id theSource = [script richTextSource];
-				if ( theSource == nil ) theSource = [script source];
-				AppleScriptAlert *scriptAlert = [[[AppleScriptAlert alloc] initWithSource:theSource error:errors] autorelease];
-			
-				NSBeep();
-				[scriptAlert showWindow:self];
-			}
-		}
-		else if ( castType == 3 )
-		{
-			NSString *castTitle = [[entries objectAtIndex:i] valueForKey:@"title"];
-			if ( ![script executeHandler:videoHandlerName error:&errors withParameters: castPath, castTitle, nil]
 				&& [[errors objectForKey:NSAppleScriptErrorNumber] integerValue] != kScriptWasCancelledError )
 			{
 				NSLog(@"%s - unable to execute image handler, error %@", __PRETTY_FUNCTION__, errors);

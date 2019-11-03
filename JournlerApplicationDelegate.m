@@ -478,7 +478,7 @@ Additional Columns:
 //#warning recognize recorded movies as audio files, or at least display them so
 //#warning when opening an entry into a new tab, the currently selected folder is not saved
 
-extern void QTSetProcessProperty(UInt32 type, UInt32 creator, size_t size, uint8_t *data);
+//extern void QTSetProcessProperty(UInt32 type, UInt32 creator, size_t size, uint8_t *data);
 
 @implementation JournlerApplicationDelegate
 
@@ -658,7 +658,7 @@ extern void QTSetProcessProperty(UInt32 type, UInt32 creator, size_t size, uint8
 	SKLoadDefaultExtractorPlugIns();
 	
 	char *fairplay = "FairPlay";
-	QTSetProcessProperty('dmmc', 'play', strlen(fairplay), (uint8_t *)fairplay);
+//	QTSetProcessProperty('dmmc', 'play', strlen(fairplay), (uint8_t *)fairplay);
 
 	// install journler as the provider of certain services
 	[self installPDFService];
@@ -3034,84 +3034,6 @@ bail:
 }
 
 #pragma mark -
-#pragma mark Make a Recording
-
-- (IBAction) recordAudio:(id)sender
-{
-	// convert over some of the user default values (2.5.4 -> 2.5.5)
-	if ( [[NSUserDefaults standardUserDefaults] stringForKey:@"DefaultAlbum"] == nil )
-		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] stringForKey:@"Default Album"] 
-				forKey:@"DefaultAlbum"];
-	if ( [[NSUserDefaults standardUserDefaults] stringForKey:@"DefaultArtist"] == nil )
-		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] stringForKey:@"Default Artist"] 
-				forKey:@"DefaultArtist"];
-	if ( [[NSUserDefaults standardUserDefaults] stringForKey:@"DefaultPlaylist"] == nil )
-		[[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] stringForKey:@"Default Playlist"] 
-				forKey:@"DefaultPlaylist"];
-	
-	// note the recording title and date
-	NSString *recordingTitle;
-	NSCalendarDate *recordingDate;
-	
-	JournlerEntry *theGoodEntry = nil;
-	id theGoodTarget = [NSApp targetForAction:@selector(entryForRecording:) to:nil from:self];
-	
-	if ( theGoodTarget != nil && ( ( theGoodEntry = [theGoodTarget entryForRecording:self] ) != nil ) )
-	{
-		recordingTitle = [theGoodEntry valueForKey:@"title"];
-		recordingDate = [theGoodEntry valueForKey:@"calDate"];
-	}
-	else
-	{
-		recordingTitle = NSLocalizedString(@"untitled title",@"");
-		recordingDate = [NSCalendarDate calendarDate];
-	}
-	
-	NSDictionary *recordingAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
-			recordingTitle, kSproutedAudioRecordingTitleKey,
-			recordingDate, kSproutedAudioRecordingDateKey, nil];
-	
-	
-	[[SproutedAVIController sharedController] setDelegate:self];
-	[[SproutedAVIController sharedController] showWindow:self];
-	[[[SproutedAVIController sharedController] window] setTitle:NSLocalizedString(@"Journler AVI", @"")];
-	
-	[[SproutedAVIController sharedController] setAudioRecordingAttributes:recordingAttributes];
-	[[SproutedAVIController sharedController] recordAudio:self];
-}
-
-- (IBAction) recordVideo:(id)sender
-{
-	[[SproutedAVIController sharedController] setDelegate:self];
-	[[SproutedAVIController sharedController] showWindow:self];
-	[[[SproutedAVIController sharedController] window] setTitle:NSLocalizedString(@"Journler AVI", @"")];
-	[[SproutedAVIController sharedController] recordVideo:self];
-}
-
-- (IBAction) captureSnapshot:(id)sender
-{
-	[[SproutedAVIController sharedController] setDelegate:self];
-	[[SproutedAVIController sharedController] showWindow:self];
-	[[[SproutedAVIController sharedController] window] setTitle:NSLocalizedString(@"Journler AVI", @"")];
-	[[SproutedAVIController sharedController] takeSnapshot:self];
-}
-
-#pragma mark -
-
-- (NSNumber*) validateYourself:(SproutedAVIController*)aController
-{
-	NSBundle *framework = [NSBundle bundleWithIdentifier:@"com.sprouted.avi"];
-	NSString *executablePath = [framework executablePath];
-	
-	NSNumber *executableSize = [[[NSFileManager defaultManager] 
-			fileAttributesAtPath:executablePath 
-			traverseLink:NO]
-			objectForKey:NSFileSize];
-	
-	return executableSize;
-}
-
-#pragma mark -
 
 - (IBAction) toggleContinuousSpellcheckingAppwide:(id)sender
 {
@@ -3267,7 +3189,7 @@ bail:
 				@"New Tab with this Entry", @"New Window with this Entry",
 				@"Email Selection", @"Blog this Entry", @"Print Selection",@"Export Selection", 
 				@"Send Entry to iWeb", @"Send Entry to iPod", 
-				@"Record Audio", @"Record Video", @"Take a Picture", @"Show Media", @"Show Contacts",
+				@"Take a Picture", @"Show Media", @"Show Contacts",
 				@"Import Files", @"Print Journal",  @"Export Journal",
 				@"Go to Tomorrow", @"Go to Today", @"Go to Yesterday", @"Go to Previous Month", @"Go to Next Month",
 				@"Save", @"Close Window",
@@ -3330,12 +3252,6 @@ bail:
 	
 	// Adding media an Entry --------------------------------------------------------
 	
-	else if ([command isEqualToString:@"Record Audio"])
-		[NSApp sendAction:@selector(recordAudio:) to:nil from:self];
-	
-	else if ([command isEqualToString:@"Record Video"])
-		[NSApp sendAction:@selector(recordVideo:) to:nil from:self];
-		
 	else if ([command isEqualToString:@"Take a Picture"])
 		[NSApp sendAction:@selector(captureSnapshot:) to:nil from:self];
 		

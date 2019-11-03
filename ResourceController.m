@@ -407,7 +407,6 @@ static NSSortDescriptor *ResourceByRankSortPrototype()
 	NSMutableArray *pdfs = [NSMutableArray array];
 	NSMutableArray *archives = [NSMutableArray array];
 	NSMutableArray *images = [NSMutableArray array];
-	NSMutableArray *audioVideo = [NSMutableArray array];
 	NSMutableArray *documents = [NSMutableArray array];
 	NSMutableArray *correspondence = [NSMutableArray array];
 	
@@ -560,8 +559,6 @@ static NSSortDescriptor *ResourceByRankSortPrototype()
 					[archives addObject:aNode];
 				else if ( UTTypeConformsTo((CFStringRef)[aResource uti],kUTTypeImage) )
 					[images addObject:aNode];
-				else if ( UTTypeConformsTo((CFStringRef)[aResource uti],kUTTypeAudiovisualContent) )
-					[audioVideo addObject:aNode];
 				else if ( UTTypeConformsTo((CFStringRef)[aResource uti],kUTTypeMessage)
 						|| UTTypeConformsTo((CFStringRef)[aResource uti],(CFStringRef)ResourceMailUTI) 
 						|| UTTypeConformsTo((CFStringRef)[aResource uti],(CFStringRef)ResourceMailStandardEmailUTI)
@@ -656,17 +653,6 @@ static NSSortDescriptor *ResourceByRankSortPrototype()
 	else
 	{
 		[imagesNode setChildren:nil];
-	}
-	
-	if ( [audioVideo count] > 0 )
-	{
-		[audioVideo setValue:avNode forKey:@"parent"];
-		[avNode setValue:[audioVideo sortedArrayUsingDescriptors:universalSortOrder] forKey:@"children"];
-		[theNodes addObject:avNode];
-	}
-	else
-	{
-		[avNode setChildren:nil];
 	}
 	
 	if ( [documents count] > 0 )
@@ -1617,15 +1603,6 @@ bail:
 				[resourceTable collapseItem:imagesNode];
 			else if ( [[aDictionary objectForKey:aKey] integerValue] == kResourceNodeExpanded && ![resourceTable isItemExpanded:imagesNode] )
 				[resourceTable expandItem:imagesNode expandChildren:NO];
-		}
-		
-		// audio/visual
-		else if ( [aKey isEqualToString:[avNode labelTitle]] && [resourceTable rowForItem:avNode] != -1 )
-		{
-			if ( [[aDictionary objectForKey:aKey] integerValue] == kResourceNodeCollapsed && [resourceTable isItemExpanded:avNode] )
-				[resourceTable collapseItem:avNode];
-			else if ( [[aDictionary objectForKey:aKey] integerValue] == kResourceNodeExpanded && ![resourceTable isItemExpanded:avNode] )
-				[resourceTable expandItem:avNode expandChildren:NO];
 		}
 		
 		// internal folders
@@ -2758,53 +2735,6 @@ bail:
 	
 	return actualCommand;
 } 
-
-- (NSString*) _linkedTextForAudioFile:(NSString*)fullpath {
-	
-	//
-	// have a look at the metadata for the file, author and name, or use display name
-	
-	NSMutableString *return_string = [[NSMutableString allocWithZone:[self zone]] init];
-	
-	MDItemRef meta_data = MDItemCreate(NULL,(CFStringRef)fullpath);
-	if ( meta_data != NULL ) {
-		
-		NSString *title = (NSString*)MDItemCopyAttribute(meta_data,kMDItemTitle);
-		NSArray *authors = (NSArray*)MDItemCopyAttribute(meta_data,kMDItemAuthors);
-		NSString *composer = (NSString*)MDItemCopyAttribute(meta_data,kMDItemComposer);
-		
-		if ( title != nil ) {
-			
-			if ( authors != nil )
-				[return_string appendFormat:@"%@ - ", [authors componentsJoinedByString:@", "]];
-			else if ( composer != nil )
-				[return_string appendFormat:@"%@ - ", composer];
-			
-			[return_string appendString:title];
-			
-		}
-		else {
-			
-			// use the display name no path
-			[return_string appendString:[[fullpath lastPathComponent] stringByDeletingPathExtension]];
-			
-		}
-		
-		//
-		// clean up
-		CFRelease(meta_data);
-		
-	}
-	else {
-		
-		//
-		// use the display name no path
-		[return_string appendString:[[fullpath lastPathComponent] stringByDeletingPathExtension]];
-		
-	}
-	
-	return [return_string autorelease];
-}
 
 - (NSString*) _mdTitleFoFileAtPath:(NSString*)fullpath {
 	

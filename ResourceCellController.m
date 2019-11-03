@@ -56,9 +56,7 @@
 #import "JournlerMediaContentController.h"
 
 #import "AddressRecordController.h"
-#import "AudioViewController.h"
 #import "ImageViewController.h"
-#import "MovieViewController.h"
 #import "PDPDFViewController.h"
 #import "WebViewController.h"
 #import "MailMessageController.h"
@@ -365,12 +363,6 @@
 		
 		if ( UTTypeConformsTo( (CFStringRef)uti, kUTTypePDF ) )
 			controllerClass = [PDPDFViewController class];
-		
-		else if ( UTTypeConformsTo( (CFStringRef)uti, kUTTypeAudio ) )
-			controllerClass = [AudioViewController class];
-			
-		else if ( UTTypeConformsTo( (CFStringRef)uti, (CFStringRef)@"public.movie" ) )
-			controllerClass = [MovieViewController class];
 		
 		else if ( UTTypeConformsTo( (CFStringRef)uti, kUTTypeImage ) )
 			controllerClass = [ImageViewController class];
@@ -911,7 +903,7 @@
 		NSBeep(); return;
 	}
 	
-	[[self delegate] contentController:aController showLexiconSelection:anObject term:aTerm];
+//	[[self delegate] contentController:aController showLexiconSelection:anObject term:aTerm];
 }
 
 #pragma mark -

@@ -2326,24 +2326,6 @@ static NSArray *JObjectValues()
 		initWithString:[NSString string] attributes:[JournlerEntry defaultTextAttributes]] autorelease];
 	}
 	
-	else if ( [[NSWorkspace sharedWorkspace] canWatchFile:fullpath] ) 
-	{
-		// videos
-		_import_path = [fullpath retain];
-		
-		import_content = [[[NSAttributedString allocWithZone:[self zone]]
-		initWithString:[NSString string] attributes:[JournlerEntry defaultTextAttributes]] autorelease];
-	}
-	
-	else if ( [[NSWorkspace sharedWorkspace] canPlayFile:fullpath] ) 
-	{
-		// audio
-		_import_path = [fullpath retain];
-		
-		import_content = [[[NSAttributedString allocWithZone:[self zone]]
-		initWithString:[NSString string] attributes:[JournlerEntry defaultTextAttributes]] autorelease];
-	}
-	
 	else if ( UTTypeConformsTo((CFStringRef)import_uti,kUTTypeRTF) ) 
 	{
 		// rtf - import content

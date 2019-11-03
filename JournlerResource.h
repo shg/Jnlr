@@ -268,18 +268,6 @@ enum {
 
 @end
 
-/*
-@interface JournlerResource (AudioVideoSnapshotSupport)
-
-- (id) initSnapshotResource;
-- (id) initAudioRecordingResource;
-- (id) initVideoRecordingResource;
-
-- (BOOL) representsRecording;
-
-@end
-*/
-
 @interface JournlerResource (PasteboardSupport)
 
 - (id) initWithPasteboard:(NSPasteboard*)pboard operation:(NewResourceCommand)command 

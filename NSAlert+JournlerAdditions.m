@@ -547,28 +547,6 @@
 
 #pragma mark -
 
-+ (NSAlert*) noVideoCapture {
-	NSAlert *alert = [[NSAlert alloc] init];
-	
-	[alert setMessageText:
-		NSLocalizedStringFromTable(@"no video capture msg", @"JAlerts", @"")];
-	[alert setInformativeText:
-		NSLocalizedStringFromTable(@"no video capture info", @"JAlerts", @"")];
-
-	return [alert autorelease];
-}
-
-+ (NSAlert*) noAudioCapture {
-	NSAlert *alert = [[NSAlert alloc] init];
-	
-	[alert setMessageText:
-		NSLocalizedStringFromTable(@"no audio capture msg", @"JAlerts", @"")];
-	[alert setInformativeText:
-		NSLocalizedStringFromTable(@"no audio capture info", @"JAlerts", @"")];
-
-	return [alert autorelease];
-}
-
 + (NSAlert*) noSnapshotCapture
 {
 	NSAlert *alert = [[NSAlert alloc] init];

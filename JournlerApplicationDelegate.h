@@ -43,7 +43,7 @@
 #import <Sparkle/Sparkle.h>
 #import <Pantomime/Pantomime.h>
 //#import <iMediaBrowser/iMedia.h>
-#import <SproutedAVI/SproutedAVI.h>
+//X #import <SproutedAVI/SproutedAVI.h>
 
 #import "JournlerJournal.h"
 #import "JournlerResource.h"
@@ -153,8 +153,6 @@ extern NSString *JournlerDidFinishImportNotification;
 - (IBAction) toggleLowLightDisplay:(id)sender;
 - (IBAction) lockJournal:(id)sender;
 
-- (IBAction) recordAudio:(id)sender;
-- (IBAction) recordVideo:(id)sender;
 - (IBAction) captureSnapshot:(id)sender;
 
 - (IBAction) doPageSetup:(id)sender;

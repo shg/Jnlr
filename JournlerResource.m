@@ -1670,46 +1670,6 @@ bail:
 
 #pragma mark -
 
-/*
-@implementation JournlerResource (AudioVideoSnapshotSupport)
-
-- (id) initSnapshotResource
-{
-	if ( self = [self initWithProperties:nil] )
-	{
-		[self setType:kResourceTypeRecording];
-		[self setValue:ResourceSnapshotUTI forKey:@"uti"];
-		[self setValue:NSLocalizedString(@"Snapshot",@"title of snapshot resource") forKey:@"title"];
-	
-		// entry handled afterwards
-		// icon is handled only after the journal relationship has been estalished
-		
-	}
-	return self;
-}
-
-- (id) initAudioRecordingResource
-{
-	return nil;
-}
-
-- (id) initVideoRecordingResource
-{
-	return nil;
-}
-
-#pragma mark -
-
-- (BOOL) representsRecording
-{
-	return ( [self type] == kResourceTypeRecording ); 
-}
-
-@end
-
-#pragma mark -
-*/
-
 @implementation JournlerResource (PasteboardSupport)
 
 - (id) initWithPasteboard:(NSPasteboard*)pboard operation:(NewResourceCommand)command 

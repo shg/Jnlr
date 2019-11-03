@@ -93,8 +93,6 @@
 
 #pragma mark -
 
-+ (NSAlert*) noVideoCapture;
-+ (NSAlert*) noAudioCapture;
 + (NSAlert*) noSnapshotCapture;
 
 #pragma mark -
