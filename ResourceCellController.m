@@ -56,9 +56,7 @@
 #import "JournlerMediaContentController.h"
 
 #import "AddressRecordController.h"
-//X #import "AudioViewController.h"
 #import "ImageViewController.h"
-//X #import "MovieViewController.h"
 #import "PDPDFViewController.h"
 #import "WebViewController.h"
 #import "MailMessageController.h"
@@ -366,12 +364,6 @@
 		if ( UTTypeConformsTo( (CFStringRef)uti, kUTTypePDF ) )
 			controllerClass = [PDPDFViewController class];
 		
-//		else if ( UTTypeConformsTo( (CFStringRef)uti, kUTTypeAudio ) )
-//			controllerClass = [AudioViewController class];
-//			
-//		else if ( UTTypeConformsTo( (CFStringRef)uti, (CFStringRef)@"public.movie" ) )
-//			controllerClass = [MovieViewController class];
-//		
 		else if ( UTTypeConformsTo( (CFStringRef)uti, kUTTypeImage ) )
 			controllerClass = [ImageViewController class];
 		

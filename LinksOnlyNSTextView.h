@@ -168,7 +168,6 @@
 // private additions
 - (NSUInteger) _charIndexForDraggingLoc:(NSPoint)point;
 - (NSString*) _mdTitleFoFileAtPath:(NSString*)fullpath;
-- (NSString*) _linkedTextForAudioFile:(NSString*)fullpath;
 - (NSUInteger) _commandForCurrentCommand:(NSUInteger)dragOperation fileType:(NSString*)type directory:(BOOL)dir package:(BOOL)package;
 
 - (void) applyDefaultStyleAndRuler;

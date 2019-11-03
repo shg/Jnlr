@@ -39,8 +39,6 @@
 //#import "JUtility.h"
 
 @class MediaContentController;
-//@class AudioViewController;
-//@class MovieViewController;
 @class WebViewController;
 @class PDPDFViewController;
 @class ImageViewController;

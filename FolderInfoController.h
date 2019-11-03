@@ -65,8 +65,6 @@
 	IBOutlet NSButton *pdfButton;
 	IBOutlet NSButton *bookmarksButton;
 	IBOutlet NSButton *picturesButton;
-//	IBOutlet NSButton *audioButton;
-//	IBOutlet NSButton *moviesButton;
 	
 	JournlerJournal *journal;
 	JournlerCollection *collection;

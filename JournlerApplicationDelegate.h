@@ -153,8 +153,6 @@ extern NSString *JournlerDidFinishImportNotification;
 - (IBAction) toggleLowLightDisplay:(id)sender;
 - (IBAction) lockJournal:(id)sender;
 
-- (IBAction) recordAudio:(id)sender;
-- (IBAction) recordVideo:(id)sender;
 - (IBAction) captureSnapshot:(id)sender;
 
 - (IBAction) doPageSetup:(id)sender;

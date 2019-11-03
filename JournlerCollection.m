@@ -686,32 +686,6 @@ static NSImage * DefaultImageForFolderType(NSNumber *type)
 		icon = [icon imageWithWidth:128 height:128 inset:9];
 		break;
 	
-//	case PDCollectionTypeIDAudio:
-//		
-//		icon = [[[NSImage alloc] 
-//				initWithContentsOfFile:@"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/MusicFolderIcon.icns"] autorelease];
-//		if ( icon == nil ) 
-//		{
-//			NSLog(@"%s - unable to locate MusicFolderIcon", __PRETTY_FUNCTION__);
-//			icon = [NSImage imageNamed:@"FolderMusic.png"];
-//		}
-//		
-//		icon = [icon imageWithWidth:128 height:128 inset:9];
-//		break;
-//	
-//	case PDCollectionTypeIDVideo:
-//		
-//		icon = [[[NSImage alloc] 
-//				initWithContentsOfFile:@"/System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/MovieFolderIcon.icns"] autorelease];
-//		if ( icon == nil ) 
-//		{
-//			NSLog(@"%s - unable to locate MovieFolderIcon", __PRETTY_FUNCTION__);
-//			icon = [NSImage imageNamed:@"FolderMovies.png"];
-//		}
-//		
-//		icon = [icon imageWithWidth:128 height:128 inset:9];
-//		break;
-//	
 	case PDCollectionTypeIDImage:
 		
 		icon = [[[NSImage alloc] 
