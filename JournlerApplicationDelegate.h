@@ -75,7 +75,6 @@ extern NSString *JournlerDidFinishImportNotification;
 	
 	BOOL lockout;
 	BOOL wasFirstRun;
-	BOOL displayInverted;
 	BOOL dropBoxIsWaiting;
 	NSInteger spellDocumentTag;
 	
@@ -150,7 +149,6 @@ extern NSString *JournlerDidFinishImportNotification;
 
 - (IBAction) toggleContinuousSpellcheckingAppwide:(id)sender;
 - (IBAction) toggleSpeakableItems:(id)sender;
-- (IBAction) toggleLowLightDisplay:(id)sender;
 - (IBAction) lockJournal:(id)sender;
 
 - (IBAction) captureSnapshot:(id)sender;
