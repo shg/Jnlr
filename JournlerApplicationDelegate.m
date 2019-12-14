@@ -645,9 +645,6 @@ Additional Columns:
 	// tell spotlight to use default plugins
 	SKLoadDefaultExtractorPlugIns();
 	
-	char *fairplay = "FairPlay";
-//	QTSetProcessProperty('dmmc', 'play', strlen(fairplay), (uint8_t *)fairplay);
-
 	// install journler as the provider of certain services
 	[self installPDFService];
 	//[self installScriptMenu];
