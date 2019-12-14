@@ -582,18 +582,6 @@ Additional Columns:
 			forEventClass:kInternetEventClass 
 			andEventID:kAEGetURL];
 		
-	// set appwide behavior
-	// #warning not quite working -- doesn't work in 64 bit environment, so on leopard?
-	[PDTableView poseAsClass:[NSTableView class]];
-	[PDOutlineView poseAsClass:[NSOutlineView class]];
-	[PDCaseInsensitiveComboBoxCell poseAsClass:[NSComboBoxCell class]];
-	[NSTBFTextBlock poseAsClass:[NSTextBlock class]];
-	
-	//[PDPrintedView poseAsClass:[NSView class]];
-	//[PDToolbar poseAsClass:[NSToolbar class]];
-	//[PDDatePicker poseAsClass:[NSDatePicker class]];
-	//[CURLHandle curlHelloSignature:@"xxx" acceptAll:YES];
-	
 	[NSDateFormatter setDefaultFormatterBehavior:NSDateFormatterBehavior10_4];
 	[NSNumberFormatter setDefaultFormatterBehavior:NSNumberFormatterBehavior10_4];
 	
