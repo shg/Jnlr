@@ -4,7 +4,7 @@
 
 static NSString *JLRWindowAutosaveName = @"JnlrMainWindow";
 
-@interface JLRAppDelegate : NSObject <NSApplicationDelegate, NSTableViewDataSource, NSTableViewDelegate>
+@interface JLRAppDelegate : NSObject <NSApplicationDelegate, NSTableViewDataSource, NSTableViewDelegate, NSTextViewDelegate, NSTextFieldDelegate>
 {
     NSWindow *_window;
     NSTableView *_tableView;
@@ -15,12 +15,20 @@ static NSString *JLRWindowAutosaveName = @"JnlrMainWindow";
     JLRCompatJournal *_journal;
     NSArray *_entries;
     NSString *_initialJournalPath;
+    JournlerEntry *_selectedEntry;
+    BOOL _entryHasUnsavedChanges;
+    BOOL _isRefreshingEditor;
 }
 
 - (instancetype)initWithInitialJournalPath:(NSString *)path;
 - (void)openJournalAtPath:(NSString *)path;
 - (void)openJournal:(id)sender;
 - (void)reloadJournal:(id)sender;
+- (void)saveDocument:(id)sender;
+- (BOOL)saveSelectedEntry:(NSError **)error;
+- (BOOL)promptToSaveIfNeeded;
+- (void)updateStatusLabel;
+- (void)markSelectedEntryDirty;
 - (void)refreshSelectedEntry;
 @end
 
@@ -176,6 +184,7 @@ static int JLRRunSmokeTest(NSString *journalPath)
     NSMenu *fileMenu = [[[NSMenu alloc] initWithTitle:@"File"] autorelease];
     [fileItem setSubmenu:fileMenu];
     [fileMenu addItemWithTitle:@"Open Journal…" action:@selector(openJournal:) keyEquivalent:@"o"];
+    [fileMenu addItemWithTitle:@"Save" action:@selector(saveDocument:) keyEquivalent:@"s"];
     [fileMenu addItemWithTitle:@"Reload Journal" action:@selector(reloadJournal:) keyEquivalent:@"r"];
 }
 
@@ -222,9 +231,10 @@ static int JLRRunSmokeTest(NSString *journalPath)
     _titleLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(20, NSHeight([detailView bounds]) - 56, NSWidth([detailView bounds]) - 40, 28)];
     [_titleLabel setBezeled:NO];
     [_titleLabel setDrawsBackground:NO];
-    [_titleLabel setEditable:NO];
-    [_titleLabel setSelectable:NO];
+    [_titleLabel setEditable:YES];
+    [_titleLabel setSelectable:YES];
     [_titleLabel setFont:[NSFont boldSystemFontOfSize:20]];
+    [_titleLabel setDelegate:self];
     [_titleLabel setAutoresizingMask:NSViewWidthSizable | NSViewMinYMargin];
     [_titleLabel setStringValue:@"No entry selected"];
     [detailView addSubview:_titleLabel];
@@ -251,10 +261,11 @@ static int JLRRunSmokeTest(NSString *journalPath)
     [textScroll setHasVerticalScroller:YES];
     [textScroll setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     _textView = [[NSTextView alloc] initWithFrame:[[textScroll contentView] bounds]];
-    [_textView setEditable:NO];
+    [_textView setEditable:YES];
     [_textView setRichText:YES];
     [_textView setImportsGraphics:YES];
     [_textView setUsesFindPanel:YES];
+    [_textView setDelegate:self];
     [textScroll setDocumentView:_textView];
     [detailView addSubview:textScroll];
 
@@ -271,8 +282,127 @@ static int JLRRunSmokeTest(NSString *journalPath)
     _entries = [sortedEntries copy];
 }
 
+- (JournlerEntry *)currentSelectedEntry
+{
+    NSInteger row = [_tableView selectedRow];
+    if (row < 0 || row >= (NSInteger)[_entries count]) {
+        return nil;
+    }
+    return [_entries objectAtIndex:row];
+}
+
+- (void)updateStatusLabel
+{
+    if (_journal == nil) {
+        [_statusLabel setStringValue:@"No journal loaded"];
+        return;
+    }
+
+    NSString *mode = _entryHasUnsavedChanges ? @"Unsaved changes" : @"Editable";
+    [_statusLabel setStringValue:[NSString stringWithFormat:@"%@. %@ entries, %@ resources, %@ collections",
+                                  mode,
+                                  @([_entries count]),
+                                  @([[_journal resources] count]),
+                                  @([[_journal collections] count])]];
+}
+
+- (void)markSelectedEntryDirty
+{
+    if (_isRefreshingEditor || [self currentSelectedEntry] == nil) {
+        return;
+    }
+
+    _entryHasUnsavedChanges = YES;
+    [self updateStatusLabel];
+}
+
+- (BOOL)saveSelectedEntry:(NSError **)error
+{
+    JournlerEntry *entry = [self currentSelectedEntry];
+    if (entry == nil || _journal == nil) {
+        return YES;
+    }
+
+    [entry setTitle:[_titleLabel stringValue]];
+    [entry setAttributedContent:[[[_textView textStorage] copy] autorelease]];
+
+    if (![_journal saveEntry:entry error:error]) {
+        return NO;
+    }
+
+    NSNumber *selectedTag = [entry tagID];
+    _entryHasUnsavedChanges = NO;
+    [self setEntriesFromJournal:_journal];
+    [_tableView reloadData];
+
+    NSInteger rowToSelect = NSNotFound;
+    for (NSInteger i = 0; i < (NSInteger)[_entries count]; i++) {
+        if ([[[_entries objectAtIndex:i] tagID] isEqual:selectedTag]) {
+            rowToSelect = i;
+            break;
+        }
+    }
+    if (rowToSelect != NSNotFound) {
+        [_tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:rowToSelect] byExtendingSelection:NO];
+    }
+
+    [self refreshSelectedEntry];
+    [self updateStatusLabel];
+    return YES;
+}
+
+- (void)saveDocument:(id)sender
+{
+    NSError *error = nil;
+    if (![self saveSelectedEntry:&error]) {
+        NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+        [alert setMessageText:@"Could not save entry"];
+        [alert setInformativeText:(error ? [error localizedDescription] : @"Unknown error")];
+        [alert runModal];
+    }
+}
+
+- (BOOL)promptToSaveIfNeeded
+{
+    if (!_entryHasUnsavedChanges) {
+        return YES;
+    }
+
+    NSAlert *alert = [[[NSAlert alloc] init] autorelease];
+    [alert setMessageText:@"Save changes to this entry?"];
+    [alert setInformativeText:@"This writes the updated entry and JournlerStore.dict, after creating a backup copy."];
+    [alert addButtonWithTitle:@"Save"];
+    [alert addButtonWithTitle:@"Discard"];
+    [alert addButtonWithTitle:@"Cancel"];
+
+    NSModalResponse response = [alert runModal];
+    if (response == NSAlertFirstButtonReturn) {
+        NSError *error = nil;
+        if (![self saveSelectedEntry:&error]) {
+            NSAlert *saveAlert = [[[NSAlert alloc] init] autorelease];
+            [saveAlert setMessageText:@"Could not save entry"];
+            [saveAlert setInformativeText:(error ? [error localizedDescription] : @"Unknown error")];
+            [saveAlert runModal];
+            return NO;
+        }
+        return YES;
+    }
+
+    if (response == NSAlertSecondButtonReturn) {
+        _entryHasUnsavedChanges = NO;
+        [self updateStatusLabel];
+        return YES;
+    }
+
+    return NO;
+}
+
 - (void)openJournalAtPath:(NSString *)path
 {
+    if (![self promptToSaveIfNeeded]) {
+        return;
+    }
+
     NSError *error = nil;
     JLRCompatJournal *journal = [[JLRCompatJournal alloc] initWithPath:[path stringByStandardizingPath]];
     if (![journal load:&error]) {
@@ -286,15 +416,13 @@ static int JLRRunSmokeTest(NSString *journalPath)
 
     [_journal release];
     _journal = journal;
+    _entryHasUnsavedChanges = NO;
 
     [self setEntriesFromJournal:_journal];
     [_tableView reloadData];
 
     [_window setTitle:[NSString stringWithFormat:@"Jnlr - %@", [[_journal properties] objectForKey:@"Title"] ?: @"Journal"]];
-    [_statusLabel setStringValue:[NSString stringWithFormat:@"Read-only mode. %@ entries, %@ resources, %@ collections",
-                                  @([_entries count]),
-                                  @([[_journal resources] count]),
-                                  @([[_journal collections] count])]];
+    [self updateStatusLabel];
 
     if ([_entries count] > 0) {
         [_tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
@@ -325,6 +453,9 @@ static int JLRRunSmokeTest(NSString *journalPath)
 - (void)reloadJournal:(id)sender
 {
     if (_journal != nil) {
+        if (![self promptToSaveIfNeeded]) {
+            return;
+        }
         [self openJournalAtPath:[_journal path]];
     }
 }
@@ -358,15 +489,19 @@ static int JLRRunSmokeTest(NSString *journalPath)
 
 - (void)refreshSelectedEntry
 {
+    _isRefreshingEditor = YES;
     NSInteger row = [_tableView selectedRow];
     if (row < 0 || row >= (NSInteger)[_entries count]) {
+        _selectedEntry = nil;
         [_titleLabel setStringValue:@"No entry selected"];
         [_metaLabel setStringValue:@""];
         [[_textView textStorage] setAttributedString:[[[NSAttributedString alloc] initWithString:@""] autorelease]];
+        _isRefreshingEditor = NO;
         return;
     }
 
     JournlerEntry *entry = [_entries objectAtIndex:row];
+    _selectedEntry = entry;
     [_titleLabel setStringValue:([entry title] && [[entry title] length] > 0) ? [entry title] : @"(untitled)"];
     [_metaLabel setStringValue:[NSString stringWithFormat:@"Tag %@   %@", [entry tagID] ?: @"-", JLRFormatDate([entry creationDate])]];
 
@@ -378,11 +513,32 @@ static int JLRRunSmokeTest(NSString *journalPath)
         NSString *message = [NSString stringWithFormat:@"Could not load entry body.\n\n%@", error ? [error localizedDescription] : @"Unknown error"];
         [[_textView textStorage] setAttributedString:[[[NSAttributedString alloc] initWithString:message] autorelease]];
     }
+    _entryHasUnsavedChanges = NO;
+    _isRefreshingEditor = NO;
+    [self updateStatusLabel];
+}
+
+- (BOOL)tableView:(NSTableView *)tableView shouldSelectRow:(NSInteger)row
+{
+    if (row == [_tableView selectedRow]) {
+        return YES;
+    }
+    return [self promptToSaveIfNeeded];
 }
 
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
     [self refreshSelectedEntry];
+}
+
+- (void)controlTextDidChange:(NSNotification *)notification
+{
+    [self markSelectedEntryDirty];
+}
+
+- (void)textDidChange:(NSNotification *)notification
+{
+    [self markSelectedEntryDirty];
 }
 
 @end

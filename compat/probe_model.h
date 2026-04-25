@@ -6,6 +6,7 @@
 - (NSDictionary *)properties;
 - (NSNumber *)tagID;
 - (NSString *)title;
+- (void)setTitle:(NSString *)title;
 - (NSString *)sourceJournalPath;
 - (void)setSourceJournalPath:(NSString *)path;
 - (void)mergeArchivedProperties:(NSDictionary *)properties;
@@ -15,6 +16,8 @@
 - (NSDate *)creationDate;
 - (NSString *)packagePath;
 - (NSString *)attributedContentPath;
+- (NSAttributedString *)attributedContent;
+- (void)setAttributedContent:(NSAttributedString *)content;
 - (NSAttributedString *)loadAttributedContent:(NSError **)error;
 - (NSArray *)resourceIDs;
 @end
@@ -33,6 +36,7 @@
 - (BOOL)load:(NSError **)error;
 - (NSString *)path;
 - (BOOL)loadedFromStore;
+- (BOOL)saveEntry:(JournlerEntry *)entry error:(NSError **)error;
 - (NSDictionary *)properties;
 - (NSArray *)entries;
 - (NSArray *)collections;

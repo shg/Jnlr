@@ -67,12 +67,20 @@ Current verified behavior of the minimal viewer:
 - builds on current macOS
 - supports a `--smoke-test <journal-path>` mode for headless verification
 - loads the supplied journal successfully
+- supports minimal single-entry editing for title and body text
+- prompts to save, discard, or cancel before losing unsaved changes
+- creates backup copies before writing entry and store changes
 - shows store-backed entries in read-only mode
 - loads entry body text for the first verified sample entry
 - can fall back to directory-only loading when `JournlerStore.dict` is absent
 - current verified result on the supplied journal is `6036` entries in both:
   - store-backed loading with directory reconciliation
   - directory-only loading without `JournlerStore.dict`
+- a save round-trip on a copied journal succeeds for:
+  - entry title update
+  - entry body update
+  - `JournlerStore.dict` rewrite
+  - reload after save
 
 Interpretation:
 

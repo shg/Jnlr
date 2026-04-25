@@ -10,7 +10,16 @@ int main(int argc, const char * argv[])
             return 2;
         }
 
-        NSString *journalPath = [[NSString stringWithUTF8String:argv[1]] stringByStandardizingPath];
+        BOOL saveSmoke = NO;
+        NSString *journalPathArgument = nil;
+        if (argc >= 3 && strcmp(argv[1], "--save-smoke") == 0) {
+            saveSmoke = YES;
+            journalPathArgument = [NSString stringWithUTF8String:argv[2]];
+        } else {
+            journalPathArgument = [NSString stringWithUTF8String:argv[1]];
+        }
+
+        NSString *journalPath = [journalPathArgument stringByStandardizingPath];
         JLRCompatJournal *journal = [[JLRCompatJournal alloc] initWithPath:journalPath];
         NSError *error = nil;
         BOOL ok = [journal load:&error];
@@ -44,6 +53,40 @@ int main(int argc, const char * argv[])
         for (NSUInteger idx = 0; idx < issueLimit; idx++) {
             NSString *issue = [[journal entryDecodeIssues] objectAtIndex:idx];
             printf("entry_issue_%lu=%s\n", (unsigned long)idx, [issue UTF8String]);
+        }
+
+        if (saveSmoke && ok && [[journal entries] count] > 0) {
+            JournlerEntry *entry = [[journal entries] objectAtIndex:0];
+            NSString *originalTitle = [[entry title] copy];
+            NSAttributedString *originalContent = [[entry loadAttributedContent:NULL] copy];
+
+            NSString *updatedTitle = [originalTitle stringByAppendingString:@" [save-smoke]"];
+            [entry setTitle:updatedTitle];
+            [entry setAttributedContent:[[[NSAttributedString alloc] initWithString:@"save smoke body"] autorelease]];
+
+            NSError *saveError = nil;
+            BOOL saveOK = [journal saveEntry:entry error:&saveError];
+            printf("save_smoke_ok=%s\n", saveOK ? "true" : "false");
+            printf("save_smoke_error=%s\n", saveError ? [[[saveError localizedDescription] description] UTF8String] : "<none>");
+
+            JLRCompatJournal *reloaded = [[JLRCompatJournal alloc] initWithPath:journalPath];
+            NSError *reloadError = nil;
+            BOOL reloadOK = [reloaded load:&reloadError];
+            printf("save_smoke_reload_ok=%s\n", reloadOK ? "true" : "false");
+            printf("save_smoke_reload_error=%s\n", reloadError ? [[[reloadError localizedDescription] description] UTF8String] : "<none>");
+            if (reloadOK && [[reloaded entries] count] > 0) {
+                JournlerEntry *reloadedEntry = [[reloaded entries] objectAtIndex:0];
+                printf("save_smoke_reloaded_title=%s\n", [[[reloadedEntry title] description] UTF8String]);
+                NSAttributedString *reloadedContent = [reloadedEntry loadAttributedContent:NULL];
+                printf("save_smoke_reloaded_content_length=%lu\n", (unsigned long)[reloadedContent length]);
+            }
+
+            [reloaded release];
+
+            [entry setTitle:originalTitle];
+            [entry setAttributedContent:originalContent];
+            [originalTitle release];
+            [originalContent release];
         }
 
         [journal release];
