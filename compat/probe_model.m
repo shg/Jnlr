@@ -392,7 +392,13 @@ static NSString * const JLRBlogsDirectoryName = @"Blogs";
             continue;
         }
 
-        NSArray *propertiesFiles = [[manager contentsOfDirectoryAtPath:packagePath error:NULL] pathsMatchingExtensions:[NSArray arrayWithObject:@"jobj"]];
+        NSArray *packageContents = [manager contentsOfDirectoryAtPath:packagePath error:NULL];
+        NSMutableArray *propertiesFiles = [NSMutableArray array];
+        for (NSString *candidate in packageContents) {
+            if ([candidate hasSuffix:@".jobj"]) {
+                [propertiesFiles addObject:candidate];
+            }
+        }
         NSString *propertiesPath = nil;
         if ([propertiesFiles count] == 1) {
             propertiesPath = [packagePath stringByAppendingPathComponent:[propertiesFiles objectAtIndex:0]];
