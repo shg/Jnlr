@@ -433,16 +433,19 @@ static int JLRRunSmokeTest(NSString *journalPath)
     [_metaLabel setAutoresizingMask:NSViewWidthSizable | NSViewMinYMargin];
     [detailView addSubview:_metaLabel];
 
-    _statusLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(20, 16, NSWidth([detailView bounds]) - 40, 20)];
+    _statusLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(20, 12, NSWidth([detailView bounds]) - 40, 36)];
     [_statusLabel setBezeled:NO];
     [_statusLabel setDrawsBackground:NO];
     [_statusLabel setEditable:NO];
     [_statusLabel setSelectable:NO];
     [_statusLabel setTextColor:[NSColor secondaryLabelColor]];
+    [_statusLabel setUsesSingleLineMode:NO];
+    [[_statusLabel cell] setWraps:YES];
+    [[_statusLabel cell] setScrollable:NO];
     [_statusLabel setAutoresizingMask:NSViewWidthSizable | NSViewMaxYMargin];
     [detailView addSubview:_statusLabel];
 
-    NSScrollView *textScroll = [[[NSScrollView alloc] initWithFrame:NSMakeRect(20, 48, NSWidth([detailView bounds]) - 40, NSHeight([detailView bounds]) - 188)] autorelease];
+    NSScrollView *textScroll = [[[NSScrollView alloc] initWithFrame:NSMakeRect(20, 56, NSWidth([detailView bounds]) - 40, NSHeight([detailView bounds]) - 196)] autorelease];
     [textScroll setHasVerticalScroller:YES];
     [textScroll setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     _textView = [[NSTextView alloc] initWithFrame:[[textScroll contentView] bounds]];
@@ -595,15 +598,19 @@ static int JLRRunSmokeTest(NSString *journalPath)
 {
     if (_journal == nil) {
         [_statusLabel setStringValue:@"No journal loaded"];
+        [_statusLabel setToolTip:nil];
         return;
     }
 
     NSString *mode = _entryHasUnsavedChanges ? @"Unsaved changes" : @"Editable";
-    [_statusLabel setStringValue:[NSString stringWithFormat:@"%@. %@ entries, %@ resources, %@ collections",
+    NSString *journalPath = [_journal path] ?: @"";
+    [_statusLabel setStringValue:[NSString stringWithFormat:@"%@. %@ entries, %@ resources, %@ collections\n%@",
                                   mode,
                                   @([_entries count]),
                                   @([[_journal resources] count]),
-                                  @([[_journal collections] count])]];
+                                  @([[_journal collections] count]),
+                                  journalPath]];
+    [_statusLabel setToolTip:journalPath];
 }
 
 - (void)markSelectedEntryDirty
