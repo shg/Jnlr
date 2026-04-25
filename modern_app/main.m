@@ -89,6 +89,7 @@ static int JLRRunSmokeTest(NSString *journalPath)
     printf("smoke_path=%s\n", [journalPath UTF8String]);
     printf("smoke_load_ok=%s\n", ok ? "true" : "false");
     printf("smoke_error=%s\n", error ? [[[error localizedDescription] description] UTF8String] : "<none>");
+    printf("smoke_loaded_from_store=%s\n", [journal loadedFromStore] ? "true" : "false");
     printf("smoke_entries=%lu\n", (unsigned long)[[journal entries] count]);
 
     if (ok && [[journal entries] count] > 0) {

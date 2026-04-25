@@ -32,6 +32,7 @@
 - (instancetype)initWithPath:(NSString *)path;
 - (BOOL)load:(NSError **)error;
 - (NSString *)path;
+- (BOOL)loadedFromStore;
 - (NSDictionary *)properties;
 - (NSArray *)entries;
 - (NSArray *)collections;

@@ -69,6 +69,14 @@ Current verified behavior of the minimal viewer:
 - loads the supplied journal successfully
 - shows store-backed entries in read-only mode
 - loads entry body text for the first verified sample entry
+- can fall back to directory-only loading when `JournlerStore.dict` is absent
+- current fallback result on the supplied journal is `6035` entries
+
+Current known gap:
+
+- one entry package (`Entry 4135`) still unarchives to `nil` in the lightweight
+  compatibility layer, so the current read-only viewer reaches `6035` package
+  entries instead of the raw directory count `6036`
 
 Interpretation:
 

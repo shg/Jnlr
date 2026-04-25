@@ -4,6 +4,11 @@ static NSString * const JLRPropertiesFilename = @"Journler.plist";
 static NSString * const JLRStoreFilename = @"JournlerStore.dict";
 static NSString * const JLREntryRTFDFilename = @"Entry.rtfd";
 static NSString * const JLREntryRTFFilename = @"TXT.rtf";
+static NSString * const JLREntryContentsFilename = @"Contents.jobj";
+static NSString * const JLREntriesDirectoryName = @"Journler Entries";
+static NSString * const JLRCollectionsDirectoryName = @"Collections";
+static NSString * const JLRResourcesDirectoryName = @"Resources";
+static NSString * const JLRBlogsDirectoryName = @"Blogs";
 
 @interface JournlerObject ()
 {
@@ -295,6 +300,7 @@ static NSString * const JLREntryRTFFilename = @"TXT.rtf";
     NSArray *_resources;
     NSArray *_blogs;
     NSArray *_entryDecodeIssues;
+    BOOL _loadedFromStore;
 }
 @end
 
@@ -307,6 +313,179 @@ static NSString * const JLREntryRTFFilename = @"TXT.rtf";
             [object setSourceJournalPath:journalPath];
         }
     }
+}
+
+- (id)unarchiveObjectAtPath:(NSString *)path issueLabel:(NSString *)issueLabel issues:(NSMutableArray *)issues
+{
+    id object = nil;
+    @try {
+        object = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+    }
+    @catch (NSException *exception) {
+        if (issues != nil) {
+            [issues addObject:[NSString stringWithFormat:@"%@: %@", issueLabel, [exception reason]]];
+        }
+        return nil;
+    }
+
+    if (object == nil && issues != nil) {
+        [issues addObject:[NSString stringWithFormat:@"%@: unarchived to nil", issueLabel]];
+    }
+
+    return object;
+}
+
+- (NSArray *)decodeDirectoryObjectsAtPath:(NSString *)directoryPath
+                                extension:(NSString *)extension
+                               issueGroup:(NSString *)issueGroup
+{
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSArray *contents = [manager contentsOfDirectoryAtPath:directoryPath error:NULL];
+    if (![contents isKindOfClass:[NSArray class]]) {
+        return [NSArray array];
+    }
+
+    NSMutableArray *decoded = [NSMutableArray array];
+    NSMutableArray *issues = [NSMutableArray array];
+
+    for (NSString *name in contents) {
+        if (![[name pathExtension] isEqualToString:extension]) {
+            continue;
+        }
+
+        NSString *fullPath = [directoryPath stringByAppendingPathComponent:name];
+        id object = [self unarchiveObjectAtPath:fullPath
+                                     issueLabel:[NSString stringWithFormat:@"%@/%@", issueGroup, name]
+                                         issues:issues];
+        if (object != nil) {
+            [decoded addObject:object];
+        }
+    }
+
+    if ([issueGroup isEqualToString:@"Entries"]) {
+        [_entryDecodeIssues release];
+        _entryDecodeIssues = [issues copy];
+    }
+
+    return decoded;
+}
+
+- (NSArray *)decodeEntryPackagesAtPath:(NSString *)entriesPath
+{
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSArray *contents = [manager contentsOfDirectoryAtPath:entriesPath error:NULL];
+    if (![contents isKindOfClass:[NSArray class]]) {
+        return [NSArray array];
+    }
+
+    NSMutableArray *decoded = [NSMutableArray array];
+    NSMutableArray *issues = [NSMutableArray array];
+
+    for (NSString *name in contents) {
+        if ([name rangeOfString:@"Entry "].location == NSNotFound) {
+            continue;
+        }
+
+        NSString *packagePath = [entriesPath stringByAppendingPathComponent:name];
+        BOOL isDirectory = NO;
+        if (![manager fileExistsAtPath:packagePath isDirectory:&isDirectory] || !isDirectory) {
+            continue;
+        }
+
+        NSArray *propertiesFiles = [[manager contentsOfDirectoryAtPath:packagePath error:NULL] pathsMatchingExtensions:[NSArray arrayWithObject:@"jobj"]];
+        NSString *propertiesPath = nil;
+        if ([propertiesFiles count] == 1) {
+            propertiesPath = [packagePath stringByAppendingPathComponent:[propertiesFiles objectAtIndex:0]];
+        } else {
+            NSString *defaultPath = [packagePath stringByAppendingPathComponent:JLREntryContentsFilename];
+            if ([manager fileExistsAtPath:defaultPath]) {
+                propertiesPath = defaultPath;
+            } else if ([propertiesFiles count] > 0) {
+                propertiesPath = [packagePath stringByAppendingPathComponent:[propertiesFiles objectAtIndex:0]];
+            } else {
+                propertiesPath = defaultPath;
+            }
+        }
+
+        id entry = [self unarchiveObjectAtPath:propertiesPath
+                                    issueLabel:[NSString stringWithFormat:@"Entries/%@", name]
+                                        issues:issues];
+        if (entry != nil) {
+            [decoded addObject:entry];
+        }
+    }
+
+    [_entryDecodeIssues release];
+    _entryDecodeIssues = [issues copy];
+    return decoded;
+}
+
+- (void)mergeDirectoryEntriesIfNeeded
+{
+    NSString *entriesPath = [_path stringByAppendingPathComponent:JLREntriesDirectoryName];
+    NSArray *directoryEntries = [self decodeEntryPackagesAtPath:entriesPath];
+    if ([directoryEntries count] == 0) {
+        return;
+    }
+
+    NSMutableDictionary *entriesByTag = [NSMutableDictionary dictionary];
+    for (JournlerEntry *entry in _entries) {
+        NSNumber *tag = [entry tagID];
+        if (tag != nil) {
+            [entriesByTag setObject:entry forKey:tag];
+        }
+    }
+
+    NSMutableArray *merged = [NSMutableArray arrayWithArray:_entries ?: [NSArray array]];
+    for (JournlerEntry *entry in directoryEntries) {
+        NSNumber *tag = [entry tagID];
+        if (tag == nil || [entriesByTag objectForKey:tag] != nil) {
+            continue;
+        }
+        [merged addObject:entry];
+        [entriesByTag setObject:entry forKey:tag];
+    }
+
+    [_entries release];
+    _entries = [merged copy];
+    [self assignJournalPath:_path toObjects:_entries];
+}
+
+- (BOOL)loadFromDirectory:(NSError **)error
+{
+    NSString *entriesPath = [_path stringByAppendingPathComponent:JLREntriesDirectoryName];
+    NSString *collectionsPath = [_path stringByAppendingPathComponent:JLRCollectionsDirectoryName];
+    NSString *resourcesPath = [_path stringByAppendingPathComponent:JLRResourcesDirectoryName];
+    NSString *blogsPath = [_path stringByAppendingPathComponent:JLRBlogsDirectoryName];
+
+    [_entries release];
+    _entries = [[self decodeEntryPackagesAtPath:entriesPath] copy];
+    [self assignJournalPath:_path toObjects:_entries];
+
+    [_collections release];
+    _collections = [[self decodeDirectoryObjectsAtPath:collectionsPath extension:@"jcol" issueGroup:@"Collections"] copy];
+    [self assignJournalPath:_path toObjects:_collections];
+
+    [_resources release];
+    _resources = [[self decodeDirectoryObjectsAtPath:resourcesPath extension:@"jresource" issueGroup:@"Resources"] copy];
+    [self assignJournalPath:_path toObjects:_resources];
+
+    [_blogs release];
+    _blogs = [[self decodeDirectoryObjectsAtPath:blogsPath extension:@"jblog" issueGroup:@"Blogs"] copy];
+    [self assignJournalPath:_path toObjects:_blogs];
+
+    _loadedFromStore = NO;
+
+    if ([_entries count] == 0 && [_collections count] == 0 && [_resources count] == 0 && [_blogs count] == 0) {
+        if (error) {
+            *error = [NSError errorWithDomain:@"JLRCompatJournal"
+                                         code:5
+                                     userInfo:@{NSLocalizedDescriptionKey: @"Could not decode journal contents from directories"}];
+        }
+        return NO;
+    }
+
+    return YES;
 }
 
 - (instancetype)initWithPath:(NSString *)path
@@ -398,12 +577,7 @@ static NSString * const JLREntryRTFFilename = @"TXT.rtf";
 
     NSDictionary *store = [NSDictionary dictionaryWithContentsOfFile:storePath];
     if (store == nil) {
-        if (error) {
-            *error = [NSError errorWithDomain:@"JLRCompatJournal"
-                                         code:2
-                                     userInfo:@{NSLocalizedDescriptionKey: @"Could not read JournlerStore.dict"}];
-        }
-        return NO;
+        return [self loadFromDirectory:error];
     }
 
     NSArray *encodedEntries = [store objectForKey:@"Entries"];
@@ -442,11 +616,15 @@ static NSString * const JLREntryRTFFilename = @"TXT.rtf";
     _blogs = [[self decodeArchivedObjects:encodedBlogs] copy];
     [self assignJournalPath:_path toObjects:_blogs];
 
+    _loadedFromStore = YES;
+    [self mergeDirectoryEntriesIfNeeded];
+
     return YES;
 }
 
 - (NSDictionary *)properties { return _properties; }
 - (NSString *)path { return _path; }
+- (BOOL)loadedFromStore { return _loadedFromStore; }
 - (NSArray *)entries { return _entries; }
 - (NSArray *)collections { return _collections; }
 - (NSArray *)resources { return _resources; }

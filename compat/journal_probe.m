@@ -18,6 +18,7 @@ int main(int argc, const char * argv[])
         printf("path=%s\n", [journalPath UTF8String]);
         printf("load_ok=%s\n", ok ? "true" : "false");
         printf("error=%s\n", error ? [[[error localizedDescription] description] UTF8String] : "<none>");
+        printf("loaded_from_store=%s\n", [journal loadedFromStore] ? "true" : "false");
         printf("version=%ld\n", (long)[[[journal properties] objectForKey:@"Version"] integerValue]);
         printf("title=%s\n", [[[[journal properties] objectForKey:@"Title"] description] UTF8String]);
         printf("entries=%lu\n", (unsigned long)[[journal entries] count]);
