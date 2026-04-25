@@ -14,6 +14,9 @@
 
 @interface JournlerEntry : JournlerObject
 - (NSDate *)creationDate;
+- (NSDate *)modificationDate;
+- (NSString *)category;
+- (NSArray *)tags;
 - (NSString *)packagePath;
 - (NSString *)attributedContentPath;
 - (NSAttributedString *)attributedContent;

@@ -187,6 +187,24 @@ static NSString * const JLRBackupDirectoryName = @".JnlrBackups";
     return [value isKindOfClass:[NSDate class]] ? value : nil;
 }
 
+- (NSDate *)modificationDate
+{
+    id value = [[self properties] objectForKey:@"Entry Cal Date Modified"];
+    return [value isKindOfClass:[NSDate class]] ? value : nil;
+}
+
+- (NSString *)category
+{
+    id value = [[self properties] objectForKey:@"Entry Category"];
+    return [value isKindOfClass:[NSString class]] ? value : nil;
+}
+
+- (NSArray *)tags
+{
+    id value = [[self properties] objectForKey:@"Entry Tags"];
+    return [value isKindOfClass:[NSArray class]] ? value : nil;
+}
+
 - (NSString *)packagePath
 {
     NSString *journalPath = [self sourceJournalPath];

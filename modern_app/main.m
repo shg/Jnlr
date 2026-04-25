@@ -10,6 +10,7 @@ static NSString *JLRWindowAutosaveName = @"JnlrMainWindow";
     NSTableView *_tableView;
     NSTextView *_textView;
     NSTextField *_titleLabel;
+    NSTextField *_summaryLabel;
     NSTextField *_metaLabel;
     NSTextField *_statusLabel;
     JLRCompatJournal *_journal;
@@ -45,6 +46,35 @@ static NSString *JLRFormatDate(NSDate *date)
         [formatter setTimeStyle:NSDateFormatterNoStyle];
     }
     return [formatter stringFromDate:date];
+}
+
+static NSString *JLRJoinTags(NSArray *tags)
+{
+    if (![tags isKindOfClass:[NSArray class]] || [tags count] == 0) {
+        return @"";
+    }
+    return [tags componentsJoinedByString:@", "];
+}
+
+static NSString *JLRListSubtitleForEntry(JournlerEntry *entry)
+{
+    NSMutableArray *parts = [NSMutableArray array];
+    NSString *date = JLRFormatDate([entry creationDate]);
+    if ([date length] > 0) {
+        [parts addObject:date];
+    }
+
+    NSString *category = [entry category];
+    if ([category length] > 0) {
+        [parts addObject:category];
+    }
+
+    NSString *tags = JLRJoinTags([entry tags]);
+    if ([tags length] > 0) {
+        [parts addObject:tags];
+    }
+
+    return [parts componentsJoinedByString:@"  ·  "];
 }
 
 static NSArray *JLRDefaultJournalCandidatePaths(void)
@@ -133,6 +163,7 @@ static int JLRRunSmokeTest(NSString *journalPath)
     [_tableView release];
     [_textView release];
     [_titleLabel release];
+    [_summaryLabel release];
     [_metaLabel release];
     [_statusLabel release];
     [_journal release];
@@ -222,6 +253,7 @@ static int JLRRunSmokeTest(NSString *journalPath)
     [_tableView setDataSource:self];
     [_tableView setUsesAlternatingRowBackgroundColors:YES];
     [_tableView setAllowsEmptySelection:YES];
+    [_tableView setRowHeight:40];
     [tableScroll setDocumentView:_tableView];
     [splitView addSubview:tableScroll];
 
@@ -239,12 +271,24 @@ static int JLRRunSmokeTest(NSString *journalPath)
     [_titleLabel setStringValue:@"No entry selected"];
     [detailView addSubview:_titleLabel];
 
-    _metaLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(20, NSHeight([detailView bounds]) - 84, NSWidth([detailView bounds]) - 40, 20)];
+    _summaryLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(20, NSHeight([detailView bounds]) - 84, NSWidth([detailView bounds]) - 40, 20)];
+    [_summaryLabel setBezeled:NO];
+    [_summaryLabel setDrawsBackground:NO];
+    [_summaryLabel setEditable:NO];
+    [_summaryLabel setSelectable:NO];
+    [_summaryLabel setTextColor:[NSColor secondaryLabelColor]];
+    [_summaryLabel setAutoresizingMask:NSViewWidthSizable | NSViewMinYMargin];
+    [detailView addSubview:_summaryLabel];
+
+    _metaLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(20, NSHeight([detailView bounds]) - 128, NSWidth([detailView bounds]) - 40, 40)];
     [_metaLabel setBezeled:NO];
     [_metaLabel setDrawsBackground:NO];
     [_metaLabel setEditable:NO];
     [_metaLabel setSelectable:NO];
     [_metaLabel setTextColor:[NSColor secondaryLabelColor]];
+    [_metaLabel setUsesSingleLineMode:NO];
+    [[_metaLabel cell] setWraps:YES];
+    [[_metaLabel cell] setScrollable:NO];
     [_metaLabel setAutoresizingMask:NSViewWidthSizable | NSViewMinYMargin];
     [detailView addSubview:_metaLabel];
 
@@ -257,7 +301,7 @@ static int JLRRunSmokeTest(NSString *journalPath)
     [_statusLabel setAutoresizingMask:NSViewWidthSizable | NSViewMaxYMargin];
     [detailView addSubview:_statusLabel];
 
-    NSScrollView *textScroll = [[[NSScrollView alloc] initWithFrame:NSMakeRect(20, 48, NSWidth([detailView bounds]) - 40, NSHeight([detailView bounds]) - 144)] autorelease];
+    NSScrollView *textScroll = [[[NSScrollView alloc] initWithFrame:NSMakeRect(20, 48, NSWidth([detailView bounds]) - 40, NSHeight([detailView bounds]) - 188)] autorelease];
     [textScroll setHasVerticalScroller:YES];
     [textScroll setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
     _textView = [[NSTextView alloc] initWithFrame:[[textScroll contentView] bounds]];
@@ -429,6 +473,7 @@ static int JLRRunSmokeTest(NSString *journalPath)
         [self refreshSelectedEntry];
     } else {
         [_titleLabel setStringValue:@"No entry selected"];
+        [_summaryLabel setStringValue:@""];
         [_metaLabel setStringValue:@""];
         [[_textView textStorage] setAttributedString:[[[NSAttributedString alloc] initWithString:@""] autorelease]];
     }
@@ -470,20 +515,34 @@ static int JLRRunSmokeTest(NSString *journalPath)
     static NSString *identifier = @"EntryCell";
     NSTableCellView *cell = [tableView makeViewWithIdentifier:identifier owner:self];
     if (cell == nil) {
-        cell = [[[NSTableCellView alloc] initWithFrame:NSMakeRect(0, 0, [tableColumn width], 22)] autorelease];
-        NSTextField *textField = [[[NSTextField alloc] initWithFrame:NSMakeRect(8, 1, [tableColumn width] - 16, 20)] autorelease];
+        cell = [[[NSTableCellView alloc] initWithFrame:NSMakeRect(0, 0, [tableColumn width], 38)] autorelease];
+        NSTextField *textField = [[[NSTextField alloc] initWithFrame:NSMakeRect(8, 18, [tableColumn width] - 16, 17)] autorelease];
         [textField setBezeled:NO];
         [textField setDrawsBackground:NO];
         [textField setEditable:NO];
         [textField setSelectable:NO];
+        [textField setFont:[NSFont systemFontOfSize:13 weight:NSFontWeightMedium]];
+
+        NSTextField *subtitleField = [[[NSTextField alloc] initWithFrame:NSMakeRect(8, 2, [tableColumn width] - 16, 15)] autorelease];
+        [subtitleField setBezeled:NO];
+        [subtitleField setDrawsBackground:NO];
+        [subtitleField setEditable:NO];
+        [subtitleField setSelectable:NO];
+        [subtitleField setFont:[NSFont systemFontOfSize:11]];
+        [subtitleField setTextColor:[NSColor secondaryLabelColor]];
+        [subtitleField setTag:1001];
+
         [cell setIdentifier:identifier];
         [cell setTextField:textField];
         [cell addSubview:textField];
+        [cell addSubview:subtitleField];
     }
 
     JournlerEntry *entry = [_entries objectAtIndex:row];
     NSString *title = [entry title];
     [[cell textField] setStringValue:(title != nil && [title length] > 0) ? title : @"(untitled)"];
+    NSTextField *subtitleField = [cell viewWithTag:1001];
+    [subtitleField setStringValue:JLRListSubtitleForEntry(entry)];
     return cell;
 }
 
@@ -494,6 +553,7 @@ static int JLRRunSmokeTest(NSString *journalPath)
     if (row < 0 || row >= (NSInteger)[_entries count]) {
         _selectedEntry = nil;
         [_titleLabel setStringValue:@"No entry selected"];
+        [_summaryLabel setStringValue:@""];
         [_metaLabel setStringValue:@""];
         [[_textView textStorage] setAttributedString:[[[NSAttributedString alloc] initWithString:@""] autorelease]];
         _isRefreshingEditor = NO;
@@ -503,7 +563,18 @@ static int JLRRunSmokeTest(NSString *journalPath)
     JournlerEntry *entry = [_entries objectAtIndex:row];
     _selectedEntry = entry;
     [_titleLabel setStringValue:([entry title] && [[entry title] length] > 0) ? [entry title] : @"(untitled)"];
-    [_metaLabel setStringValue:[NSString stringWithFormat:@"Tag %@   %@", [entry tagID] ?: @"-", JLRFormatDate([entry creationDate])]];
+    [_summaryLabel setStringValue:JLRListSubtitleForEntry(entry)];
+
+    NSString *created = JLRFormatDate([entry creationDate]);
+    NSString *modified = JLRFormatDate([entry modificationDate]);
+    NSString *category = [entry category] ?: @"";
+    NSString *tags = JLRJoinTags([entry tags]);
+    [_metaLabel setStringValue:[NSString stringWithFormat:@"Created: %@    Modified: %@\nCategory: %@    Tags: %@    Entry ID: %@",
+                                ([created length] > 0 ? created : @"-"),
+                                ([modified length] > 0 ? modified : @"-"),
+                                ([category length] > 0 ? category : @"-"),
+                                ([tags length] > 0 ? tags : @"-"),
+                                [entry tagID] ?: @"-"]];
 
     NSError *error = nil;
     NSAttributedString *content = [entry loadAttributedContent:&error];
