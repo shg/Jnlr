@@ -4,9 +4,24 @@
 
 static NSString *JLRWindowAutosaveName = @"JnlrMainWindow";
 
-@interface JLRAppDelegate : NSObject <NSApplicationDelegate, NSTableViewDataSource, NSTableViewDelegate, NSTextViewDelegate, NSTextFieldDelegate>
+@interface JLRSidebarNode : NSObject
+{
+    NSString *_title;
+    JournlerCollection *_collection;
+    NSMutableArray *_children;
+}
+
+- (instancetype)initWithTitle:(NSString *)title collection:(JournlerCollection *)collection;
+- (void)addChild:(JLRSidebarNode *)child;
+- (NSString *)title;
+- (JournlerCollection *)collection;
+- (NSArray *)children;
+@end
+
+@interface JLRAppDelegate : NSObject <NSApplicationDelegate, NSOutlineViewDataSource, NSOutlineViewDelegate, NSTableViewDataSource, NSTableViewDelegate, NSTextViewDelegate, NSTextFieldDelegate>
 {
     NSWindow *_window;
+    NSOutlineView *_sidebarView;
     NSTableView *_tableView;
     NSTextView *_textView;
     NSTextField *_titleLabel;
@@ -14,7 +29,9 @@ static NSString *JLRWindowAutosaveName = @"JnlrMainWindow";
     NSTextField *_metaLabel;
     NSTextField *_statusLabel;
     JLRCompatJournal *_journal;
+    NSArray *_allEntries;
     NSArray *_entries;
+    NSArray *_sidebarItems;
     NSString *_initialJournalPath;
     JournlerEntry *_selectedEntry;
     BOOL _entryHasUnsavedChanges;
@@ -30,6 +47,8 @@ static NSString *JLRWindowAutosaveName = @"JnlrMainWindow";
 - (BOOL)promptToSaveIfNeeded;
 - (void)updateStatusLabel;
 - (void)markSelectedEntryDirty;
+- (void)rebuildSidebarItems;
+- (void)applySidebarSelection;
 - (void)refreshSelectedEntry;
 @end
 
@@ -118,6 +137,27 @@ static NSInteger JLREntrySort(id leftEntry, id rightEntry, void *context)
     return [leftTitle localizedCaseInsensitiveCompare:rightTitle];
 }
 
+static NSInteger JLRCollectionSort(id leftCollection, id rightCollection, void *context)
+{
+    NSNumber *leftIndex = [leftCollection indexValue];
+    NSNumber *rightIndex = [rightCollection indexValue];
+
+    if (leftIndex != nil && rightIndex != nil) {
+        NSComparisonResult indexResult = [leftIndex compare:rightIndex];
+        if (indexResult != NSOrderedSame) {
+            return indexResult;
+        }
+    } else if (leftIndex != nil) {
+        return NSOrderedAscending;
+    } else if (rightIndex != nil) {
+        return NSOrderedDescending;
+    }
+
+    NSString *leftTitle = [leftCollection title] ?: @"";
+    NSString *rightTitle = [rightCollection title] ?: @"";
+    return [leftTitle localizedCaseInsensitiveCompare:rightTitle];
+}
+
 static int JLRRunSmokeTest(NSString *journalPath)
 {
     JLRCompatJournal *journal = [[JLRCompatJournal alloc] initWithPath:journalPath];
@@ -145,6 +185,38 @@ static int JLRRunSmokeTest(NSString *journalPath)
     return ok ? 0 : 1;
 }
 
+@implementation JLRSidebarNode
+
+- (instancetype)initWithTitle:(NSString *)title collection:(JournlerCollection *)collection
+{
+    self = [super init];
+    if (self) {
+        _title = [title copy];
+        _collection = [collection retain];
+        _children = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [_title release];
+    [_collection release];
+    [_children release];
+    [super dealloc];
+}
+
+- (void)addChild:(JLRSidebarNode *)child
+{
+    [_children addObject:child];
+}
+
+- (NSString *)title { return _title; }
+- (JournlerCollection *)collection { return _collection; }
+- (NSArray *)children { return _children; }
+
+@end
+
 @implementation JLRAppDelegate
 
 - (instancetype)initWithInitialJournalPath:(NSString *)path
@@ -152,7 +224,9 @@ static int JLRRunSmokeTest(NSString *journalPath)
     self = [super init];
     if (self) {
         _initialJournalPath = [path copy];
+        _allEntries = [[NSArray alloc] init];
         _entries = [[NSArray alloc] init];
+        _sidebarItems = [[NSArray alloc] init];
     }
     return self;
 }
@@ -160,6 +234,7 @@ static int JLRRunSmokeTest(NSString *journalPath)
 - (void)dealloc
 {
     [_window release];
+    [_sidebarView release];
     [_tableView release];
     [_textView release];
     [_titleLabel release];
@@ -167,7 +242,9 @@ static int JLRRunSmokeTest(NSString *journalPath)
     [_metaLabel release];
     [_statusLabel release];
     [_journal release];
+    [_allEntries release];
     [_entries release];
+    [_sidebarItems release];
     [_initialJournalPath release];
     [super dealloc];
 }
@@ -233,13 +310,38 @@ static int JLRRunSmokeTest(NSString *journalPath)
     [_window setFrameAutosaveName:JLRWindowAutosaveName];
 
     NSView *contentView = [_window contentView];
-    NSSplitView *splitView = [[[NSSplitView alloc] initWithFrame:[contentView bounds]] autorelease];
-    [splitView setVertical:YES];
-    [splitView setDividerStyle:NSSplitViewDividerStyleThin];
-    [splitView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-    [contentView addSubview:splitView];
+    NSSplitView *outerSplitView = [[[NSSplitView alloc] initWithFrame:[contentView bounds]] autorelease];
+    [outerSplitView setVertical:YES];
+    [outerSplitView setDividerStyle:NSSplitViewDividerStyleThin];
+    [outerSplitView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    [contentView addSubview:outerSplitView];
 
-    NSScrollView *tableScroll = [[[NSScrollView alloc] initWithFrame:NSMakeRect(0, 0, 340, NSHeight([splitView bounds]))] autorelease];
+    NSScrollView *sidebarScroll = [[[NSScrollView alloc] initWithFrame:NSMakeRect(0, 0, 220, NSHeight([outerSplitView bounds]))] autorelease];
+    [sidebarScroll setHasVerticalScroller:YES];
+    [sidebarScroll setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+
+    _sidebarView = [[NSOutlineView alloc] initWithFrame:[sidebarScroll bounds]];
+    NSTableColumn *sidebarColumn = [[[NSTableColumn alloc] initWithIdentifier:@"sidebar"] autorelease];
+    [sidebarColumn setTitle:@"Collections"];
+    [sidebarColumn setWidth:200];
+    [_sidebarView addTableColumn:sidebarColumn];
+    [_sidebarView setOutlineTableColumn:sidebarColumn];
+    [_sidebarView setHeaderView:nil];
+    [_sidebarView setDelegate:self];
+    [_sidebarView setDataSource:self];
+    [_sidebarView setUsesAlternatingRowBackgroundColors:YES];
+    [_sidebarView setAllowsEmptySelection:NO];
+    [_sidebarView setRowHeight:28];
+    [sidebarScroll setDocumentView:_sidebarView];
+    [outerSplitView addSubview:sidebarScroll];
+
+    NSSplitView *contentSplitView = [[[NSSplitView alloc] initWithFrame:NSMakeRect(0, 0, 980, NSHeight([outerSplitView bounds]))] autorelease];
+    [contentSplitView setVertical:YES];
+    [contentSplitView setDividerStyle:NSSplitViewDividerStyleThin];
+    [contentSplitView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    [outerSplitView addSubview:contentSplitView];
+
+    NSScrollView *tableScroll = [[[NSScrollView alloc] initWithFrame:NSMakeRect(0, 0, 340, NSHeight([contentSplitView bounds]))] autorelease];
     [tableScroll setHasVerticalScroller:YES];
     [tableScroll setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
 
@@ -255,9 +357,9 @@ static int JLRRunSmokeTest(NSString *journalPath)
     [_tableView setAllowsEmptySelection:YES];
     [_tableView setRowHeight:40];
     [tableScroll setDocumentView:_tableView];
-    [splitView addSubview:tableScroll];
+    [contentSplitView addSubview:tableScroll];
 
-    NSView *detailView = [[[NSView alloc] initWithFrame:NSMakeRect(0, 0, 860, NSHeight([splitView bounds]))] autorelease];
+    NSView *detailView = [[[NSView alloc] initWithFrame:NSMakeRect(0, 0, 860, NSHeight([contentSplitView bounds]))] autorelease];
     [detailView setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
 
     _titleLabel = [[NSTextField alloc] initWithFrame:NSMakeRect(20, NSHeight([detailView bounds]) - 56, NSWidth([detailView bounds]) - 40, 28)];
@@ -313,17 +415,97 @@ static int JLRRunSmokeTest(NSString *journalPath)
     [textScroll setDocumentView:_textView];
     [detailView addSubview:textScroll];
 
-    [splitView addSubview:detailView];
-    [splitView adjustSubviews];
-    [splitView setPosition:340 ofDividerAtIndex:0];
+    [contentSplitView addSubview:detailView];
+    [contentSplitView adjustSubviews];
+    [contentSplitView setPosition:340 ofDividerAtIndex:0];
+    [outerSplitView adjustSubviews];
+    [outerSplitView setPosition:220 ofDividerAtIndex:0];
 }
 
 - (void)setEntriesFromJournal:(JLRCompatJournal *)journal
 {
     NSArray *sortedEntries = [[journal entries] sortedArrayUsingFunction:JLREntrySort context:NULL];
 
+    [_allEntries release];
+    _allEntries = [sortedEntries copy];
+
     [_entries release];
     _entries = [sortedEntries copy];
+}
+
+- (void)rebuildSidebarItems
+{
+    NSMutableArray *roots = [NSMutableArray array];
+    JLRSidebarNode *allEntriesNode = [[[JLRSidebarNode alloc] initWithTitle:@"All Entries" collection:nil] autorelease];
+    [roots addObject:allEntriesNode];
+
+    NSArray *sortedCollections = [[_journal collections] sortedArrayUsingFunction:JLRCollectionSort context:NULL];
+    NSMutableDictionary *nodesByTag = [NSMutableDictionary dictionary];
+
+    for (JournlerCollection *collection in sortedCollections) {
+        NSString *title = [collection title];
+        if ([title length] == 0) {
+            title = @"(untitled collection)";
+        }
+        JLRSidebarNode *node = [[[JLRSidebarNode alloc] initWithTitle:title collection:collection] autorelease];
+        NSNumber *tagID = [collection tagID];
+        if (tagID != nil) {
+            [nodesByTag setObject:node forKey:tagID];
+        }
+    }
+
+    for (JournlerCollection *collection in sortedCollections) {
+        JLRSidebarNode *node = [nodesByTag objectForKey:[collection tagID]];
+        NSNumber *parentID = [collection parentID];
+        JLRSidebarNode *parentNode = (parentID != nil ? [nodesByTag objectForKey:parentID] : nil);
+
+        if (parentNode != nil && [parentID integerValue] >= 0) {
+            [parentNode addChild:node];
+        } else {
+            [roots addObject:node];
+        }
+    }
+
+    [_sidebarItems release];
+    _sidebarItems = [roots copy];
+}
+
+- (void)applySidebarSelection
+{
+    id item = [_sidebarView itemAtRow:[_sidebarView selectedRow]];
+    if (item == nil && [_sidebarItems count] > 0) {
+        item = [_sidebarItems objectAtIndex:0];
+    }
+
+    JournlerCollection *collection = [item collection];
+    NSArray *visibleEntries = nil;
+
+    if (collection == nil) {
+        visibleEntries = _allEntries;
+    } else {
+        NSSet *entryIDs = [NSSet setWithArray:[collection entryIDs] ?: [NSArray array]];
+        NSMutableArray *filtered = [NSMutableArray array];
+        for (JournlerEntry *entry in _allEntries) {
+            if ([entryIDs containsObject:[entry tagID]]) {
+                [filtered addObject:entry];
+            }
+        }
+        visibleEntries = filtered;
+    }
+
+    [_entries release];
+    _entries = [visibleEntries copy];
+    [_tableView reloadData];
+
+    if ([_entries count] > 0) {
+        [_tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
+        [self refreshSelectedEntry];
+    } else {
+        [_titleLabel setStringValue:@"No entry selected"];
+        [_summaryLabel setStringValue:@""];
+        [_metaLabel setStringValue:@""];
+        [[_textView textStorage] setAttributedString:[[[NSAttributedString alloc] initWithString:@""] autorelease]];
+    }
 }
 
 - (JournlerEntry *)currentSelectedEntry
@@ -377,7 +559,7 @@ static int JLRRunSmokeTest(NSString *journalPath)
     NSNumber *selectedTag = [entry tagID];
     _entryHasUnsavedChanges = NO;
     [self setEntriesFromJournal:_journal];
-    [_tableView reloadData];
+    [self applySidebarSelection];
 
     NSInteger rowToSelect = NSNotFound;
     for (NSInteger i = 0; i < (NSInteger)[_entries count]; i++) {
@@ -463,15 +645,17 @@ static int JLRRunSmokeTest(NSString *journalPath)
     _entryHasUnsavedChanges = NO;
 
     [self setEntriesFromJournal:_journal];
+    [self rebuildSidebarItems];
+    [_sidebarView reloadData];
+    [_sidebarView expandItem:nil expandChildren:YES];
+    [_sidebarView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
+    [self applySidebarSelection];
     [_tableView reloadData];
 
     [_window setTitle:[NSString stringWithFormat:@"Jnlr - %@", [[_journal properties] objectForKey:@"Title"] ?: @"Journal"]];
     [self updateStatusLabel];
 
-    if ([_entries count] > 0) {
-        [_tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
-        [self refreshSelectedEntry];
-    } else {
+    if ([_entries count] == 0) {
         [_titleLabel setStringValue:@"No entry selected"];
         [_summaryLabel setStringValue:@""];
         [_metaLabel setStringValue:@""];
@@ -508,6 +692,65 @@ static int JLRRunSmokeTest(NSString *journalPath)
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
     return [_entries count];
+}
+
+- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item
+{
+    if (outlineView != _sidebarView) {
+        return 0;
+    }
+
+    if (item == nil) {
+        return [_sidebarItems count];
+    }
+
+    return [[item children] count];
+}
+
+- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item
+{
+    if (outlineView != _sidebarView) {
+        return nil;
+    }
+
+    if (item == nil) {
+        return [_sidebarItems objectAtIndex:index];
+    }
+
+    return [[item children] objectAtIndex:index];
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item
+{
+    return ([[item children] count] > 0);
+}
+
+- (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item
+{
+    static NSString *sidebarIdentifier = @"SidebarCell";
+    NSTableCellView *cell = [outlineView makeViewWithIdentifier:sidebarIdentifier owner:self];
+    if (cell == nil) {
+        cell = [[[NSTableCellView alloc] initWithFrame:NSMakeRect(0, 0, [tableColumn width], 24)] autorelease];
+        NSTextField *textField = [[[NSTextField alloc] initWithFrame:NSMakeRect(6, 4, [tableColumn width] - 12, 18)] autorelease];
+        [textField setBezeled:NO];
+        [textField setDrawsBackground:NO];
+        [textField setEditable:NO];
+        [textField setSelectable:NO];
+        [textField setFont:[NSFont systemFontOfSize:13 weight:NSFontWeightMedium]];
+        [cell setIdentifier:sidebarIdentifier];
+        [cell setTextField:textField];
+        [cell addSubview:textField];
+    }
+
+    NSString *title = [item title];
+    JournlerCollection *collection = [item collection];
+    if (collection != nil) {
+        title = [NSString stringWithFormat:@"%@ (%lu)", title, (unsigned long)[[collection entryIDs] count]];
+    } else {
+        title = [NSString stringWithFormat:@"%@ (%lu)", title, (unsigned long)[_allEntries count]];
+    }
+    [[cell textField] setStringValue:title];
+    return cell;
 }
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
@@ -597,9 +840,29 @@ static int JLRRunSmokeTest(NSString *journalPath)
     return [self promptToSaveIfNeeded];
 }
 
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item
+{
+    if (outlineView != _sidebarView) {
+        return YES;
+    }
+
+    if (item == [_sidebarView itemAtRow:[_sidebarView selectedRow]]) {
+        return YES;
+    }
+
+    return [self promptToSaveIfNeeded];
+}
+
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
     [self refreshSelectedEntry];
+}
+
+- (void)outlineViewSelectionDidChange:(NSNotification *)notification
+{
+    if ([notification object] == _sidebarView) {
+        [self applySidebarSelection];
+    }
 }
 
 - (void)controlTextDidChange:(NSNotification *)notification

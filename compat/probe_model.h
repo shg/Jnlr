@@ -26,6 +26,11 @@
 @end
 
 @interface JournlerCollection : JournlerObject
+- (NSArray *)entryIDs;
+- (NSArray *)childrenIDs;
+- (NSNumber *)parentID;
+- (NSNumber *)typeID;
+- (NSNumber *)indexValue;
 @end
 
 @interface JournlerResource : JournlerObject

@@ -295,6 +295,36 @@ static NSString * const JLRBackupDirectoryName = @".JnlrBackups";
     [encoder encodeObject:[self properties] forKey:@"JCollProperties"];
 }
 
+- (NSArray *)entryIDs
+{
+    id value = [[self properties] objectForKey:@"entryIDs"];
+    return [value isKindOfClass:[NSArray class]] ? value : nil;
+}
+
+- (NSArray *)childrenIDs
+{
+    id value = [[self properties] objectForKey:@"childrenIDs"];
+    return [value isKindOfClass:[NSArray class]] ? value : nil;
+}
+
+- (NSNumber *)parentID
+{
+    id value = [[self properties] objectForKey:@"parentID"];
+    return [value isKindOfClass:[NSNumber class]] ? value : nil;
+}
+
+- (NSNumber *)typeID
+{
+    id value = [[self properties] objectForKey:@"typeID"];
+    return [value isKindOfClass:[NSNumber class]] ? value : nil;
+}
+
+- (NSNumber *)indexValue
+{
+    id value = [[self properties] objectForKey:@"index"];
+    return [value isKindOfClass:[NSNumber class]] ? value : nil;
+}
+
 @end
 
 @implementation JournlerResource
