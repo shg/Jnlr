@@ -183,13 +183,19 @@ static NSString * const JLRBackupDirectoryName = @".JnlrBackups";
 
 - (NSDate *)creationDate
 {
-    id value = [[self properties] objectForKey:@"Entry Date"];
+    id value = [[self properties] objectForKey:@"Entry Cal Date"];
+    if (![value isKindOfClass:[NSDate class]]) {
+        value = [[self properties] objectForKey:@"Entry Date"];
+    }
     return [value isKindOfClass:[NSDate class]] ? value : nil;
 }
 
 - (NSDate *)modificationDate
 {
     id value = [[self properties] objectForKey:@"Entry Cal Date Modified"];
+    if (![value isKindOfClass:[NSDate class]]) {
+        value = [[self properties] objectForKey:@"Entry Date Modified"];
+    }
     return [value isKindOfClass:[NSDate class]] ? value : nil;
 }
 
