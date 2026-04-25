@@ -2,10 +2,13 @@
 
 static NSString * const JLRPropertiesFilename = @"Journler.plist";
 static NSString * const JLRStoreFilename = @"JournlerStore.dict";
+static NSString * const JLREntryRTFDFilename = @"Entry.rtfd";
+static NSString * const JLREntryRTFFilename = @"TXT.rtf";
 
 @interface JournlerObject ()
 {
     NSMutableDictionary *_properties;
+    NSString *_sourceJournalPath;
 }
 @end
 
@@ -33,6 +36,7 @@ static NSString * const JLRStoreFilename = @"JournlerStore.dict";
 - (void)dealloc
 {
     [_properties release];
+    [_sourceJournalPath release];
     [super dealloc];
 }
 
@@ -45,6 +49,19 @@ static NSString * const JLRStoreFilename = @"JournlerStore.dict";
 {
     if ([properties isKindOfClass:[NSDictionary class]]) {
         [_properties addEntriesFromDictionary:properties];
+    }
+}
+
+- (NSString *)sourceJournalPath
+{
+    return _sourceJournalPath;
+}
+
+- (void)setSourceJournalPath:(NSString *)path
+{
+    if (_sourceJournalPath != path) {
+        [_sourceJournalPath release];
+        _sourceJournalPath = [path copy];
     }
 }
 
@@ -128,6 +145,68 @@ static NSString * const JLRStoreFilename = @"JournlerStore.dict";
 - (NSArray *)resourceIDs
 {
     return _resourceIDs;
+}
+
+- (NSDate *)creationDate
+{
+    id value = [[self properties] objectForKey:@"Entry Date"];
+    return [value isKindOfClass:[NSDate class]] ? value : nil;
+}
+
+- (NSString *)packagePath
+{
+    NSString *journalPath = [self sourceJournalPath];
+    NSNumber *tagID = [self tagID];
+    if (journalPath == nil || tagID == nil) {
+        return nil;
+    }
+
+    NSString *entriesPath = [journalPath stringByAppendingPathComponent:@"Journler Entries"];
+    NSString *entryDirectory = [NSString stringWithFormat:@"Entry %@", tagID];
+    return [entriesPath stringByAppendingPathComponent:entryDirectory];
+}
+
+- (NSString *)attributedContentPath
+{
+    NSString *packagePath = [self packagePath];
+    if (packagePath == nil) {
+        return nil;
+    }
+
+    return [[packagePath stringByAppendingPathComponent:@"_Text.jrtfd"] stringByAppendingPathComponent:JLREntryRTFDFilename];
+}
+
+- (NSAttributedString *)loadAttributedContent:(NSError **)error
+{
+    NSString *contentPath = [self attributedContentPath];
+    if (contentPath == nil) {
+        if (error) {
+            *error = [NSError errorWithDomain:@"JLRCompatJournal"
+                                         code:4
+                                     userInfo:@{NSLocalizedDescriptionKey: @"Entry did not resolve to a content path"}];
+        }
+        return nil;
+    }
+
+    NSURL *contentURL = [NSURL fileURLWithPath:contentPath];
+    NSFileWrapper *wrapper = [[[NSFileWrapper alloc] initWithURL:contentURL
+                                                         options:0
+                                                           error:error] autorelease];
+    if (wrapper != nil) {
+        NSAttributedString *rtfdContent = [[[NSAttributedString alloc] initWithRTFDFileWrapper:wrapper
+                                                                            documentAttributes:NULL] autorelease];
+        if (rtfdContent != nil) {
+            return rtfdContent;
+        }
+    }
+
+    NSString *rtfPath = [contentPath stringByAppendingPathComponent:JLREntryRTFFilename];
+    NSURL *rtfURL = [NSURL fileURLWithPath:rtfPath];
+    NSDictionary *options = @{NSDocumentTypeDocumentOption: NSRTFTextDocumentType};
+    return [[[NSAttributedString alloc] initWithURL:rtfURL
+                                            options:options
+                                 documentAttributes:NULL
+                                              error:error] autorelease];
 }
 
 @end
@@ -220,6 +299,15 @@ static NSString * const JLRStoreFilename = @"JournlerStore.dict";
 @end
 
 @implementation JLRCompatJournal
+
+- (void)assignJournalPath:(NSString *)journalPath toObjects:(NSArray *)objects
+{
+    for (id object in objects) {
+        if ([object respondsToSelector:@selector(setSourceJournalPath:)]) {
+            [object setSourceJournalPath:journalPath];
+        }
+    }
+}
 
 - (instancetype)initWithPath:(NSString *)path
 {
@@ -340,20 +428,25 @@ static NSString * const JLRStoreFilename = @"JournlerStore.dict";
 
     [_entries release];
     _entries = [[self decodeEntries:encodedEntries] copy];
+    [self assignJournalPath:_path toObjects:_entries];
 
     [_collections release];
     _collections = [[self decodeArchivedObjects:encodedCollections] copy];
+    [self assignJournalPath:_path toObjects:_collections];
 
     [_resources release];
     _resources = [[self decodeArchivedObjects:encodedResources] copy];
+    [self assignJournalPath:_path toObjects:_resources];
 
     [_blogs release];
     _blogs = [[self decodeArchivedObjects:encodedBlogs] copy];
+    [self assignJournalPath:_path toObjects:_blogs];
 
     return YES;
 }
 
 - (NSDictionary *)properties { return _properties; }
+- (NSString *)path { return _path; }
 - (NSArray *)entries { return _entries; }
 - (NSArray *)collections { return _collections; }
 - (NSArray *)resources { return _resources; }

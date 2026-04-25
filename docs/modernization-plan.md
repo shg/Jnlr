@@ -54,6 +54,21 @@ Confirmed on the supplied journal:
 - keyed unarchiving succeeds for all store-backed entries
 - decoded counts match the store exactly
 - first decoded entry returns a valid tag and title
+- the first entry body can be loaded from `_Text.jrtfd/Entry.rtfd/TXT.rtf`
+
+An additional minimal AppKit viewer now builds outside the legacy Xcode project:
+
+- app sources: `modern_app/main.m`
+- bundle build script: `tools/build_minimal_app.sh`
+- output: `build/JournlerMini.app`
+
+Current verified behavior of the minimal viewer:
+
+- builds on current macOS
+- supports a `--smoke-test <journal-path>` mode for headless verification
+- loads the supplied journal successfully
+- shows store-backed entries in read-only mode
+- loads entry body text for the first verified sample entry
 
 Interpretation:
 
@@ -184,9 +199,11 @@ After the compatibility core works:
 2. Vendor only the source files needed from `SproutedUtilities` and related
    sibling repos.
 3. Make the supplied journal load in a non-UI executable.
-4. Add regression checks around counts and sample entries.
-5. Make save round-trip succeed.
-6. Only then start rebuilding application UI.
+4. Add a minimal read-only app shell around the compatibility core.
+5. Add regression checks around counts and sample entries.
+6. Implement directory fallback when `JournlerStore.dict` is missing or stale.
+7. Make save round-trip succeed.
+8. Only then start rebuilding broader application UI.
 
 ## Why not start with the UI
 

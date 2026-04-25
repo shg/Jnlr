@@ -6,10 +6,16 @@
 - (NSDictionary *)properties;
 - (NSNumber *)tagID;
 - (NSString *)title;
+- (NSString *)sourceJournalPath;
+- (void)setSourceJournalPath:(NSString *)path;
 - (void)mergeArchivedProperties:(NSDictionary *)properties;
 @end
 
 @interface JournlerEntry : JournlerObject
+- (NSDate *)creationDate;
+- (NSString *)packagePath;
+- (NSString *)attributedContentPath;
+- (NSAttributedString *)loadAttributedContent:(NSError **)error;
 - (NSArray *)resourceIDs;
 @end
 
@@ -25,6 +31,7 @@
 @interface JLRCompatJournal : NSObject
 - (instancetype)initWithPath:(NSString *)path;
 - (BOOL)load:(NSError **)error;
+- (NSString *)path;
 - (NSDictionary *)properties;
 - (NSArray *)entries;
 - (NSArray *)collections;

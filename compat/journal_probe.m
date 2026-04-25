@@ -30,6 +30,13 @@ int main(int argc, const char * argv[])
             id entry = [[journal entries] objectAtIndex:0];
             printf("first_entry_tag=%ld\n", (long)[[entry tagID] integerValue]);
             printf("first_entry_title=%s\n", [[[entry title] description] UTF8String]);
+
+            NSError *contentError = nil;
+            NSAttributedString *content = [entry loadAttributedContent:&contentError];
+            printf("first_entry_content_ok=%s\n", content ? "true" : "false");
+            printf("first_entry_content_error=%s\n",
+                   contentError ? [[[contentError localizedDescription] description] UTF8String] : "<none>");
+            printf("first_entry_content_length=%lu\n", (unsigned long)[content length]);
         }
 
         NSUInteger issueLimit = MIN((NSUInteger)5, [[journal entryDecodeIssues] count]);
