@@ -2,7 +2,7 @@
 
 #import "../compat/probe_model.h"
 
-static NSString *JLRWindowAutosaveName = @"JournlerMiniMainWindow";
+static NSString *JLRWindowAutosaveName = @"JnlrMainWindow";
 
 @interface JLRAppDelegate : NSObject <NSApplicationDelegate, NSTableViewDataSource, NSTableViewDelegate>
 {
@@ -163,12 +163,12 @@ static int JLRRunSmokeTest(NSString *journalPath)
     NSMenu *mainMenu = [[[NSMenu alloc] initWithTitle:@"MainMenu"] autorelease];
     [NSApp setMainMenu:mainMenu];
 
-    NSMenuItem *appItem = [[[NSMenuItem alloc] initWithTitle:@"JournlerMini" action:NULL keyEquivalent:@""] autorelease];
+    NSMenuItem *appItem = [[[NSMenuItem alloc] initWithTitle:@"Jnlr" action:NULL keyEquivalent:@""] autorelease];
     [mainMenu addItem:appItem];
 
-    NSMenu *appMenu = [[[NSMenu alloc] initWithTitle:@"JournlerMini"] autorelease];
+    NSMenu *appMenu = [[[NSMenu alloc] initWithTitle:@"Jnlr"] autorelease];
     [appItem setSubmenu:appMenu];
-    [appMenu addItemWithTitle:@"Quit JournlerMini" action:@selector(terminate:) keyEquivalent:@"q"];
+    [appMenu addItemWithTitle:@"Quit Jnlr" action:@selector(terminate:) keyEquivalent:@"q"];
 
     NSMenuItem *fileItem = [[[NSMenuItem alloc] initWithTitle:@"File" action:NULL keyEquivalent:@""] autorelease];
     [mainMenu addItem:fileItem];
@@ -189,7 +189,7 @@ static int JLRRunSmokeTest(NSString *journalPath)
                                                      NSWindowStyleMaskMiniaturizable)
                                             backing:NSBackingStoreBuffered
                                               defer:NO];
-    [_window setTitle:@"JournlerMini"];
+    [_window setTitle:@"Jnlr"];
     [_window setFrameAutosaveName:JLRWindowAutosaveName];
 
     NSView *contentView = [_window contentView];
@@ -290,7 +290,7 @@ static int JLRRunSmokeTest(NSString *journalPath)
     [self setEntriesFromJournal:_journal];
     [_tableView reloadData];
 
-    [_window setTitle:[NSString stringWithFormat:@"JournlerMini - %@", [[_journal properties] objectForKey:@"Title"] ?: @"Journal"]];
+    [_window setTitle:[NSString stringWithFormat:@"Jnlr - %@", [[_journal properties] objectForKey:@"Title"] ?: @"Journal"]];
     [_statusLabel setStringValue:[NSString stringWithFormat:@"Read-only mode. %@ entries, %@ resources, %@ collections",
                                   @([_entries count]),
                                   @([[_journal resources] count]),

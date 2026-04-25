@@ -3,11 +3,11 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-APP_DIR="${ROOT}/build/JournlerMini.app"
+APP_DIR="${ROOT}/build/Jnlr.app"
 CONTENTS_DIR="${APP_DIR}/Contents"
 MACOS_DIR="${CONTENTS_DIR}/MacOS"
 RESOURCES_DIR="${CONTENTS_DIR}/Resources"
-EXECUTABLE="${MACOS_DIR}/JournlerMini"
+EXECUTABLE="${MACOS_DIR}/Jnlr"
 
 mkdir -p "${MACOS_DIR}" "${RESOURCES_DIR}"
 

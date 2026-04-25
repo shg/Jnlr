@@ -60,7 +60,7 @@ An additional minimal AppKit viewer now builds outside the legacy Xcode project:
 
 - app sources: `modern_app/main.m`
 - bundle build script: `tools/build_minimal_app.sh`
-- output: `build/JournlerMini.app`
+- output: `build/Jnlr.app`
 
 Current verified behavior of the minimal viewer:
 

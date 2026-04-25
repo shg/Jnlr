@@ -5,13 +5,13 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
-	<string>JournlerMini</string>
+	<string>Jnlr</string>
 	<key>CFBundleIdentifier</key>
-	<string>local.jnlr.JournlerMini</string>
+	<string>local.jnlr.Jnlr</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>JournlerMini</string>
+	<string>Jnlr</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
