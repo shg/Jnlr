@@ -347,15 +347,31 @@ static int JLRRunSmokeTest(NSString *journalPath)
 
     _tableView = [[NSTableView alloc] initWithFrame:[tableScroll bounds]];
     NSTableColumn *titleColumn = [[[NSTableColumn alloc] initWithIdentifier:@"title"] autorelease];
-    [titleColumn setTitle:@"Entries"];
-    [titleColumn setWidth:320];
+    [titleColumn setTitle:@"Title"];
+    [titleColumn setWidth:220];
     [_tableView addTableColumn:titleColumn];
-    [_tableView setHeaderView:nil];
+
+    NSTableColumn *dateColumn = [[[NSTableColumn alloc] initWithIdentifier:@"date"] autorelease];
+    [dateColumn setTitle:@"Date"];
+    [dateColumn setWidth:110];
+    [_tableView addTableColumn:dateColumn];
+
+    NSTableColumn *categoryColumn = [[[NSTableColumn alloc] initWithIdentifier:@"category"] autorelease];
+    [categoryColumn setTitle:@"Category"];
+    [categoryColumn setWidth:110];
+    [_tableView addTableColumn:categoryColumn];
+
+    NSTableColumn *tagsColumn = [[[NSTableColumn alloc] initWithIdentifier:@"tags"] autorelease];
+    [tagsColumn setTitle:@"Tags"];
+    [tagsColumn setWidth:180];
+    [_tableView addTableColumn:tagsColumn];
+
     [_tableView setDelegate:self];
     [_tableView setDataSource:self];
     [_tableView setUsesAlternatingRowBackgroundColors:YES];
     [_tableView setAllowsEmptySelection:YES];
-    [_tableView setRowHeight:40];
+    [_tableView setRowHeight:24];
+    [_tableView setColumnAutoresizingStyle:NSTableViewLastColumnOnlyAutoresizingStyle];
     [tableScroll setDocumentView:_tableView];
     [contentSplitView addSubview:tableScroll];
 
@@ -755,37 +771,42 @@ static int JLRRunSmokeTest(NSString *journalPath)
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    static NSString *identifier = @"EntryCell";
+    NSString *identifier = [NSString stringWithFormat:@"EntryCell-%@", [tableColumn identifier]];
     NSTableCellView *cell = [tableView makeViewWithIdentifier:identifier owner:self];
     if (cell == nil) {
-        cell = [[[NSTableCellView alloc] initWithFrame:NSMakeRect(0, 0, [tableColumn width], 38)] autorelease];
-        NSTextField *textField = [[[NSTextField alloc] initWithFrame:NSMakeRect(8, 18, [tableColumn width] - 16, 17)] autorelease];
+        cell = [[[NSTableCellView alloc] initWithFrame:NSMakeRect(0, 0, [tableColumn width], 22)] autorelease];
+        NSTextField *textField = [[[NSTextField alloc] initWithFrame:NSMakeRect(6, 2, [tableColumn width] - 12, 18)] autorelease];
         [textField setBezeled:NO];
         [textField setDrawsBackground:NO];
         [textField setEditable:NO];
         [textField setSelectable:NO];
-        [textField setFont:[NSFont systemFontOfSize:13 weight:NSFontWeightMedium]];
-
-        NSTextField *subtitleField = [[[NSTextField alloc] initWithFrame:NSMakeRect(8, 2, [tableColumn width] - 16, 15)] autorelease];
-        [subtitleField setBezeled:NO];
-        [subtitleField setDrawsBackground:NO];
-        [subtitleField setEditable:NO];
-        [subtitleField setSelectable:NO];
-        [subtitleField setFont:[NSFont systemFontOfSize:11]];
-        [subtitleField setTextColor:[NSColor secondaryLabelColor]];
-        [subtitleField setTag:1001];
+        if ([[tableColumn identifier] isEqualToString:@"title"]) {
+            [textField setFont:[NSFont systemFontOfSize:13 weight:NSFontWeightMedium]];
+        } else {
+            [textField setFont:[NSFont systemFontOfSize:12]];
+            [textField setTextColor:[NSColor secondaryLabelColor]];
+        }
 
         [cell setIdentifier:identifier];
         [cell setTextField:textField];
         [cell addSubview:textField];
-        [cell addSubview:subtitleField];
     }
 
     JournlerEntry *entry = [_entries objectAtIndex:row];
-    NSString *title = [entry title];
-    [[cell textField] setStringValue:(title != nil && [title length] > 0) ? title : @"(untitled)"];
-    NSTextField *subtitleField = [cell viewWithTag:1001];
-    [subtitleField setStringValue:JLRListSubtitleForEntry(entry)];
+    NSString *value = @"";
+    NSString *columnIdentifier = [tableColumn identifier];
+    if ([columnIdentifier isEqualToString:@"title"]) {
+        NSString *title = [entry title];
+        value = (title != nil && [title length] > 0) ? title : @"(untitled)";
+    } else if ([columnIdentifier isEqualToString:@"date"]) {
+        value = JLRFormatDate([entry creationDate]);
+    } else if ([columnIdentifier isEqualToString:@"category"]) {
+        value = [entry category] ?: @"";
+    } else if ([columnIdentifier isEqualToString:@"tags"]) {
+        value = JLRJoinTags([entry tags]);
+    }
+
+    [[cell textField] setStringValue:value ?: @""];
     return cell;
 }
 
