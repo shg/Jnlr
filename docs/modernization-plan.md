@@ -28,11 +28,40 @@ Observed metadata from the supplied journal:
 
 - `Version = 253`
 - `PDJournalProperShutDown = 1`
-- about 6k entry packages
-- about 4.4k resources
+- `JournlerStore.dict` contains:
+  - `Entries = 6015`
+  - `Collections = 85`
+  - `Resources = 4433`
+  - `Blogs = 1`
+- `Journler Entries/` contains `6036` entry package directories
+- `Resources/` contains `4433` `.jresource` files
 
 This means the first compatibility target can be Journler 2.5.3/2.6 style
 journals. Earlier 1.x and 2.0 upgrade paths can be treated as a later phase.
+
+## Confirmed current milestone
+
+A new non-UI probe now builds on current macOS and can decode the supplied
+journal's top-level store directly:
+
+- build script: `tools/build_journal_probe.sh`
+- probe sources: `compat/journal_probe.m`, `compat/probe_model.m`
+
+Confirmed on the supplied journal:
+
+- `Journler.plist` loads
+- `JournlerStore.dict` loads
+- keyed unarchiving succeeds for all store-backed entries
+- decoded counts match the store exactly
+- first decoded entry returns a valid tag and title
+
+Interpretation:
+
+- Archive compatibility at the `JournlerStore.dict` level is achievable on
+  current macOS without reviving the entire legacy app target first.
+- The remaining gap is not basic archive readability; it is rebuilding enough
+  of the original model/runtime to support full journal behavior and eventual
+  save round-tripping.
 
 ## What must not be broken
 
