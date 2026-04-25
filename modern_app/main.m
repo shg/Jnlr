@@ -49,6 +49,7 @@ static NSString *JLRWindowAutosaveName = @"JnlrMainWindow";
 - (void)markSelectedEntryDirty;
 - (void)rebuildSidebarItems;
 - (void)applySidebarSelection;
+- (NSArray *)sortedEntriesArrayFromArray:(NSArray *)entries;
 - (void)refreshSelectedEntry;
 @end
 
@@ -156,6 +157,23 @@ static NSInteger JLRCollectionSort(id leftCollection, id rightCollection, void *
     NSString *leftTitle = [leftCollection title] ?: @"";
     NSString *rightTitle = [rightCollection title] ?: @"";
     return [leftTitle localizedCaseInsensitiveCompare:rightTitle];
+}
+
+static id JLRSortValueForEntry(JournlerEntry *entry, NSString *key)
+{
+    if ([key isEqualToString:@"title"]) {
+        return [entry title] ?: @"";
+    }
+    if ([key isEqualToString:@"date"]) {
+        return [entry creationDate] ?: [NSDate distantPast];
+    }
+    if ([key isEqualToString:@"category"]) {
+        return [entry category] ?: @"";
+    }
+    if ([key isEqualToString:@"tags"]) {
+        return JLRJoinTags([entry tags]) ?: @"";
+    }
+    return @"";
 }
 
 static int JLRRunSmokeTest(NSString *journalPath)
@@ -349,21 +367,25 @@ static int JLRRunSmokeTest(NSString *journalPath)
     NSTableColumn *titleColumn = [[[NSTableColumn alloc] initWithIdentifier:@"title"] autorelease];
     [titleColumn setTitle:@"Title"];
     [titleColumn setWidth:220];
+    [titleColumn setSortDescriptorPrototype:[[[NSSortDescriptor alloc] initWithKey:@"title" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)] autorelease]];
     [_tableView addTableColumn:titleColumn];
 
     NSTableColumn *dateColumn = [[[NSTableColumn alloc] initWithIdentifier:@"date"] autorelease];
     [dateColumn setTitle:@"Date"];
     [dateColumn setWidth:110];
+    [dateColumn setSortDescriptorPrototype:[[[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO] autorelease]];
     [_tableView addTableColumn:dateColumn];
 
     NSTableColumn *categoryColumn = [[[NSTableColumn alloc] initWithIdentifier:@"category"] autorelease];
     [categoryColumn setTitle:@"Category"];
     [categoryColumn setWidth:110];
+    [categoryColumn setSortDescriptorPrototype:[[[NSSortDescriptor alloc] initWithKey:@"category" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)] autorelease]];
     [_tableView addTableColumn:categoryColumn];
 
     NSTableColumn *tagsColumn = [[[NSTableColumn alloc] initWithIdentifier:@"tags"] autorelease];
     [tagsColumn setTitle:@"Tags"];
     [tagsColumn setWidth:180];
+    [tagsColumn setSortDescriptorPrototype:[[[NSSortDescriptor alloc] initWithKey:@"tags" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)] autorelease]];
     [_tableView addTableColumn:tagsColumn];
 
     [_tableView setDelegate:self];
@@ -372,6 +394,7 @@ static int JLRRunSmokeTest(NSString *journalPath)
     [_tableView setAllowsEmptySelection:YES];
     [_tableView setRowHeight:24];
     [_tableView setColumnAutoresizingStyle:NSTableViewLastColumnOnlyAutoresizingStyle];
+    [_tableView setSortDescriptors:[NSArray arrayWithObject:[[[NSSortDescriptor alloc] initWithKey:@"date" ascending:NO] autorelease]]];
     [tableScroll setDocumentView:_tableView];
     [contentSplitView addSubview:tableScroll];
 
@@ -486,6 +509,39 @@ static int JLRRunSmokeTest(NSString *journalPath)
     _sidebarItems = [roots copy];
 }
 
+- (NSArray *)sortedEntriesArrayFromArray:(NSArray *)entries
+{
+    NSArray *sortDescriptors = [_tableView sortDescriptors];
+    if ([sortDescriptors count] == 0) {
+        return entries;
+    }
+
+    return [entries sortedArrayUsingComparator:^NSComparisonResult(JournlerEntry *leftEntry, JournlerEntry *rightEntry) {
+        for (NSSortDescriptor *descriptor in sortDescriptors) {
+            id leftValue = JLRSortValueForEntry(leftEntry, [descriptor key]);
+            id rightValue = JLRSortValueForEntry(rightEntry, [descriptor key]);
+            NSComparisonResult result = NSOrderedSame;
+
+            if ([leftValue respondsToSelector:@selector(compare:)]) {
+                result = (NSComparisonResult)[leftValue compare:rightValue];
+            } else {
+                result = [[leftValue description] localizedCaseInsensitiveCompare:[rightValue description]];
+            }
+
+            if (!descriptor.ascending) {
+                if (result == NSOrderedAscending) result = NSOrderedDescending;
+                else if (result == NSOrderedDescending) result = NSOrderedAscending;
+            }
+
+            if (result != NSOrderedSame) {
+                return result;
+            }
+        }
+
+        return JLREntrySort(leftEntry, rightEntry, NULL);
+    }];
+}
+
 - (void)applySidebarSelection
 {
     id item = [_sidebarView itemAtRow:[_sidebarView selectedRow]];
@@ -508,6 +564,8 @@ static int JLRRunSmokeTest(NSString *journalPath)
         }
         visibleEntries = filtered;
     }
+
+    visibleEntries = [self sortedEntriesArrayFromArray:visibleEntries];
 
     [_entries release];
     _entries = [visibleEntries copy];
@@ -877,6 +935,30 @@ static int JLRRunSmokeTest(NSString *journalPath)
 - (void)tableViewSelectionDidChange:(NSNotification *)notification
 {
     [self refreshSelectedEntry];
+}
+
+- (void)tableView:(NSTableView *)tableView sortDescriptorsDidChange:(NSArray<NSSortDescriptor *> *)oldDescriptors
+{
+    if (tableView != _tableView) {
+        return;
+    }
+
+    NSNumber *selectedTag = [[self currentSelectedEntry] tagID];
+    [self applySidebarSelection];
+
+    if (selectedTag != nil) {
+        NSInteger rowToSelect = NSNotFound;
+        for (NSInteger i = 0; i < (NSInteger)[_entries count]; i++) {
+            if ([[[_entries objectAtIndex:i] tagID] isEqual:selectedTag]) {
+                rowToSelect = i;
+                break;
+            }
+        }
+        if (rowToSelect != NSNotFound) {
+            [_tableView selectRowIndexes:[NSIndexSet indexSetWithIndex:rowToSelect] byExtendingSelection:NO];
+            [self refreshSelectedEntry];
+        }
+    }
 }
 
 - (void)outlineViewSelectionDidChange:(NSNotification *)notification
